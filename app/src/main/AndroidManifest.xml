@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
     <!-- Add Necessary Permission -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -17,6 +16,35 @@
         android:theme="@style/Theme.DogAdoptionApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".view.shared.DogDetailsView"
+            android:exported="false" />
+        <activity
+            android:name=".view.admin.AdminDashboardView"
+            android:exported="false"
+            android:label="@string/title_activity_admin_dashboard_view"
+            android:theme="@style/Theme.DogAdoptionApp" />
+        <activity
+            android:name=".view.user.UserDogRequestView"
+            android:exported="false" />
+        <activity
+            android:name=".view.admin.AdminDogRequestView"
+            android:exported="false" />
+        <activity
+            android:name=".view.admin.UpdateDogRecordView"
+            android:exported="false" />
+        <activity
+            android:name=".view.admin.AddDogRecordView"
+            android:exported="false" />
+        <activity
+            android:name=".view.user.UserDashboardView"
+            android:exported="false" />
+        <activity
+            android:name=".view.auth.LogInView"
+            android:exported="false" />
+        <activity
+            android:name=".view.auth.SignUpView"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
