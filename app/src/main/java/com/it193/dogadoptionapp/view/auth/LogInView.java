@@ -22,26 +22,31 @@ public class LogInView extends AppCompatActivity {
 
     private AccountApi accountApi;
 
+    private EditText emailField;
+    private EditText passwordField;
+    private Button logInButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in_view);
 
+        // Initialize Retrofit
         RetrofitService retrofitService = new RetrofitService();
         accountApi = retrofitService.getRetrofit().create(AccountApi.class);
 
-        // Initialize Components
-        initComponents();
+        // Get UI Fields
+        emailField = new EditText(this);
+        passwordField = new EditText(this);
+        logInButton = new Button(this);
+
+        // Log In Action
+        handleLogInAction();
     }
 
-    private void initComponents() {
-        // Get Inputs
-        EditText emailField = new EditText(this);
-        EditText passwordField = new EditText(this);
-        Button LogInButton = new Button(this);
-
+    private void handleLogInAction() {
         // Handle LogIn Action
-        LogInButton.setOnClickListener(v -> {
+        logInButton.setOnClickListener(v -> {
             // Get Raw Data
             String email = emailField.getText().toString();
             String passwd = passwordField.getText().toString();

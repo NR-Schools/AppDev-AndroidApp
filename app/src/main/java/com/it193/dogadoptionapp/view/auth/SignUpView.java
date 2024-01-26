@@ -25,28 +25,35 @@ public class SignUpView extends AppCompatActivity {
 
     private AccountApi accountApi;
 
+    private EditText nameField;
+    private EditText emailField;
+    private EditText passwordField;
+    private EditText confirmPasswordField;
+    private Button signUpButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_view);
 
+        // Initialize Retrofit
         RetrofitService retrofitService = new RetrofitService();
         accountApi = retrofitService.getRetrofit().create(AccountApi.class);
 
-        // Initialize Components
-        initComponents();
+        // Get UI Fields
+        nameField = new EditText(this);
+        emailField = new EditText(this);
+        passwordField = new EditText(this);
+        confirmPasswordField = new EditText(this);
+        signUpButton = new Button(this);
+
+        // Sign Up Action
+        handleSignUpAction();
     }
 
-    private void initComponents() {
-        // Get Inputs
-        EditText nameField = new EditText(this);
-        EditText emailField = new EditText(this);
-        EditText passwordField = new EditText(this);
-        EditText confirmPasswordField = new EditText(this);
-        Button SignUpButton = new Button(this);
-
+    private void handleSignUpAction() {
         // Handle SignUp Action
-        SignUpButton.setOnClickListener(v -> {
+        signUpButton.setOnClickListener(v -> {
             // Get Raw Data
             String name = nameField.getText().toString();
             String email = emailField.getText().toString();
