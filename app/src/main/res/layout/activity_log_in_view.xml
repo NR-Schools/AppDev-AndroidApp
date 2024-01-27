@@ -7,4 +7,47 @@
     android:layout_height="match_parent"
     tools:context=".view.auth.LogInView">
 
+    <EditText
+        android:id="@+id/editTextText3"
+        android:layout_width="323dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="19dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Email Address"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button2" />
+
+    <EditText
+        android:id="@+id/editTextTextPassword3"
+        android:layout_width="320dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="38dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:text="a"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextText3" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="175dp"
+        android:layout_marginTop="177dp"
+        android:text="Sign Up"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="189dp"
+        android:layout_height="68dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="32dp"
+        android:text="Login"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword3" />
 </androidx.constraintlayout.widget.ConstraintLayout>
