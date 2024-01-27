@@ -18,7 +18,6 @@ public class Dog {
     private String size;
     private String location;
     private byte[] photoBytes;
-    private boolean isPhotoUpdated;
 
     // For Dog Adoption
     private boolean adoptRequested;
@@ -165,14 +164,6 @@ public class Dog {
 
     public void setAccount(Account account) {
         this.account = account;
-    }
-
-    public boolean isPhotoChanged() {
-        return isPhotoUpdated;
-    }
-
-    public void setPhotoChanged(boolean photoChangedStatus) {
-        this.isPhotoUpdated = photoChangedStatus;
     }
 
     @Override
