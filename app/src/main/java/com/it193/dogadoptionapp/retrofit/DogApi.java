@@ -32,7 +32,7 @@ public interface DogApi {
             @Part("sex") String sex,
             @Part("colorCoat") String colorCoat,
             @Part("description") String description,
-            @Part("arrivedDate") LocalDate arrivedDate,
+            @Part("arrivedDate") String arrivedDate,
             @Part("arrivedFrom") String arrivedFrom,
             @Part("size") String size,
             @Part("location") String location
@@ -58,7 +58,7 @@ public interface DogApi {
             @Part("sex") String sex,
             @Part("colorCoat") String colorCoat,
             @Part("description") String description,
-            @Part("arrivedDate") LocalDate arrivedDate,
+            @Part("arrivedDate") String arrivedDate,
             @Part("arrivedFrom") String arrivedFrom,
             @Part("size") String size,
             @Part("location") String location
