@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "com.it193.dogadoptionapp"
-        minSdk = 24
+        minSdk = 26 // previously 24
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
