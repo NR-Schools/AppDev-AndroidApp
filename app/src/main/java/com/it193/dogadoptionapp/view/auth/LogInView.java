@@ -16,6 +16,8 @@ import com.it193.dogadoptionapp.storage.AppStateStorage;
 import com.it193.dogadoptionapp.utils.AnimationUtility;
 import com.it193.dogadoptionapp.utils.InputUtility;
 import com.it193.dogadoptionapp.utils.NotificationUtility;
+import com.it193.dogadoptionapp.view.admin.AdminDashboardView;
+import com.it193.dogadoptionapp.view.user.UserDashboardView;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -98,6 +100,15 @@ public class LogInView extends AppCompatActivity {
                                 .setActiveAccount(
                                         response.body()
                                 );
+
+                        // Determine whether to go to UserDashboard or AdminDashboard
+                        Account activeAccount = AppStateStorage.getInstance().getActiveAccount();
+
+                        Class classToRedirect = UserDashboardView.class;
+                        if (activeAccount.getEmail().equals("Admin"))
+                            classToRedirect = AdminDashboardView.class;
+
+                        startActivity(new Intent(LogInView.this, classToRedirect));
                     }
 
                     @Override
