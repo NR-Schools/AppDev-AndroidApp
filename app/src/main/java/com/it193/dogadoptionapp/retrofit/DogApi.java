@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -25,17 +26,17 @@ public interface DogApi {
     Call<Boolean> addNewDog(
             @Header("email") String email,
             @Header("session-auth-string") String sessionAuthString,
-            @Part("photoBytes") MultipartBody.Part file,
-            @Part("name") String name,
-            @Part("breed") String breed,
-            @Part("age") int age,
-            @Part("sex") String sex,
-            @Part("colorCoat") String colorCoat,
-            @Part("description") String description,
-            @Part("arrivedDate") String arrivedDate,
-            @Part("arrivedFrom") String arrivedFrom,
-            @Part("size") String size,
-            @Part("location") String location
+            @Part MultipartBody.Part file,
+            @Part("name") RequestBody name,
+            @Part("breed") RequestBody breed,
+            @Part("age") RequestBody age,
+            @Part("sex") RequestBody sex,
+            @Part("colorCoat") RequestBody colorCoat,
+            @Part("description") RequestBody description,
+            @Part("arrivedDate") RequestBody arrivedDate,
+            @Part("arrivedFrom") RequestBody arrivedFrom,
+            @Part("size") RequestBody size,
+            @Part("location") RequestBody location
     );
 
     @GET("/api/dog/dogs")

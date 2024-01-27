@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">DogAdoptionApp</string>
+
+    <string-array name="dog_sex_entries">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="dog_size_entries">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+    </string-array>
 </resources>

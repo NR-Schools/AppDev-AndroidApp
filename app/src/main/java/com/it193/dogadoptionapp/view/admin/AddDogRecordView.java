@@ -25,10 +25,15 @@ import com.it193.dogadoptionapp.model.Dog;
 import com.it193.dogadoptionapp.retrofit.DogApi;
 import com.it193.dogadoptionapp.retrofit.RetrofitService;
 import com.it193.dogadoptionapp.storage.AppStateStorage;
+import com.it193.dogadoptionapp.utils.AnimationUtility;
 import com.it193.dogadoptionapp.utils.InputUtility;
 import com.it193.dogadoptionapp.utils.NotificationUtility;
 
 import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -75,6 +80,9 @@ public class AddDogRecordView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_dog_record_view);
 
+        // Initialize AnimationUtility
+        AnimationUtility.getInstance().initialize(this, getLayoutInflater());
+
         // Initialize Retrofit
         RetrofitService retrofitService = new RetrofitService();
         dogApi = retrofitService.getRetrofit().create(DogApi.class);
@@ -91,18 +99,18 @@ public class AddDogRecordView extends AppCompatActivity {
     private void initComponents() {
         selectDogImageButton = findViewById(R.id.addDogSelectImageButton);
         displayImage = findViewById(R.id.addDogDisplayImageView);
-        dogNameField = new EditText(this);
-        dogBreedField = new EditText(this);
-        dogColorField = new EditText(this);
-        dogAgeField = new EditText(this);
-        dogSexField = new Spinner(this);
-        dogArrivedDateButton = new View(this);
-        dogArrivedDateDisplayField = new TextView(this);
-        dogArrivedFromField = new EditText(this);
-        dogSizeField = new Spinner(this);
-        dogLocationField = new EditText(this);
-        dogDescriptionField = new EditText(this);
-        addDogButton = new Button(this);
+        dogNameField = findViewById(R.id.addDogNameField);
+        dogBreedField = findViewById(R.id.addDogBreedField);
+        dogColorField = findViewById(R.id.addDogColorField);
+        dogAgeField = findViewById(R.id.addDogAgeField);
+        dogSexField = findViewById(R.id.addDogSexField);
+        dogArrivedDateButton = findViewById(R.id.addDogArrivedDateButton);
+        dogArrivedDateDisplayField = findViewById(R.id.addDogArrivedDateDisplay);
+        dogArrivedFromField = findViewById(R.id.addDogArrivedFromField);
+        dogSizeField = findViewById(R.id.addDogSizeField);
+        dogLocationField = findViewById(R.id.addDogLocationField);
+        dogDescriptionField = findViewById(R.id.addDogDescriptionField);
+        addDogButton = findViewById(R.id.addDogButton);
 
         dogImageActionLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -112,17 +120,6 @@ public class AddDogRecordView extends AppCompatActivity {
                         displayImage.setImageURI(data.getData());
 
                         isPhotoSet = true;
-
-                        // DEBUG
-                        Bitmap dogImageBitmap = ((BitmapDrawable) displayImage.getDrawable()).getBitmap();
-                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                        dogImageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-                        byte[] dogImageBytes = byteArrayOutputStream.toByteArray();
-
-                        // R_DEBUG
-                        Bitmap bmp = BitmapFactory.decodeByteArray(dogImageBytes, 0, dogImageBytes.length);
-                        displayImage.setImageBitmap(Bitmap.createScaledBitmap(bmp, displayImage.getWidth(), displayImage.getHeight(), false));
-
                     }
                 }
         );
@@ -140,8 +137,13 @@ public class AddDogRecordView extends AppCompatActivity {
         dogArrivedDateButton.setOnClickListener(v -> {
             DatePickerDialog dialog = new DatePickerDialog(this);
             dialog.setOnDateSetListener(
-                    (view, year, month, dayOfMonth) ->
-                            dogArrivedDateDisplayField.setText(year + "-" + month + "-" + dayOfMonth)
+                    (view, year, month, dayOfMonth) -> {
+                        String dateString = String.format("%d-%02d-%02d", year, month+1, dayOfMonth);
+
+                        dogArrivedDateDisplayField.setText(
+                                dateString
+                        );
+                    }
             );
             dialog.show();
         });
@@ -166,14 +168,14 @@ public class AddDogRecordView extends AppCompatActivity {
             if (isPhotoSet) {
                 Bitmap dogImageBitmap = ((BitmapDrawable) displayImage.getDrawable()).getBitmap();
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                dogImageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+                dogImageBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
                 dogImageBytes = byteArrayOutputStream.toByteArray();
             }
             //endregion
 
 
             // Check if all fields have non-empty input
-            if (InputUtility.stringsAreNotNullOrEmpty(
+            if (!InputUtility.stringsAreNotNullOrEmpty(
                     dogName, dogBreed, dogColor, dogAgeStr, dogSex, dogArrivedDate,
                     dogArrivedFrom, dogSize, dogLocation, dogDescription
             )) {
@@ -185,45 +187,71 @@ public class AddDogRecordView extends AppCompatActivity {
                 return;
             }
 
-            // Try to cast age
-            int dogAge = Integer.parseInt(dogAgeStr);
-
-            // Get Credentials
-            Account currentAccount = AppStateStorage.getInstance().getActiveAccount();
-
             // Send Data
-            dogApi.addNewDog(
-                    currentAccount.getEmail(),
-                    currentAccount.getSessionAuthString(),
-                    MultipartBody.Part.createFormData("photoBytes", "file", RequestBody.create(MediaType.parse("image*/"), dogImageBytes)),
-                    dogName,
-                    dogBreed,
-                    dogAge,
-                    dogSex,
-                    dogColor,
-                    dogDescription,
-                    dogArrivedDate,
-                    dogArrivedFrom,
-                    dogSize,
-                    dogLocation
-            ).enqueue(new Callback<Boolean>() {
-                @Override
-                public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                    NotificationUtility.successAlert(
-                            AddDogRecordView.this,
-                            "Dog Record added successfully!"
-                    );
-                }
+            AnimationUtility.getInstance().startLoading();
+            handleSendingData(
+                    dogImageBytes, dogName, dogBreed, dogColor, dogAgeStr, dogSex,
+                    dogArrivedDate, dogArrivedFrom, dogSize, dogLocation, dogDescription
+            );
+        });
+    }
 
-                @Override
-                public void onFailure(Call<Boolean> call, Throwable t) {
-                    NotificationUtility.errorAlert(
-                            AddDogRecordView.this,
-                            "Add Dog",
-                            "Dog Record failed to be added!"
-                    );
-                }
-            });
+    // I don't know why we have to do this
+    // This should be handled by another class or something
+    private void handleSendingData(
+            byte[] dogImageBytes, String name, String breed, String color, String age, String sex,
+            String arrivedDate, String arrivedFrom, String dogSize, String location, String description
+    ) {
+        // Get Credentials
+        Account currentAccount = AppStateStorage.getInstance().getActiveAccount();
+
+        // Setup Request Bodies
+        RequestBody dogImageRB = RequestBody.create(MediaType.parse("image/png"), dogImageBytes);
+        MultipartBody.Part dogImagePart = MultipartBody.Part.createFormData("photoBytes", "file", dogImageRB);
+        RequestBody dogNameRB = RequestBody.create(MediaType.parse("text/plain"), name);
+        RequestBody dogBreedRB = RequestBody.create(MediaType.parse("text/plain"), breed);
+        RequestBody dogColorRB = RequestBody.create(MediaType.parse("text/plain"), color);
+        RequestBody dogAgeRB = RequestBody.create(MediaType.parse("text/plain"), age);
+        RequestBody dogSexRB = RequestBody.create(MediaType.parse("text/plain"), sex);
+        RequestBody dogArrivedDateRB = RequestBody.create(MediaType.parse("text/plain"), arrivedDate);
+        RequestBody dogArrivedFromRB = RequestBody.create(MediaType.parse("text/plain"), arrivedFrom);
+        RequestBody dogSizeRB = RequestBody.create(MediaType.parse("text/plain"), dogSize);
+        RequestBody dogLocationRB = RequestBody.create(MediaType.parse("text/plain"), location);
+        RequestBody dogDescriptionRB = RequestBody.create(MediaType.parse("text/plain"), description);
+
+        dogApi.addNewDog(
+                currentAccount.getEmail(),
+                currentAccount.getSessionAuthString(),
+                dogImagePart,
+                dogNameRB,
+                dogBreedRB,
+                dogAgeRB,
+                dogSexRB,
+                dogColorRB,
+                dogDescriptionRB,
+                dogArrivedDateRB,
+                dogArrivedFromRB,
+                dogSizeRB,
+                dogLocationRB
+        ).enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                AnimationUtility.getInstance().endLoading();
+                NotificationUtility.successAlert(
+                        AddDogRecordView.this,
+                        "Add Dog Action Successfully!"
+                );
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                AnimationUtility.getInstance().endLoading();
+                NotificationUtility.errorAlert(
+                        AddDogRecordView.this,
+                        "Add Dog",
+                        "Failed to add new dog!"
+                );
+            }
         });
     }
 }
