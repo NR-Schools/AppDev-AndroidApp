@@ -31,3 +31,7 @@ replay_pid*
 .gradle/*
 .idea/*
 gradle/*
+
+# exclude properties
+*.properties
+local.properties
