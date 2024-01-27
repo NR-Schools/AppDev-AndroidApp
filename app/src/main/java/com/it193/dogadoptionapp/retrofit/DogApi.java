@@ -50,19 +50,19 @@ public interface DogApi {
     Call<Dog> updateDog(
             @Header("email") String email,
             @Header("session-auth-string") String sessionAuthString,
-            @Part("id") long id,
+            @Part("id") RequestBody id,
             @Part("photoBytes") MultipartBody.Part file,
-            @Part("isPhotoUpdated") boolean isPhotoUpdated,
-            @Part("name") String name,
-            @Part("breed") String breed,
-            @Part("age") int age,
-            @Part("sex") String sex,
-            @Part("colorCoat") String colorCoat,
-            @Part("description") String description,
-            @Part("arrivedDate") String arrivedDate,
-            @Part("arrivedFrom") String arrivedFrom,
-            @Part("size") String size,
-            @Part("location") String location
+            @Part("isPhotoUpdated") RequestBody isPhotoUpdated,
+            @Part("name") RequestBody name,
+            @Part("breed") RequestBody breed,
+            @Part("age") RequestBody age,
+            @Part("sex") RequestBody sex,
+            @Part("colorCoat") RequestBody colorCoat,
+            @Part("description") RequestBody description,
+            @Part("arrivedDate") RequestBody arrivedDate,
+            @Part("arrivedFrom") RequestBody arrivedFrom,
+            @Part("size") RequestBody size,
+            @Part("location") RequestBody location
     );
 
     @DELETE("/api/dog/delete-dog/{dogId}")
