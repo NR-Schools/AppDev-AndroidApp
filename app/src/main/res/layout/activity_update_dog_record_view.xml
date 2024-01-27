@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,123 +7,26 @@
     tools:context=".view.admin.UpdateDogRecordView">
 
     <Button
-        android:id="@+id/button15"
+        android:id="@+id/updateDogSelectImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="55dp"
         android:layout_marginTop="40dp"
         android:text="upload photo"
-        app:layout_constraintStart_toEndOf="@+id/editTextText9"
+        app:layout_constraintStart_toEndOf="@+id/addDogNameField"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editTextText5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="37dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Breed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button15" />
+    <ImageView
+        android:id="@+id/updateDogDisplayImageView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/updateDogSelectImageButton" />
 
     <EditText
-        android:id="@+id/editTextText6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Color"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText5" />
-
-    <EditText
-        android:id="@+id/editTextText7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Age"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText6" />
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="279dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="40dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText7" />
-
-    <Spinner
-        android:id="@+id/spinner6"
-        android:layout_width="247dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
-
-    <Spinner
-        android:id="@+id/spinner7"
-        android:layout_width="261dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="13dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner6" />
-
-    <Spinner
-        android:id="@+id/spinner8"
-        android:layout_width="225dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner7" />
-
-    <EditText
-        android:id="@+id/editTextText8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="7dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Location"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner8" />
-
-    <EditText
-        android:id="@+id/editTextTextMultiLine"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="77dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button16" />
-
-    <Button
-        android:id="@+id/button16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="141dp"
-        android:layout_marginTop="33dp"
-        android:text="ADD"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText8" />
-
-    <EditText
-        android:id="@+id/editTextText9"
+        android:id="@+id/updateDogNameField"
         android:layout_width="166dp"
         android:layout_height="37dp"
         android:layout_marginStart="16dp"
@@ -134,5 +36,133 @@
         android:text="Name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/updateDogBreedField"
+        android:layout_width="172dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Breed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/updateDogNameField" />
+
+    <EditText
+        android:id="@+id/updateDogColorField"
+        android:layout_width="175dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:text="Color"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/updateDogBreedField" />
+
+
+    <EditText
+        android:id="@+id/updateDogAgeField"
+        android:layout_width="175dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:text="2"
+        android:ems="10"
+        android:inputType="numberSigned"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/updateDogColorField" />
+
+    <Spinner
+        android:id="@+id/updateDogSexField"
+        android:layout_width="175dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:entries="@array/dog_sex_entries"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/updateDogAgeField" />
+
+    <LinearLayout
+        android:id="@+id/updateDogLinearLayoutContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/updateDogSexField">
+
+        <TextView
+            android:id="@+id/updateDogArrivedDateDisplay"
+            android:layout_width="100dp"
+            android:layout_height="34dp"
+            android:text="No Date Set!" />
+
+        <Button
+            android:id="@+id/updateDogArrivedDateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set Date" />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/updateDogArrivedFromField"
+        android:layout_width="181dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="ArrivedFrom"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/updateDogLinearLayoutContainer" />
+
+    <Spinner
+        android:id="@+id/updateDogSizeField"
+        android:layout_width="183dp"
+        android:layout_height="46dp"
+        android:entries="@array/dog_size_entries"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/updateDogArrivedFromField" />
+
+    <EditText
+        android:id="@+id/updateDogLocationField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Location"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/updateDogSizeField" />
+
+    <EditText
+        android:id="@+id/updateDogDescriptionField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/updateDogLocationField" />
+
+    <Button
+        android:id="@+id/updateDogButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginBottom="44dp"
+        android:text="Update Dog"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

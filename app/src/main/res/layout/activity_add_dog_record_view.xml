@@ -85,7 +85,7 @@
         app:layout_constraintTop_toBottomOf="@+id/addDogAgeField" />
 
     <LinearLayout
-        android:id="@+id/linearLayoutContainer"
+        android:id="@+id/addDogLinearLayoutContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -118,7 +118,7 @@
         android:inputType="text"
         android:text="ArrivedFrom"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutContainer" />
+        app:layout_constraintTop_toBottomOf="@+id/addDogLinearLayoutContainer" />
 
     <Spinner
         android:id="@+id/addDogSizeField"
