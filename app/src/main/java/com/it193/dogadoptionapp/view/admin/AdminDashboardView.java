@@ -8,6 +8,7 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -20,15 +21,23 @@ import androidx.navigation.ui.NavigationUI;
 import com.it193.dogadoptionapp.databinding.ActivityAdminDashboardViewBinding;
 
 import com.it193.dogadoptionapp.R;
+import com.it193.dogadoptionapp.model.Dog;
 import com.it193.dogadoptionapp.retrofit.DogApi;
 import com.it193.dogadoptionapp.retrofit.RetrofitService;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AdminDashboardView extends AppCompatActivity {
 
     private DogApi dogApi;
+    private List<Dog> dogs;
 
+    private ListView dogListView;
     private Button goToAddDog;
-    private Button goToUpdateDog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,25 +48,49 @@ public class AdminDashboardView extends AppCompatActivity {
         RetrofitService retrofitService = new RetrofitService();
         dogApi = retrofitService.getRetrofit().create(DogApi.class);
 
-        // Initialize Components
+        // Initialize Components and Data
         initComponents();
+        initData();
 
         // Handle Actions
-        handleRedirectActions();
+        handleActions();
     }
 
+    private void initData() {
+        dogApi.getAllDogs()
+                .enqueue(new Callback<List<Dog>>() {
+                    @Override
+                    public void onResponse(Call<List<Dog>> call, Response<List<Dog>> response) {
+                        dogs = response.body();
+                        AdminDogListAdapter dogListAdapter = new AdminDogListAdapter(
+                                getApplicationContext(),
+                                dogs
+                        );
+                        dogListView.setAdapter(dogListAdapter);
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Dog>> call, Throwable t) {
+                        System.out.println(t.getMessage());
+                    }
+                });
+    }
     private void initComponents() {
         goToAddDog = findViewById(R.id.adminDashboardViewToAddDogView);
-        goToUpdateDog = findViewById(R.id.adminDashboardViewToUpdateDogView);
+        dogListView = findViewById(R.id.adminDashboardDogList);
     }
-
-    private void handleRedirectActions() {
+    private void handleActions() {
         goToAddDog.setOnClickListener(v -> {
             startActivity(new Intent(AdminDashboardView.this, AddDogRecordView.class));
         });
 
-        goToUpdateDog.setOnClickListener(v -> {
-            startActivity(new Intent(AdminDashboardView.this, UpdateDogRecordView.class));
+        dogListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(AdminDashboardView.this, UpdateDogRecordView.class);
+                intent.putExtra("dogId", dogs.get(position).getId());
+                startActivity(intent);
+            }
         });
     }
 }
