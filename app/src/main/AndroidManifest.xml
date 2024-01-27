@@ -21,9 +21,7 @@
             android:exported="false" />
         <activity
             android:name=".view.admin.AdminDashboardView"
-            android:exported="false"
-            android:label="@string/title_activity_admin_dashboard_view"
-            android:theme="@style/Theme.DogAdoptionApp" />
+            android:exported="false" />
         <activity
             android:name=".view.user.UserDogRequestView"
             android:exported="false" />
