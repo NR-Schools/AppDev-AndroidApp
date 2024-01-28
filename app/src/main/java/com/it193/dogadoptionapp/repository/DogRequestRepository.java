@@ -97,6 +97,40 @@ public class DogRequestRepository {
         return this;
     }
 
+    public DogRequestRepository userCancelDogRequest(Dog dogReqItem) {
+        Account currentAccount = AppStateStorage.getInstance().getActiveAccount();
+        Dog dog = new Dog();
+        dog.setId(dogReqItem.getId());
+        dog.setAdoptAccepted(dogReqItem.isAdoptAccepted());
+        dog.setAdoptRequested(false);
+        dog.setAccount(dogReqItem.getAccount());
+
+        dogApi.userCancelDogAdoptRequest(
+                currentAccount.getEmail(),
+                currentAccount.getSessionAuthString(),
+                dog
+        ).enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                NotificationUtility.successAlert(
+                        ctx,
+                        "User Cancel Dog Request Successful"
+                );
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                NotificationUtility.errorAlert(
+                        ctx,
+                        "Dog Request",
+                        "User Cancel Dog Request Failed"
+                );
+            }
+        });
+
+        return this;
+    }
+
     public DogRequestRepository adminViewAllDogRequest() {
         Account currentAccount = AppStateStorage.getInstance().getActiveAccount();
 
@@ -114,6 +148,45 @@ public class DogRequestRepository {
             @Override
             public void onFailure(Call<List<Dog>> call, Throwable t) {
                 AnimationUtility.getInstance().endLoading();
+                callback.onResponseEvent(null, t.getMessage());
+            }
+        });
+
+        return this;
+    }
+
+    public DogRequestRepository adminConfirmRequest(Dog dogReqItem, boolean isAccepted) {
+        Account currentAccount = AppStateStorage.getInstance().getActiveAccount();
+        Dog dog = new Dog();
+        dog.setId(dogReqItem.getId());
+        dog.setAdoptAccepted(isAccepted);
+        dog.setAdoptRequested(dogReqItem.isAdoptRequested());
+        dog.setAccount(dogReqItem.getAccount());
+
+        AnimationUtility.getInstance().startLoading();
+        dogApi.adminConfirmReq(
+                currentAccount.getEmail(),
+                currentAccount.getSessionAuthString(),
+                dog
+        ).enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                AnimationUtility.getInstance().endLoading();
+                NotificationUtility.successAlert(
+                        ctx,
+                        "Admin Confirm Dog Request Successful"
+                );
+                callback.onResponseEvent(response.body(), null);
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                AnimationUtility.getInstance().endLoading();
+                NotificationUtility.errorAlert(
+                        ctx,
+                        "Dog Request",
+                        "Admin Confirm Dog Request Failed"
+                );
                 callback.onResponseEvent(null, t.getMessage());
             }
         });

@@ -12,31 +12,23 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.it193.dogadoptionapp.R;
-import com.it193.dogadoptionapp.model.Account;
 import com.it193.dogadoptionapp.model.Dog;
-import com.it193.dogadoptionapp.retrofit.DogApi;
+import com.it193.dogadoptionapp.repository.DogRequestRepository;
 import com.it193.dogadoptionapp.storage.AppStateStorage;
-import com.it193.dogadoptionapp.utils.NotificationUtility;
 
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class DogRequestListAdapter extends BaseAdapter {
 
-    DogApi dogApi;
     Context ctx;
     LayoutInflater inflater;
     List<Dog> dogRequestList;
     boolean isAdmin;
 
-    public DogRequestListAdapter(Context ctx, List<Dog> dogRequestList, DogApi dogApi) {
+    public DogRequestListAdapter(Context ctx, List<Dog> dogRequestList) {
         this.ctx = ctx;
         this.dogRequestList = dogRequestList;
         this.inflater = LayoutInflater.from(ctx);
-        this.dogApi = dogApi;
 
         // Check if Admin
         isAdmin = false;
@@ -102,96 +94,30 @@ public class DogRequestListAdapter extends BaseAdapter {
 
     // Handle Actions
     private void handleAdminReject(int position) {
-        Account currentAccount = AppStateStorage.getInstance().getActiveAccount();
-        Dog dog = new Dog();
-        dog.setId(dogRequestList.get(position).getId());
-        dog.setAdoptAccepted(false);
-        dog.setAdoptRequested(dogRequestList.get(position).isAdoptRequested());
-        dog.setAccount(dogRequestList.get(position).getAccount());
-
-        dogApi.adminConfirmReq(
-                currentAccount.getEmail(),
-                currentAccount.getSessionAuthString(),
-                dog
-        ).enqueue(new Callback<Boolean>() {
-            @Override
-            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                NotificationUtility.successAlert(
-                        ctx,
-                        "Admin Reject Dog Request Successful"
-                );
-            }
-
-            @Override
-            public void onFailure(Call<Boolean> call, Throwable t) {
-                NotificationUtility.errorAlert(
-                        ctx,
-                        "Dog Request",
-                        "Admin Reject Dog Request Failed"
-                );
-            }
-        });
+        DogRequestRepository
+                .getRepository(ctx)
+                .adminConfirmRequest(
+                        dogRequestList.get(position),
+                        false
+                )
+                .setCallback((a, b) -> {});
     }
+
     private void handleAdminAccept(int position) {
-        Account currentAccount = AppStateStorage.getInstance().getActiveAccount();
-        Dog dog = new Dog();
-        dog.setId(dogRequestList.get(position).getId());
-        dog.setAdoptAccepted(true);
-        dog.setAdoptRequested(dogRequestList.get(position).isAdoptRequested());
-        dog.setAccount(dogRequestList.get(position).getAccount());
-
-        dogApi.adminConfirmReq(
-                currentAccount.getEmail(),
-                currentAccount.getSessionAuthString(),
-                dog
-        ).enqueue(new Callback<Boolean>() {
-            @Override
-            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                NotificationUtility.successAlert(
-                        ctx,
-                        "Admin Accept Dog Request Successful"
-                );
-            }
-
-            @Override
-            public void onFailure(Call<Boolean> call, Throwable t) {
-                NotificationUtility.errorAlert(
-                        ctx,
-                        "Dog Request",
-                        "Admin Accept Dog Request Failed"
-                );
-            }
-        });
+        DogRequestRepository
+                .getRepository(ctx)
+                .adminConfirmRequest(
+                        dogRequestList.get(position),
+                        true
+                )
+                .setCallback((a, b) -> {});
     }
     private void handleUserCancel(int position) {
-        Account currentAccount = AppStateStorage.getInstance().getActiveAccount();
-        Dog dog = new Dog();
-        dog.setId(dogRequestList.get(position).getId());
-        dog.setAdoptAccepted(dogRequestList.get(position).isAdoptAccepted());
-        dog.setAdoptRequested(false);
-        dog.setAccount(dogRequestList.get(position).getAccount());
-
-        dogApi.userCancelDogAdoptRequest(
-                currentAccount.getEmail(),
-                currentAccount.getSessionAuthString(),
-                dog
-        ).enqueue(new Callback<Boolean>() {
-            @Override
-            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                NotificationUtility.successAlert(
-                        ctx,
-                        "User Cancel Dog Request Successful"
-                );
-            }
-
-            @Override
-            public void onFailure(Call<Boolean> call, Throwable t) {
-                NotificationUtility.errorAlert(
-                        ctx,
-                        "Dog Request",
-                        "User Cancel Dog Request Failed"
-                );
-            }
-        });
+        DogRequestRepository
+                .getRepository(ctx)
+                .userCancelDogRequest(
+                        dogRequestList.get(position)
+                )
+                .setCallback((a, b) -> {});
     }
 }
