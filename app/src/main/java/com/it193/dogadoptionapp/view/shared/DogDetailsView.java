@@ -6,14 +6,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.it193.dogadoptionapp.R;
+import com.it193.dogadoptionapp.model.Account;
 import com.it193.dogadoptionapp.model.Dog;
 import com.it193.dogadoptionapp.retrofit.DogApi;
 import com.it193.dogadoptionapp.retrofit.RetrofitService;
+import com.it193.dogadoptionapp.storage.AppStateStorage;
 import com.it193.dogadoptionapp.utils.AnimationUtility;
 import com.it193.dogadoptionapp.utils.InputUtility;
 
@@ -48,6 +51,9 @@ public class DogDetailsView extends AppCompatActivity {
         // Get Inputs
         initComponents();
         initValues();
+
+        // Handle Actions
+        dogRequestButton.setOnClickListener(this::handleDogRequestAction);
     }
 
     private void initComponents() {
@@ -87,5 +93,27 @@ public class DogDetailsView extends AppCompatActivity {
                         AnimationUtility.getInstance().endLoading();
                     }
                 });
+    }
+
+    private void handleDogRequestAction(View v) {
+        Account currentAccount = AppStateStorage.getInstance().getActiveAccount();
+        Dog dog = new Dog();
+        dog.setId(dogId);
+
+        dogApi.userDogAdopt(
+                currentAccount.getEmail(),
+                currentAccount.getSessionAuthString(),
+                dog
+        ).enqueue(new Callback<Dog>() {
+            @Override
+            public void onResponse(Call<Dog> call, Response<Dog> response) {
+                //
+            }
+
+            @Override
+            public void onFailure(Call<Dog> call, Throwable t) {
+                //
+            }
+        });
     }
 }

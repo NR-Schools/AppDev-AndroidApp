@@ -31,6 +31,7 @@ public class UserDashboardView extends AppCompatActivity {
     private List<Dog> dogs;
 
     private ListView dogListView;
+    private Button goToUserDogRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +71,12 @@ public class UserDashboardView extends AppCompatActivity {
     }
     private void initComponents() {
         dogListView = findViewById(R.id.userDashboardDogList);
+        goToUserDogRequest = findViewById(R.id.userDashboardViewToUserDogRequestView);
     }
     private void handleActions() {
+        goToUserDogRequest.setOnClickListener(v -> {
+            startActivity(new Intent(UserDashboardView.this, UserDogRequestView.class));
+        });
         dogListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
