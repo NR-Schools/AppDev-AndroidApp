@@ -164,9 +164,13 @@ public class AddDogRecordView extends AppCompatActivity {
             String dogDescription = dogDescriptionField.getText().toString();
 
             //region Extract Bytes from ImageView
-            byte[] dogImageBytes = null;
+            byte[] dogImageBytes = new byte[0];
             if (isPhotoSet) {
-                Bitmap dogImageBitmap = ((BitmapDrawable) displayImage.getDrawable()).getBitmap();
+                Bitmap dogImageBitmap = Bitmap.createScaledBitmap(
+                        ((BitmapDrawable) displayImage.getDrawable()).getBitmap(),
+                        200,200,
+                        false
+                );
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 dogImageBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
                 dogImageBytes = byteArrayOutputStream.toByteArray();
