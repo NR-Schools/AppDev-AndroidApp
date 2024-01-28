@@ -8,13 +8,13 @@ import retrofit2.http.POST;
 
 public interface AccountApi {
 
-    @POST("/api/account/signup")
+    @POST("/account/signup")
     Call<Boolean> userSignUp(@Body Account account);
 
-    @POST("/api/account/login")
+    @POST("/account/login")
     Call<Account> userLogIn(@Body Account account);
 
-    @POST("/api/account/logout")
+    @POST("/account/logout")
     Call<Account> userLogOut(@Body Account account);
 
 }

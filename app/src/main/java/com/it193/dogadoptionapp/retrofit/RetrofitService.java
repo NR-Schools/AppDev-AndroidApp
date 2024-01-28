@@ -37,8 +37,6 @@ public class RetrofitService {
                 account = new Gson().fromJson(jsonObject.get("account"), Account.class);
             }
 
-            System.out.println(json.toString().length());
-
             return new Dog(
                     jsonObject.get("id").getAsLong(),
                     jsonObject.get("name").getAsString(),
@@ -64,7 +62,7 @@ public class RetrofitService {
 
     private void initializeRetrofit() {
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.39.110:18080")
+                .baseUrl("http://192.168.39.110:18080/api")
                 .addConverterFactory(GsonConverterFactory.create(this.customGson()))
                 .build();
     }
