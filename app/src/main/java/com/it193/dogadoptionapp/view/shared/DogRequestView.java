@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import com.it193.dogadoptionapp.R;
+import com.it193.dogadoptionapp.data.ResponseCallback;
 import com.it193.dogadoptionapp.model.Account;
 import com.it193.dogadoptionapp.model.Dog;
+import com.it193.dogadoptionapp.repository.DogRequestRepository;
 import com.it193.dogadoptionapp.retrofit.DogApi;
 import com.it193.dogadoptionapp.retrofit.RetrofitService;
 import com.it193.dogadoptionapp.storage.AppStateStorage;
@@ -35,44 +37,36 @@ public class DogRequestView extends AppCompatActivity {
 
         // Initialize Components and Data
         initComponents();
-        initData();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Account currentAccount = AppStateStorage.getInstance().getActiveAccount();
+
+        DogRequestRepository dogRequestRepository = DogRequestRepository.getRepository(this);
+        if (currentAccount.getEmail().equals("Admin"))
+            dogRequestRepository = dogRequestRepository.adminViewAllDogRequest();
+        else
+            dogRequestRepository = dogRequestRepository.userViewAllDogRequest();
+        dogRequestRepository.setCallback(this::setInitialData);
     }
 
     private void initComponents() {
         dogRequestListView = findViewById(R.id.userDogRequestListView);
     }
 
-    private void initData() {
-        Account currentAccount = AppStateStorage.getInstance().getActiveAccount();
-
-        Call<List<Dog>> dogApiCall = dogApi.userViewAllDogAdoptReq(
-                currentAccount.getEmail(),
-                currentAccount.getSessionAuthString()
+    private void setInitialData(Object responseObject, String errorMessage) {
+        DogRequestListAdapter dogListAdapter = new DogRequestListAdapter(
+                getApplicationContext(),
+                dogs,
+                dogApi
         );
-        if (currentAccount.getEmail().equals("Admin")) {
-            dogApiCall = dogApi.adminViewAllDogAdoptReq(
-                    currentAccount.getEmail(),
-                    currentAccount.getSessionAuthString()
-            );
-        }
+        dogRequestListView.setAdapter(dogListAdapter);
 
-        dogApiCall.enqueue(new Callback<List<Dog>>() {
-                    @Override
-                    public void onResponse(Call<List<Dog>> call, Response<List<Dog>> response) {
-                        dogs = response.body();
-                        DogRequestListAdapter dogListAdapter = new DogRequestListAdapter(
-                                getApplicationContext(),
-                                dogs,
-                                dogApi
-                        );
-                        dogRequestListView.setAdapter(dogListAdapter);
-                    }
 
-                    @Override
-                    public void onFailure(Call<List<Dog>> call, Throwable t) {
-                        System.out.println(t.getMessage());
-                    }
-                });
+
     }
 
 }

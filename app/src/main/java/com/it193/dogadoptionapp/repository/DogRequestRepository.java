@@ -11,6 +11,9 @@ import com.it193.dogadoptionapp.retrofit.RetrofitService;
 import com.it193.dogadoptionapp.storage.AppStateStorage;
 import com.it193.dogadoptionapp.utils.AnimationUtility;
 import com.it193.dogadoptionapp.utils.NotificationUtility;
+import com.it193.dogadoptionapp.view.shared.DogRequestListAdapter;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -63,6 +66,54 @@ public class DogRequestRepository {
                         "User Request Dog",
                         "User Request Dog failed!"
                 );
+                callback.onResponseEvent(null, t.getMessage());
+            }
+        });
+
+        return this;
+    }
+
+    public DogRequestRepository userViewAllDogRequest() {
+        Account currentAccount = AppStateStorage.getInstance().getActiveAccount();
+
+        AnimationUtility.getInstance().startLoading();
+        dogApi.userViewAllDogAdoptReq(
+                currentAccount.getEmail(),
+                currentAccount.getSessionAuthString()
+        ).enqueue(new Callback<List<Dog>>() {
+            @Override
+            public void onResponse(Call<List<Dog>> call, Response<List<Dog>> response) {
+                AnimationUtility.getInstance().endLoading();
+                callback.onResponseEvent(response.body(), null);
+            }
+
+            @Override
+            public void onFailure(Call<List<Dog>> call, Throwable t) {
+                AnimationUtility.getInstance().endLoading();
+                callback.onResponseEvent(null, t.getMessage());
+            }
+        });
+
+        return this;
+    }
+
+    public DogRequestRepository adminViewAllDogRequest() {
+        Account currentAccount = AppStateStorage.getInstance().getActiveAccount();
+
+        AnimationUtility.getInstance().startLoading();
+        dogApi.adminViewAllDogAdoptReq(
+                currentAccount.getEmail(),
+                currentAccount.getSessionAuthString()
+        ).enqueue(new Callback<List<Dog>>() {
+            @Override
+            public void onResponse(Call<List<Dog>> call, Response<List<Dog>> response) {
+                AnimationUtility.getInstance().endLoading();
+                callback.onResponseEvent(response.body(), null);
+            }
+
+            @Override
+            public void onFailure(Call<List<Dog>> call, Throwable t) {
+                AnimationUtility.getInstance().endLoading();
                 callback.onResponseEvent(null, t.getMessage());
             }
         });
