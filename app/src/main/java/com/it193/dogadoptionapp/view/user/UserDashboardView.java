@@ -10,7 +10,9 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.it193.dogadoptionapp.R;
+import com.it193.dogadoptionapp.data.ResponseCallback;
 import com.it193.dogadoptionapp.model.Dog;
+import com.it193.dogadoptionapp.repository.DogRepository;
 import com.it193.dogadoptionapp.retrofit.DogApi;
 import com.it193.dogadoptionapp.retrofit.RetrofitService;
 import com.it193.dogadoptionapp.view.shared.DogDetailsView;
@@ -24,9 +26,7 @@ import retrofit2.Response;
 
 public class UserDashboardView extends AppCompatActivity {
 
-    private DogApi dogApi;
     private List<Dog> dogs;
-
     private ListView dogListView;
     private Button goToUserDogRequest;
 
@@ -35,52 +35,40 @@ public class UserDashboardView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_dashboard_view);
 
-        // Initialize Retrofit
-        RetrofitService retrofitService = new RetrofitService();
-        dogApi = retrofitService.getRetrofit().create(DogApi.class);
-
         // Initialize Components and Data
         initComponents();
-        initData();
 
         // Handle Actions
         handleActions();
     }
 
-    private void initData() {
-        dogApi.getAllDogs()
-                .enqueue(new Callback<List<Dog>>() {
-                    @Override
-                    public void onResponse(Call<List<Dog>> call, Response<List<Dog>> response) {
-                        dogs = response.body();
-                        UserDogListAdapter dogListAdapter = new UserDogListAdapter(
-                                getApplicationContext(),
-                                dogs
-                        );
-                        dogListView.setAdapter(dogListAdapter);
-                    }
+    @Override
+    protected void onStart() {
+        super.onStart();
 
-                    @Override
-                    public void onFailure(Call<List<Dog>> call, Throwable t) {
-                        System.out.println(t.getMessage());
-                    }
-                });
+        DogRepository
+                .getRepository(this)
+                .getAllDogRecords()
+                .setCallback(this::setInitialData);
+    }
+
+    private void setInitialData(Object responseObject, String errorMessage) {
+        UserDogListAdapter dogListAdapter = new UserDogListAdapter(
+                getApplicationContext(),
+                dogs
+        );
+        dogListView.setAdapter(dogListAdapter);
     }
     private void initComponents() {
         dogListView = findViewById(R.id.userDashboardDogList);
         goToUserDogRequest = findViewById(R.id.userDashboardViewToUserDogRequestView);
     }
     private void handleActions() {
-        goToUserDogRequest.setOnClickListener(v -> {
-            startActivity(new Intent(UserDashboardView.this, DogRequestView.class));
-        });
-        dogListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(UserDashboardView.this, DogDetailsView.class);
-                intent.putExtra("dogId", dogs.get(position).getId());
-                startActivity(intent);
-            }
+        goToUserDogRequest.setOnClickListener(v -> startActivity(new Intent(UserDashboardView.this, DogRequestView.class)));
+        dogListView.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(UserDashboardView.this, DogDetailsView.class);
+            intent.putExtra("dogId", dogs.get(position).getId());
+            startActivity(intent);
         });
     }
 }
