@@ -25,6 +25,12 @@
             android:layout_height="wrap_content"
             android:text="Add Dog" />
 
+        <Button
+            android:id="@+id/adminDashboardViewToAdminDogRequestView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Admin Requests" />
+
     </LinearLayout>
 
     <!-- Content, can be replaced/wrapped by SwipeRefreshLayout Later -->

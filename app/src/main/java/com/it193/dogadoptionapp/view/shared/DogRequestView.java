@@ -1,11 +1,8 @@
-package com.it193.dogadoptionapp.view.user;
+package com.it193.dogadoptionapp.view.shared;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.it193.dogadoptionapp.R;
@@ -14,8 +11,6 @@ import com.it193.dogadoptionapp.model.Dog;
 import com.it193.dogadoptionapp.retrofit.DogApi;
 import com.it193.dogadoptionapp.retrofit.RetrofitService;
 import com.it193.dogadoptionapp.storage.AppStateStorage;
-import com.it193.dogadoptionapp.view.shared.DogDetailsView;
-import com.it193.dogadoptionapp.view.shared.DogRequestListAdapter;
 
 import java.util.List;
 
@@ -23,7 +18,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UserDogRequestView extends AppCompatActivity {
+public class DogRequestView extends AppCompatActivity {
 
     private DogApi dogApi;
     private List<Dog> dogs;
@@ -32,7 +27,7 @@ public class UserDogRequestView extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_dog_request_view);
+        setContentView(R.layout.activity_dog_request_view);
 
         // Initialize Retrofit
         RetrofitService retrofitService = new RetrofitService();
@@ -50,11 +45,18 @@ public class UserDogRequestView extends AppCompatActivity {
     private void initData() {
         Account currentAccount = AppStateStorage.getInstance().getActiveAccount();
 
-        dogApi.userViewAllDogAdoptReq(
-                        currentAccount.getEmail(),
-                        currentAccount.getSessionAuthString()
-                )
-                .enqueue(new Callback<List<Dog>>() {
+        Call<List<Dog>> dogApiCall = dogApi.userViewAllDogAdoptReq(
+                currentAccount.getEmail(),
+                currentAccount.getSessionAuthString()
+        );
+        if (currentAccount.getEmail().equals("Admin")) {
+            dogApiCall = dogApi.adminViewAllDogAdoptReq(
+                    currentAccount.getEmail(),
+                    currentAccount.getSessionAuthString()
+            );
+        }
+
+        dogApiCall.enqueue(new Callback<List<Dog>>() {
                     @Override
                     public void onResponse(Call<List<Dog>> call, Response<List<Dog>> response) {
                         dogs = response.body();

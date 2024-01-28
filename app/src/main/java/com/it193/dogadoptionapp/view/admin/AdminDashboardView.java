@@ -24,6 +24,7 @@ import com.it193.dogadoptionapp.R;
 import com.it193.dogadoptionapp.model.Dog;
 import com.it193.dogadoptionapp.retrofit.DogApi;
 import com.it193.dogadoptionapp.retrofit.RetrofitService;
+import com.it193.dogadoptionapp.view.shared.DogRequestView;
 
 import java.util.List;
 
@@ -38,6 +39,7 @@ public class AdminDashboardView extends AppCompatActivity {
 
     private ListView dogListView;
     private Button goToAddDog;
+    private Button goToDogRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,11 +79,16 @@ public class AdminDashboardView extends AppCompatActivity {
     }
     private void initComponents() {
         goToAddDog = findViewById(R.id.adminDashboardViewToAddDogView);
+        goToDogRequest = findViewById(R.id.adminDashboardViewToAdminDogRequestView);
         dogListView = findViewById(R.id.adminDashboardDogList);
     }
     private void handleActions() {
         goToAddDog.setOnClickListener(v -> {
             startActivity(new Intent(AdminDashboardView.this, AddDogRecordView.class));
+        });
+
+        goToDogRequest.setOnClickListener(v -> {
+            startActivity(new Intent(AdminDashboardView.this, DogRequestView.class));
         });
 
         dogListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

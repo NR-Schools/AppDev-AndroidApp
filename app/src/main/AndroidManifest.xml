@@ -23,10 +23,7 @@
             android:name=".view.admin.AdminDashboardView"
             android:exported="false" />
         <activity
-            android:name=".view.user.UserDogRequestView"
-            android:exported="false" />
-        <activity
-            android:name=".view.admin.AdminDogRequestView"
+            android:name=".view.shared.DogRequestView"
             android:exported="false" />
         <activity
             android:name=".view.admin.UpdateDogRecordView"
