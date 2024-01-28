@@ -12,6 +12,9 @@ import com.it193.dogadoptionapp.storage.AppStateStorage;
 import com.it193.dogadoptionapp.utils.AnimationUtility;
 import com.it193.dogadoptionapp.utils.NotificationUtility;
 import com.it193.dogadoptionapp.view.admin.AddDogRecordView;
+import com.it193.dogadoptionapp.view.admin.AdminDogListAdapter;
+
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -86,6 +89,26 @@ public class DogRepository {
                 callback.onResponseEvent(null, t.getMessage());
             }
         });
+
+        return this;
+    }
+
+    public DogRepository getAllDogRecords() {
+        AnimationUtility.getInstance().startLoading();
+        dogApi.getAllDogs()
+                .enqueue(new Callback<List<Dog>>() {
+                    @Override
+                    public void onResponse(Call<List<Dog>> call, Response<List<Dog>> response) {
+                        AnimationUtility.getInstance().endLoading();
+                        callback.onResponseEvent(response.body(), null);
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Dog>> call, Throwable t) {
+                        AnimationUtility.getInstance().endLoading();
+                        callback.onResponseEvent(null, t.getMessage());
+                    }
+                });
 
         return this;
     }
