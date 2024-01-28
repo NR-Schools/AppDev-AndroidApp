@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import com.it193.dogadoptionapp.R;
 import com.it193.dogadoptionapp.model.Account;
+import com.it193.dogadoptionapp.repository.AccountRepository;
 import com.it193.dogadoptionapp.retrofit.AccountApi;
 import com.it193.dogadoptionapp.retrofit.RetrofitService;
 import com.it193.dogadoptionapp.storage.AppStateStorage;
@@ -25,8 +26,6 @@ import retrofit2.Response;
 
 public class LogInView extends AppCompatActivity {
 
-    private AccountApi accountApi;
-
     private EditText emailField;
     private EditText passwordField;
     private Button logInButton;
@@ -36,13 +35,6 @@ public class LogInView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in_view);
-
-        // Initialize AnimationUtility
-        AnimationUtility.getInstance().initialize(this, getLayoutInflater());
-
-        // Initialize Retrofit
-        RetrofitService retrofitService = new RetrofitService();
-        accountApi = retrofitService.getRetrofit().create(AccountApi.class);
 
         // Get UI Fields
         emailField = findViewById(R.id.logInEmailField);
@@ -83,43 +75,24 @@ public class LogInView extends AppCompatActivity {
         existingAccount.setPassword(passwd);
 
         // Attempt LogIn
-        AnimationUtility.getInstance().startLoading();
-        accountApi.userLogIn(existingAccount)
-                .enqueue(new Callback<Account>() {
-                    @Override
-                    public void onResponse(Call<Account> call, Response<Account> response) {
-                        AnimationUtility.getInstance().endLoading();
-                        NotificationUtility.successAlert(
-                                LogInView.this,
-                                "Sign Up is Successful!" + response.body().getSessionAuthString()
-                        );
+        AccountRepository
+                .getRepository(LogInView.this)
+                .logIn(existingAccount)
+                .setCallback(this::handleLogInResult);
+    }
 
-                        // Save Account
-                        AppStateStorage
-                                .getInstance()
-                                .setActiveAccount(
-                                        response.body()
-                                );
+    private void handleLogInResult(Object responseObject, String errorMessage) {
+        if (responseObject == null) {
+            return;
+        }
 
-                        // Determine whether to go to UserDashboard or AdminDashboard
-                        Account activeAccount = AppStateStorage.getInstance().getActiveAccount();
+        // Determine whether to go to UserDashboard or AdminDashboard
+        Account activeAccount = AppStateStorage.getInstance().getActiveAccount();
 
-                        Class classToRedirect = UserDashboardView.class;
-                        if (activeAccount.getEmail().equals("Admin"))
-                            classToRedirect = AdminDashboardView.class;
+        Class classToRedirect = UserDashboardView.class;
+        if (activeAccount.getEmail().equals("Admin"))
+            classToRedirect = AdminDashboardView.class;
 
-                        startActivity(new Intent(LogInView.this, classToRedirect));
-                    }
-
-                    @Override
-                    public void onFailure(Call<Account> call, Throwable t) {
-                        AnimationUtility.getInstance().endLoading();
-                        NotificationUtility.errorAlert(
-                                LogInView.this,
-                                "Sign Up",
-                                "Account Log In Attempt was Unsuccessful!"
-                        );
-                    }
-                });
+        startActivity(new Intent(LogInView.this, classToRedirect));
     }
 }
