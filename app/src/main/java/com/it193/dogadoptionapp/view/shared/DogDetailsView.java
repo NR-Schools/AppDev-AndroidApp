@@ -12,8 +12,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.it193.dogadoptionapp.R;
+import com.it193.dogadoptionapp.data.ResponseCallback;
 import com.it193.dogadoptionapp.model.Account;
 import com.it193.dogadoptionapp.model.Dog;
+import com.it193.dogadoptionapp.repository.DogRepository;
+import com.it193.dogadoptionapp.repository.DogRequestRepository;
 import com.it193.dogadoptionapp.retrofit.DogApi;
 import com.it193.dogadoptionapp.retrofit.RetrofitService;
 import com.it193.dogadoptionapp.storage.AppStateStorage;
@@ -29,7 +32,6 @@ import retrofit2.Response;
 
 public class DogDetailsView extends AppCompatActivity {
 
-    private DogApi dogApi;
     private long dogId;
 
     private ImageView dogImageView;
@@ -41,19 +43,24 @@ public class DogDetailsView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dog_details_view);
 
-        // Initialize AnimationUtility
-        AnimationUtility.getInstance().initialize(this, getLayoutInflater());
-
-        // Initialize Retrofit
-        RetrofitService retrofitService = new RetrofitService();
-        dogApi = retrofitService.getRetrofit().create(DogApi.class);
-
         // Get Inputs
         initComponents();
-        initValues();
 
         // Handle Actions
         dogRequestButton.setOnClickListener(this::handleDogRequestAction);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Intent intent = getIntent();
+        dogId = intent.getLongExtra("dogId", -1);
+
+        DogRepository
+                .getRepository(this)
+                .getDogRecord(dogId)
+                .setCallback(this::setInitialData);
     }
 
     private void initComponents() {
@@ -62,58 +69,28 @@ public class DogDetailsView extends AppCompatActivity {
         dogRequestButton = findViewById(R.id.dogDetailsRequestDogButton);
     }
 
-    private void initValues() {
-        // Get Id from Intent
-        Intent intent = getIntent();
-        dogId = intent.getLongExtra("dogId", -1);
+    private void setInitialData(Object responseObject, String errorMessage) {
 
-        // Fetch info
-        AnimationUtility.getInstance().startLoading();
-        dogApi.getDog(dogId)
-                .enqueue(new Callback<Dog>() {
-                    @Override
-                    public void onResponse(Call<Dog> call, Response<Dog> response) {
-                        AnimationUtility.getInstance().endLoading();
-                        Dog dog = response.body();
+        if (responseObject == null)
+            return;
 
-                        dogImageView.setImageBitmap(
-                                BitmapFactory.decodeByteArray(
-                                        dog.getPhotoBytes(),
-                                        0,
-                                        dog.getPhotoBytes().length
-                                )
-                        );
+        Dog dog = (Dog) responseObject;
 
-                        dogNameField.setText(dog.getName());
-                    }
+        dogImageView.setImageBitmap(
+                BitmapFactory.decodeByteArray(
+                        dog.getPhotoBytes(),
+                        0,
+                        dog.getPhotoBytes().length
+                )
+        );
 
-                    @Override
-                    public void onFailure(Call<Dog> call, Throwable t) {
-                        System.out.println(t.getMessage());
-                        AnimationUtility.getInstance().endLoading();
-                    }
-                });
+        dogNameField.setText(dog.getName());
     }
 
     private void handleDogRequestAction(View v) {
-        Account currentAccount = AppStateStorage.getInstance().getActiveAccount();
-        Dog dog = new Dog();
-        dog.setId(dogId);
-
-        dogApi.userDogAdopt(
-                currentAccount.getEmail(),
-                currentAccount.getSessionAuthString(),
-                dog
-        ).enqueue(new Callback<Dog>() {
-            @Override
-            public void onResponse(Call<Dog> call, Response<Dog> response) {
-                //
-            }
-
-            @Override
-            public void onFailure(Call<Dog> call, Throwable t) {
-                //
-            }
-        });
+        DogRequestRepository
+                .getRepository(this)
+                .userDogRequest(dogId)
+                .setCallback((a, b) -> {});
     }
 }
