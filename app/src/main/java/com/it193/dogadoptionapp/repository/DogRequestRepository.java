@@ -23,8 +23,9 @@ public class DogRequestRepository {
     private Context ctx;
     private DogApi dogApi;
     private ResponseCallback callback;
+
     private DogRequestRepository(Context context) {
-        AnimationUtility.getInstance().initialize(context, LayoutInflater.from(context));
+        AnimationUtility.getInstance().initialize(context);
         ctx = context;
         RetrofitService retrofitService = new RetrofitService();
         dogApi = retrofitService.getRetrofit().create(DogApi.class);

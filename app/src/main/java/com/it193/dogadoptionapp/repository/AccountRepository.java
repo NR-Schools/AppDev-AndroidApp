@@ -25,8 +25,9 @@ public class AccountRepository {
     private Context ctx;
     private AccountApi accountApi;
     private ResponseCallback callback;
+
     private AccountRepository(Context context) {
-        AnimationUtility.getInstance().initialize(context, LayoutInflater.from(context));
+        AnimationUtility.getInstance().initialize(context);
         ctx = context;
         RetrofitService retrofitService = new RetrofitService();
         accountApi = retrofitService.getRetrofit().create(AccountApi.class);
