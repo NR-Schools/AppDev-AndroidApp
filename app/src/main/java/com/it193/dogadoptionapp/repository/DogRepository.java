@@ -191,4 +191,38 @@ public class DogRepository {
 
         return this;
     }
+
+    public DogRepository deleteDogRecord(long dogId) {
+        Account currentAccount = AppStateStorage.getInstance().getActiveAccount();
+
+        AnimationUtility.getInstance().startLoading();
+        dogApi.deleteDog(
+                currentAccount.getEmail(),
+                currentAccount.getSessionAuthString(),
+                dogId
+        ).enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                AnimationUtility.getInstance().endLoading();
+                NotificationUtility.successAlert(
+                        ctx,
+                        "Dog Record Deletion is Successful!"
+                );
+                callback.onResponseEvent(response.body(), null);
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                AnimationUtility.getInstance().endLoading();
+                NotificationUtility.errorAlert(
+                        ctx,
+                        "Delete Dog",
+                        "Dog Record Deletion is Unsuccessful!"
+                );
+                callback.onResponseEvent(null, t.getMessage());
+            }
+        });
+
+        return this;
+    }
 }
