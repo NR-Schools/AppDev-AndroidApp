@@ -105,4 +105,33 @@ public class AccountRepository {
 
         return this;
     }
+
+    public AccountRepository logOut(Account account) {
+        AnimationUtility.getInstance().startLoading();
+        accountApi.userLogOut(account)
+                .enqueue(new Callback<Account>() {
+                    @Override
+                    public void onResponse(Call<Account> call, Response<Account> response) {
+                        AnimationUtility.getInstance().endLoading();
+                        NotificationUtility.successAlert(
+                                ctx,
+                                "Log Out is Successful!"
+                        );
+                        callback.onResponseEvent(response.body(), null);
+                    }
+
+                    @Override
+                    public void onFailure(Call<Account> call, Throwable t) {
+                        AnimationUtility.getInstance().endLoading();
+                        NotificationUtility.errorAlert(
+                                ctx,
+                                "Log Out",
+                                "Log Out is Unsuccessful!"
+                        );
+                        callback.onResponseEvent(null, t.getMessage());
+                    }
+                });
+
+        return this;
+    }
 }
