@@ -11,7 +11,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.it193.dogadoptionapp.R;
+import com.it193.dogadoptionapp.data.ResponseCallback;
 import com.it193.dogadoptionapp.model.Account;
+import com.it193.dogadoptionapp.repository.AccountRepository;
 import com.it193.dogadoptionapp.retrofit.AccountApi;
 import com.it193.dogadoptionapp.retrofit.RetrofitService;
 import com.it193.dogadoptionapp.utils.AnimationUtility;
@@ -27,8 +29,6 @@ import retrofit2.Response;
 
 public class SignUpView extends AppCompatActivity {
 
-    private AccountApi accountApi;
-
     private EditText nameField;
     private EditText emailField;
     private EditText passwordField;
@@ -40,13 +40,6 @@ public class SignUpView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_view);
-
-        // Initialize AnimationUtility
-        AnimationUtility.getInstance().initialize(this, getLayoutInflater());
-
-        // Initialize Retrofit
-        RetrofitService retrofitService = new RetrofitService();
-        accountApi = retrofitService.getRetrofit().create(AccountApi.class);
 
         // Get UI Fields
         nameField = findViewById(R.id.signUpNameField);
@@ -101,27 +94,13 @@ public class SignUpView extends AppCompatActivity {
         newAccount.setPassword(passwd);
 
         // Send Data
-        AnimationUtility.getInstance().startLoading();
-        accountApi.userSignUp(newAccount)
-                .enqueue(new Callback<Boolean>() {
-                    @Override
-                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                        AnimationUtility.getInstance().endLoading();
-                        NotificationUtility.successAlert(
-                                SignUpView.this,
-                                "Sign Up is Successful!"
-                        );
-                    }
+        AccountRepository
+                .getRepository(SignUpView.this)
+                .signUp(newAccount)
+                .setCallback(this::handleSignUpResult);
+    }
 
-                    @Override
-                    public void onFailure(Call<Boolean> call, Throwable t) {
-                        AnimationUtility.getInstance().endLoading();
-                        NotificationUtility.errorAlert(
-                                SignUpView.this,
-                                "Sign Up",
-                                "Account was not successfully saved!"
-                        );
-                    }
-                });
+    private void handleSignUpResult(Object responseObject, String errorMessage) {
+        //
     }
 }
