@@ -51,7 +51,7 @@ public interface DogApi {
             @Header("email") String email,
             @Header("session-auth-string") String sessionAuthString,
             @Part("id") RequestBody id,
-            @Part("photoBytes") MultipartBody.Part file,
+            @Part MultipartBody.Part file,
             @Part("isPhotoUpdated") RequestBody isPhotoUpdated,
             @Part("name") RequestBody name,
             @Part("breed") RequestBody breed,
