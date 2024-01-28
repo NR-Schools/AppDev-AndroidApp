@@ -1,8 +1,10 @@
 package com.it193.dogadoptionapp.repository;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 
+import com.it193.dogadoptionapp.R;
 import com.it193.dogadoptionapp.data.ResponseCallback;
 import com.it193.dogadoptionapp.model.Account;
 import com.it193.dogadoptionapp.model.Dog;
@@ -10,10 +12,14 @@ import com.it193.dogadoptionapp.retrofit.DogApi;
 import com.it193.dogadoptionapp.retrofit.RetrofitService;
 import com.it193.dogadoptionapp.storage.AppStateStorage;
 import com.it193.dogadoptionapp.utils.AnimationUtility;
+import com.it193.dogadoptionapp.utils.InputUtility;
 import com.it193.dogadoptionapp.utils.NotificationUtility;
 import com.it193.dogadoptionapp.view.admin.AddDogRecordView;
 import com.it193.dogadoptionapp.view.admin.AdminDogListAdapter;
+import com.it193.dogadoptionapp.view.admin.UpdateDogRecordView;
 
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
 
 import okhttp3.MediaType;
@@ -113,5 +119,75 @@ public class DogRepository {
         return this;
     }
 
+    public DogRepository getDogRecord(long dogId) {
+        AnimationUtility.getInstance().startLoading();
+        dogApi.getDog(dogId)
+                .enqueue(new Callback<Dog>() {
+                    @Override
+                    public void onResponse(Call<Dog> call, Response<Dog> response) {
+                        AnimationUtility.getInstance().endLoading();
+                        callback.onResponseEvent(response.body(), null);
+                    }
 
+                    @Override
+                    public void onFailure(Call<Dog> call, Throwable t) {
+                        AnimationUtility.getInstance().endLoading();
+                        callback.onResponseEvent(null, t.getMessage());
+                    }
+                });
+
+        return this;
+    }
+
+    public DogRepository updateDogRecord(
+            long dogId, byte[] dogImageBytes, boolean isPhotoSet, String name, String breed, String color, String age,
+            String sex, String arrivedDate, String arrivedFrom, String dogSize, String location, String description
+    ) {
+        // Get Credentials
+        Account currentAccount = AppStateStorage.getInstance().getActiveAccount();
+
+        // Setup Request Bodies
+        RequestBody dogIdRB = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(dogId));
+        RequestBody dogImageRB = RequestBody.create(MediaType.parse("image/png"), dogImageBytes);
+        MultipartBody.Part dogImagePart = MultipartBody.Part.createFormData("photoBytes", "file", dogImageRB);
+        RequestBody isPhotoUpdatedRB = RequestBody.create(MediaType.parse("text/plain"), Boolean.toString(isPhotoSet));
+        RequestBody dogNameRB = RequestBody.create(MediaType.parse("text/plain"), name);
+        RequestBody dogBreedRB = RequestBody.create(MediaType.parse("text/plain"), breed);
+        RequestBody dogColorRB = RequestBody.create(MediaType.parse("text/plain"), color);
+        RequestBody dogAgeRB = RequestBody.create(MediaType.parse("text/plain"), age);
+        RequestBody dogSexRB = RequestBody.create(MediaType.parse("text/plain"), sex);
+        RequestBody dogArrivedDateRB = RequestBody.create(MediaType.parse("text/plain"), arrivedDate);
+        RequestBody dogArrivedFromRB = RequestBody.create(MediaType.parse("text/plain"), arrivedFrom);
+        RequestBody dogSizeRB = RequestBody.create(MediaType.parse("text/plain"), dogSize);
+        RequestBody dogLocationRB = RequestBody.create(MediaType.parse("text/plain"), location);
+        RequestBody dogDescriptionRB = RequestBody.create(MediaType.parse("text/plain"), description);
+
+        AnimationUtility.getInstance().startLoading();
+        dogApi.updateDog(
+                currentAccount.getEmail(), currentAccount.getSessionAuthString(),
+                dogIdRB, dogImagePart, isPhotoUpdatedRB, dogNameRB, dogBreedRB, dogAgeRB, dogSexRB,
+                dogColorRB, dogDescriptionRB, dogArrivedDateRB, dogArrivedFromRB, dogSizeRB, dogLocationRB
+        ).enqueue(new Callback<Dog>() {
+            @Override
+            public void onResponse(Call<Dog> call, Response<Dog> response) {
+                AnimationUtility.getInstance().endLoading();
+                NotificationUtility.successAlert(
+                        ctx,
+                        "Update Dog Action Successfully!"
+                );
+            }
+
+            @Override
+            public void onFailure(Call<Dog> call, Throwable t) {
+                AnimationUtility.getInstance().endLoading();
+                NotificationUtility.errorAlert(
+                        ctx,
+                        "Add Dog",
+                        "Failed to add new dog!"
+                );
+            }
+        });
+
+        return this;
+    }
 }

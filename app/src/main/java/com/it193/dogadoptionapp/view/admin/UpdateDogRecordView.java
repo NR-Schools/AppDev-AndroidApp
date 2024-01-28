@@ -19,8 +19,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.it193.dogadoptionapp.R;
+import com.it193.dogadoptionapp.data.ResponseCallback;
 import com.it193.dogadoptionapp.model.Account;
 import com.it193.dogadoptionapp.model.Dog;
+import com.it193.dogadoptionapp.repository.DogRepository;
 import com.it193.dogadoptionapp.retrofit.DogApi;
 import com.it193.dogadoptionapp.retrofit.RetrofitService;
 import com.it193.dogadoptionapp.storage.AppStateStorage;
@@ -44,10 +46,7 @@ import retrofit2.http.Part;
 
 public class UpdateDogRecordView extends AppCompatActivity {
 
-    private DogApi dogApi;
-
     private ActivityResultLauncher<Intent> dogImageActionLauncher;
-
     private long dogId;
 
 
@@ -81,21 +80,26 @@ public class UpdateDogRecordView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_dog_record_view);
 
-        // Initialize AnimationUtility
-        AnimationUtility.getInstance().initialize(this, getLayoutInflater());
-
-        // Initialize Retrofit
-        RetrofitService retrofitService = new RetrofitService();
-        dogApi = retrofitService.getRetrofit().create(DogApi.class);
-
         // Get Inputs
         initComponents();
-        initValues();
 
         // Handle Actions
-        handleSelectDogImageAction();
-        handleSelectDateActions();
-        handleUpdateDogAction();
+        selectDogImageButton.setOnClickListener(this::handleSelectDogImageAction);
+        dogArrivedDateButton.setOnClickListener(this::handleSelectDateActions);
+        updateDogButton.setOnClickListener(this::handleUpdateDogAction);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Intent intent = getIntent();
+        dogId = intent.getLongExtra("dogId", -1);
+
+        DogRepository
+                .getRepository(this)
+                .getDogRecord(dogId)
+                .setCallback(this::setInitialData);
     }
 
     private void initComponents() {
@@ -127,191 +131,106 @@ public class UpdateDogRecordView extends AppCompatActivity {
         );
     }
 
-    private void initValues() {
-        // Get Id from Intent
-        Intent intent = getIntent();
-        dogId = intent.getLongExtra("dogId", -1);
+    private void setInitialData(Object responseObject, String errorMessage) {
 
-        // Fetch info
-        AnimationUtility.getInstance().startLoading();
-        dogApi.getDog(dogId)
-                .enqueue(new Callback<Dog>() {
-                    @Override
-                    public void onResponse(Call<Dog> call, Response<Dog> response) {
-                        AnimationUtility.getInstance().endLoading();
-                        Dog dog = response.body();
+        if (responseObject == null)
+            return;
 
-                        System.out.println(response.raw());
-                        System.out.println("Dog is " + response.body());
-                        System.out.println(response.code());
+        Dog dog = (Dog) responseObject;
 
-                        displayImage.setImageBitmap(
-                                BitmapFactory.decodeByteArray(
-                                        dog.getPhotoBytes(),
-                                        0,
-                                        dog.getPhotoBytes().length
-                                )
-                        );
+        displayImage.setImageBitmap(
+                BitmapFactory.decodeByteArray(
+                        dog.getPhotoBytes(),
+                        0,
+                        dog.getPhotoBytes().length
+                )
+        );
 
-                        dogNameField.setText(dog.getName());
-                        dogBreedField.setText(dog.getBreed());
-                        dogColorField.setText(dog.getColorCoat());
-                        dogAgeField.setText(String.valueOf(dog.getAge()));
-                        dogSexField.setSelection(
-                                InputUtility.getIndexFromObject(dog.getSex(), Arrays.asList(getResources().getStringArray(R.array.dog_sex_entries)))
-                        );
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                        dogArrivedDateDisplayField.setText(dog.getArrivedDate().format(formatter));
-                        dogArrivedFromField.setText(dog.getArrivedFrom());
-                        dogSizeField.setSelection(
-                                InputUtility.getIndexFromObject(dog.getSize(), Arrays.asList(getResources().getStringArray(R.array.dog_size_entries)))
-                        );
-                        dogLocationField.setText(dog.getLocation());
-                        dogDescriptionField.setText(dog.getDescription());
-                    }
-
-                    @Override
-                    public void onFailure(Call<Dog> call, Throwable t) {
-                        System.out.println(t.getMessage());
-                        AnimationUtility.getInstance().endLoading();
-                    }
-                });
+        dogNameField.setText(dog.getName());
+        dogBreedField.setText(dog.getBreed());
+        dogColorField.setText(dog.getColorCoat());
+        dogAgeField.setText(String.valueOf(dog.getAge()));
+        dogSexField.setSelection(
+                InputUtility.getIndexFromObject(dog.getSex(), Arrays.asList(getResources().getStringArray(R.array.dog_sex_entries)))
+        );
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        dogArrivedDateDisplayField.setText(dog.getArrivedDate().format(formatter));
+        dogArrivedFromField.setText(dog.getArrivedFrom());
+        dogSizeField.setSelection(
+                InputUtility.getIndexFromObject(dog.getSize(), Arrays.asList(getResources().getStringArray(R.array.dog_size_entries)))
+        );
+        dogLocationField.setText(dog.getLocation());
+        dogDescriptionField.setText(dog.getDescription());
     }
 
-    private void handleSelectDogImageAction() {
-        selectDogImageButton.setOnClickListener(v -> {
-            Intent openGalleryIntent = new Intent(Intent.ACTION_PICK);
-            openGalleryIntent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            dogImageActionLauncher.launch(openGalleryIntent);
-        });
+    private void handleSelectDogImageAction(View v) {
+        Intent openGalleryIntent = new Intent(Intent.ACTION_PICK);
+        openGalleryIntent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        dogImageActionLauncher.launch(openGalleryIntent);
     }
 
-    private void handleSelectDateActions() {
-        dogArrivedDateButton.setOnClickListener(v -> {
-            DatePickerDialog dialog = new DatePickerDialog(this);
-            dialog.setOnDateSetListener(
-                    (view, year, month, dayOfMonth) -> {
-                        String dateString = String.format("%d-%02d-%02d", year, month+1, dayOfMonth);
+    private void handleSelectDateActions(View v) {
+        DatePickerDialog dialog = new DatePickerDialog(this);
+        dialog.setOnDateSetListener(
+                (view, year, month, dayOfMonth) -> {
+                    String dateString = String.format("%d-%02d-%02d", year, month+1, dayOfMonth);
 
-                        dogArrivedDateDisplayField.setText(
-                                dateString
-                        );
-                    }
+                    dogArrivedDateDisplayField.setText(
+                            dateString
+                    );
+                }
+        );
+        dialog.show();
+    }
+
+    private void handleUpdateDogAction(View v) {
+        // Get Raw Data
+        String dogName = dogNameField.getText().toString();
+        String dogBreed = dogBreedField.getText().toString();
+        String dogColor = dogColorField.getText().toString();
+        String dogAgeStr = dogAgeField.getText().toString();
+        String dogSex = dogSexField.getSelectedItem().toString();
+        String dogArrivedDate = dogArrivedDateDisplayField.getText().toString();
+        String dogArrivedFrom = dogArrivedFromField.getText().toString();
+        String dogSize = dogSizeField.getSelectedItem().toString();
+        String dogLocation = dogLocationField.getText().toString();
+        String dogDescription = dogDescriptionField.getText().toString();
+
+        //region Extract Bytes from ImageView
+        byte[] dogImageBytes = new byte[0];
+        if (isPhotoSet) {
+            Bitmap dogImageBitmap = Bitmap.createScaledBitmap(
+                    ((BitmapDrawable) displayImage.getDrawable()).getBitmap(),
+                    200,200,
+                    false
             );
-            dialog.show();
-        });
-    }
-
-    private void handleUpdateDogAction() {
-        updateDogButton.setOnClickListener(v -> {
-            // Get Raw Data
-            String dogName = dogNameField.getText().toString();
-            String dogBreed = dogBreedField.getText().toString();
-            String dogColor = dogColorField.getText().toString();
-            String dogAgeStr = dogAgeField.getText().toString();
-            String dogSex = dogSexField.getSelectedItem().toString();
-            String dogArrivedDate = dogArrivedDateDisplayField.getText().toString();
-            String dogArrivedFrom = dogArrivedFromField.getText().toString();
-            String dogSize = dogSizeField.getSelectedItem().toString();
-            String dogLocation = dogLocationField.getText().toString();
-            String dogDescription = dogDescriptionField.getText().toString();
-
-            //region Extract Bytes from ImageView
-            byte[] dogImageBytes = new byte[0];
-            if (isPhotoSet) {
-                Bitmap dogImageBitmap = Bitmap.createScaledBitmap(
-                        ((BitmapDrawable) displayImage.getDrawable()).getBitmap(),
-                        200,200,
-                        false
-                );
-                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                dogImageBitmap.compress(Bitmap.CompressFormat.PNG, 50, byteArrayOutputStream);
-                dogImageBytes = byteArrayOutputStream.toByteArray();
-            }
-            //endregion
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            dogImageBitmap.compress(Bitmap.CompressFormat.PNG, 50, byteArrayOutputStream);
+            dogImageBytes = byteArrayOutputStream.toByteArray();
+        }
+        //endregion
 
 
-            // Check if all fields have non-empty input
-            if (!InputUtility.stringsAreNotNullOrEmpty(
-                    dogName, dogBreed, dogColor, dogAgeStr, dogSex, dogArrivedDate,
-                    dogArrivedFrom, dogSize, dogLocation, dogDescription
-            )) {
-                NotificationUtility.errorAlert(
-                        this,
-                        "Add Dog",
-                        "Incomplete/Missing Inputs Found!!"
-                );
-                return;
-            }
-
-            // Send Data
-            AnimationUtility.getInstance().startLoading();
-            handleSendingData(
-                    dogImageBytes, dogName, dogBreed, dogColor, dogAgeStr, dogSex,
-                    dogArrivedDate, dogArrivedFrom, dogSize, dogLocation, dogDescription
+        // Check if all fields have non-empty input
+        if (!InputUtility.stringsAreNotNullOrEmpty(
+                dogName, dogBreed, dogColor, dogAgeStr, dogSex, dogArrivedDate,
+                dogArrivedFrom, dogSize, dogLocation, dogDescription
+        )) {
+            NotificationUtility.errorAlert(
+                    this,
+                    "Add Dog",
+                    "Incomplete/Missing Inputs Found!!"
             );
-        });
-    }
+            return;
+        }
 
-    private void handleSendingData(
-            byte[] dogImageBytes, String name, String breed, String color, String age, String sex,
-            String arrivedDate, String arrivedFrom, String dogSize, String location, String description
-    ) {
-
-        // Get Credentials
-        Account currentAccount = AppStateStorage.getInstance().getActiveAccount();
-
-        // Setup Request Bodies
-        RequestBody dogIdRB = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(dogId));
-        RequestBody dogImageRB = RequestBody.create(MediaType.parse("image/png"), dogImageBytes);
-        MultipartBody.Part dogImagePart = MultipartBody.Part.createFormData("photoBytes", "file", dogImageRB);
-        RequestBody isPhotoUpdatedRB = RequestBody.create(MediaType.parse("text/plain"), Boolean.toString(isPhotoSet));
-        RequestBody dogNameRB = RequestBody.create(MediaType.parse("text/plain"), name);
-        RequestBody dogBreedRB = RequestBody.create(MediaType.parse("text/plain"), breed);
-        RequestBody dogColorRB = RequestBody.create(MediaType.parse("text/plain"), color);
-        RequestBody dogAgeRB = RequestBody.create(MediaType.parse("text/plain"), age);
-        RequestBody dogSexRB = RequestBody.create(MediaType.parse("text/plain"), sex);
-        RequestBody dogArrivedDateRB = RequestBody.create(MediaType.parse("text/plain"), arrivedDate);
-        RequestBody dogArrivedFromRB = RequestBody.create(MediaType.parse("text/plain"), arrivedFrom);
-        RequestBody dogSizeRB = RequestBody.create(MediaType.parse("text/plain"), dogSize);
-        RequestBody dogLocationRB = RequestBody.create(MediaType.parse("text/plain"), location);
-        RequestBody dogDescriptionRB = RequestBody.create(MediaType.parse("text/plain"), description);
-
-        dogApi.updateDog(
-                currentAccount.getEmail(),
-                currentAccount.getSessionAuthString(),
-                dogIdRB,
-                dogImagePart,
-                isPhotoUpdatedRB,
-                dogNameRB,
-                dogBreedRB,
-                dogAgeRB,
-                dogSexRB,
-                dogColorRB,
-                dogDescriptionRB,
-                dogArrivedDateRB,
-                dogArrivedFromRB,
-                dogSizeRB,
-                dogLocationRB
-        ).enqueue(new Callback<Dog>() {
-            @Override
-            public void onResponse(Call<Dog> call, Response<Dog> response) {
-                AnimationUtility.getInstance().endLoading();
-                NotificationUtility.successAlert(
-                        UpdateDogRecordView.this,
-                        "Update Dog Action Successfully!"
-                );
-            }
-
-            @Override
-            public void onFailure(Call<Dog> call, Throwable t) {
-                AnimationUtility.getInstance().endLoading();
-                NotificationUtility.errorAlert(
-                        UpdateDogRecordView.this,
-                        "Add Dog",
-                        "Failed to add new dog!"
-                );
-            }
-        });
+        // Send Data
+        DogRepository
+                .getRepository(this)
+                .updateDogRecord(
+                        dogId, dogImageBytes, isPhotoSet, dogName, dogBreed, dogColor, dogAgeStr,
+                        dogSex, dogArrivedDate, dogArrivedFrom, dogSize, dogLocation, dogDescription
+                )
+                .setCallback((a, b) -> {});
     }
 }
