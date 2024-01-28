@@ -1,4 +1,4 @@
-package com.it193.dogadoptionapp.view.admin;
+package com.it193.dogadoptionapp.view.user;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
@@ -14,13 +14,12 @@ import com.it193.dogadoptionapp.model.Dog;
 
 import java.util.List;
 
-public class AdminDogListAdapter extends BaseAdapter {
-
+public class UserDogListAdapter extends BaseAdapter {
     Context ctx;
     LayoutInflater inflater;
     List<Dog> dogList;
 
-    public AdminDogListAdapter(Context ctx, List<Dog> dogList) {
+    public UserDogListAdapter(Context ctx, List<Dog> dogList) {
         this.ctx = ctx;
         this.dogList = dogList;
         this.inflater = LayoutInflater.from(ctx);
