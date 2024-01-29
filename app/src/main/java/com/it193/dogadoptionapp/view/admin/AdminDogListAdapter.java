@@ -52,7 +52,15 @@ public class AdminDogListAdapter extends BaseAdapter {
         TextView dogNameView = (TextView) convertView.findViewById(R.id.custom_item_text1);
         TextView dogBreedView = (TextView) convertView.findViewById(R.id.custom_item_text2);
 
-        try {
+        // Set Default Image
+        dogImageView.setImageResource(R.drawable.no_dog_icon);
+
+        if (dogList.get(position).getPhotoBytes().length == 0) {
+            // Set Default Image
+            dogImageView.setImageResource(R.drawable.no_dog_icon);
+        }
+        else {
+            // Set Actual Dog Image
             dogImageView.setImageBitmap(
                     BitmapFactory.decodeByteArray(
                             dogList.get(position).getPhotoBytes(),
@@ -60,7 +68,8 @@ public class AdminDogListAdapter extends BaseAdapter {
                             dogList.get(position).getPhotoBytes().length
                     )
             );
-        } catch (Exception ex) {}
+        }
+
         dogNameView.setText(dogList.get(position).getName());
         dogBreedView.setText(dogList.get(position).getBreed());
 

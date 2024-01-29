@@ -13,6 +13,7 @@ import com.it193.dogadoptionapp.R;
 import com.it193.dogadoptionapp.model.Dog;
 
 import java.util.List;
+import java.util.Objects;
 
 public class UserDogListAdapter extends BaseAdapter {
     Context ctx;
@@ -51,7 +52,12 @@ public class UserDogListAdapter extends BaseAdapter {
         TextView dogNameView = (TextView) convertView.findViewById(R.id.custom_item_text1);
         TextView dogBreedView = (TextView) convertView.findViewById(R.id.custom_item_text2);
 
-        try {
+        if (dogList.get(position).getPhotoBytes().length == 0) {
+            // Set Default Image
+            dogImageView.setImageResource(R.drawable.no_dog_icon);
+        }
+        else {
+            // Set Actual Dog Image
             dogImageView.setImageBitmap(
                     BitmapFactory.decodeByteArray(
                             dogList.get(position).getPhotoBytes(),
@@ -59,7 +65,8 @@ public class UserDogListAdapter extends BaseAdapter {
                             dogList.get(position).getPhotoBytes().length
                     )
             );
-        } catch(Exception ex) {}
+        }
+
         dogNameView.setText(dogList.get(position).getName());
         dogBreedView.setText(dogList.get(position).getBreed());
 
