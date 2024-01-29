@@ -98,7 +98,7 @@
             android:id="@+id/addDogArrivedDateDisplay"
             android:layout_width="100dp"
             android:layout_height="34dp"
-            android:text="No Date Set!" />
+            android:text="" />
 
         <Button
             android:id="@+id/addDogArrivedDateButton"

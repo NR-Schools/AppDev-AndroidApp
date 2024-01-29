@@ -52,11 +52,10 @@ public class UserDogListAdapter extends BaseAdapter {
         TextView dogNameView = (TextView) convertView.findViewById(R.id.custom_item_text1);
         TextView dogBreedView = (TextView) convertView.findViewById(R.id.custom_item_text2);
 
-        if (dogList.get(position).getPhotoBytes().length == 0) {
-            // Set Default Image
-            dogImageView.setImageResource(R.drawable.no_dog_icon);
-        }
-        else {
+        // Set Default Image
+        dogImageView.setImageResource(R.drawable.no_dog_icon);
+
+        if (dogList.get(position).getPhotoBytes().length != 0) {
             // Set Actual Dog Image
             dogImageView.setImageBitmap(
                     BitmapFactory.decodeByteArray(

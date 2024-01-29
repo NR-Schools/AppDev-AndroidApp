@@ -55,11 +55,7 @@ public class AdminDogListAdapter extends BaseAdapter {
         // Set Default Image
         dogImageView.setImageResource(R.drawable.no_dog_icon);
 
-        if (dogList.get(position).getPhotoBytes().length == 0) {
-            // Set Default Image
-            dogImageView.setImageResource(R.drawable.no_dog_icon);
-        }
-        else {
+        if (dogList.get(position).getPhotoBytes().length != 0) {
             // Set Actual Dog Image
             dogImageView.setImageBitmap(
                     BitmapFactory.decodeByteArray(
