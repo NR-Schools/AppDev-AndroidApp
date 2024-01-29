@@ -2,37 +2,17 @@ package com.it193.dogadoptionapp.view.admin;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
-import androidx.core.view.WindowCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import com.it193.dogadoptionapp.data.ResponseCallback;
-import com.it193.dogadoptionapp.databinding.ActivityAdminDashboardViewBinding;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.it193.dogadoptionapp.R;
 import com.it193.dogadoptionapp.model.Dog;
 import com.it193.dogadoptionapp.repository.DogRepository;
-import com.it193.dogadoptionapp.retrofit.DogApi;
-import com.it193.dogadoptionapp.retrofit.RetrofitService;
 import com.it193.dogadoptionapp.view.shared.DogRequestView;
 
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class AdminDashboardView extends AppCompatActivity {
 
@@ -85,10 +65,12 @@ public class AdminDashboardView extends AppCompatActivity {
             return;
 
         dogs = (List<Dog>) responseObject;
-        AdminDogListAdapter dogListAdapter = new AdminDogListAdapter(
-                getApplicationContext(),
-                dogs
-        );
-        dogListView.setAdapter(dogListAdapter);
+        if (!dogs.isEmpty()) {
+            AdminDogListAdapter dogListAdapter = new AdminDogListAdapter(
+                    getApplicationContext(),
+                    dogs
+            );
+            dogListView.setAdapter(dogListAdapter);
+        }
     }
 }

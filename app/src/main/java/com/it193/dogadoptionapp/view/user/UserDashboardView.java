@@ -53,11 +53,17 @@ public class UserDashboardView extends AppCompatActivity {
     }
 
     private void setInitialData(Object responseObject, String errorMessage) {
-        UserDogListAdapter dogListAdapter = new UserDogListAdapter(
-                getApplicationContext(),
-                dogs
-        );
-        dogListView.setAdapter(dogListAdapter);
+        if (responseObject == null)
+            return;
+
+        dogs = (List<Dog>) responseObject;
+        if (!dogs.isEmpty()) {
+            UserDogListAdapter dogListAdapter = new UserDogListAdapter(
+                    getApplicationContext(),
+                    dogs
+            );
+            dogListView.setAdapter(dogListAdapter);
+        }
     }
     private void initComponents() {
         dogListView = findViewById(R.id.userDashboardDogList);

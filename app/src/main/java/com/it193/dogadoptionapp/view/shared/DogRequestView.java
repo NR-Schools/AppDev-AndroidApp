@@ -46,11 +46,17 @@ public class DogRequestView extends AppCompatActivity {
     }
 
     private void setInitialData(Object responseObject, String errorMessage) {
-        DogRequestListAdapter dogListAdapter = new DogRequestListAdapter(
-                getApplicationContext(),
-                dogs
-        );
-        dogRequestListView.setAdapter(dogListAdapter);
+        if (responseObject == null)
+            return;
+
+        dogs = (List<Dog>) responseObject;
+        if (!dogs.isEmpty()) {
+            DogRequestListAdapter dogListAdapter = new DogRequestListAdapter(
+                    getApplicationContext(),
+                    dogs
+            );
+            dogRequestListView.setAdapter(dogListAdapter);
+        }
     }
 
 }

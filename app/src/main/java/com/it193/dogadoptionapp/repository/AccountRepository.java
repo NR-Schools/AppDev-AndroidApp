@@ -78,7 +78,7 @@ public class AccountRepository {
                         AnimationUtility.getInstance().endLoading();
                         NotificationUtility.successAlert(
                                 ctx,
-                                "Sign Up is Successful!"
+                                "Log In is Successful!"
                         );
 
                         // Save Account
