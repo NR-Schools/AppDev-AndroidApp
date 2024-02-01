@@ -3,5 +3,7 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/farro</item>
         <item>@font/farro_bold</item>
+        <item>@font/farro_light</item>
+        <item>@font/farro_medium</item>
     </array>
 </resources>
