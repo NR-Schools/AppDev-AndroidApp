@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.it193.dogadoptionapp.R;
@@ -34,7 +35,7 @@ public class SignUpView extends AppCompatActivity {
     private EditText passwordField;
     private EditText confirmPasswordField;
     private Button signUpButton;
-    private Button goToLogIn;
+    private TextView goToLogIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
