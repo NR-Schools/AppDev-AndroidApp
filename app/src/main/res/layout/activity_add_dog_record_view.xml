@@ -18,15 +18,11 @@
             android:id="@+id/cardView3"
             android:layout_width="370dp"
 
-            android:layout_height="133dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="16dp"
+            android:layout_height="125dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="12dp"
             app:cardCornerRadius="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView2">
 
             <TextView
@@ -41,15 +37,15 @@
             <EditText
                 android:id="@+id/addDogDescriptionField"
                 android:layout_width="330dp"
-                android:layout_height="80dp"
+                android:layout_height="54dp"
+                android:layout_gravity="center"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/dogaddinput_bg"
                 android:inputType="text"
                 android:paddingLeft="5dp"
                 android:text="Add dog description..."
                 android:textColor="#747b79"
-                android:textSize="15sp"
-                android:layout_gravity="center"/>
+                android:textSize="15sp" />
 
         </androidx.cardview.widget.CardView>
 
@@ -57,14 +53,12 @@
             android:id="@+id/cardView2"
             android:layout_width="370dp"
 
-            android:layout_height="300dp"
-            android:layout_marginStart="5dp"
+            android:layout_height="350dp"
 
-            android:layout_marginEnd="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="12dp"
             app:cardCornerRadius="20dp"
-            app:layout_constraintBottom_toTopOf="@+id/cardView3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView">
 
 
@@ -85,7 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="57dp"
+                android:layout_marginTop="67dp"
                 android:fontFamily="@font/farro_light"
                 android:text="Breed"
                 android:textSize="15sp" />
@@ -95,7 +89,7 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="210dp"
-                android:layout_marginTop="57dp"
+                android:layout_marginTop="67dp"
                 android:background="@drawable/dogaddinput_bg"
                 android:inputType="text"
                 android:paddingLeft="5dp"
@@ -107,7 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="79dp"
+                android:layout_marginTop="89dp"
                 android:fontFamily="@font/farro_light"
                 android:text="Color"
                 android:textSize="15sp" />
@@ -118,7 +112,7 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="210dp"
-                android:layout_marginTop="79dp"
+                android:layout_marginTop="89dp"
                 android:background="@drawable/dogaddinput_bg"
                 android:inputType="text"
                 android:paddingLeft="5dp"
@@ -130,7 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="101dp"
+                android:layout_marginTop="111dp"
                 android:fontFamily="@font/farro_light"
                 android:text="Age"
                 android:textSize="15sp" />
@@ -140,7 +134,7 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="210dp"
-                android:layout_marginTop="101dp"
+                android:layout_marginTop="111dp"
                 android:background="@drawable/dogaddinput_bg"
                 android:inputType="text"
                 android:paddingLeft="5dp"
@@ -152,7 +146,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="123dp"
+                android:layout_marginTop="133dp"
                 android:fontFamily="@font/farro_light"
                 android:text="Sex"
                 android:textSize="15sp" />
@@ -162,7 +156,7 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="210dp"
-                android:layout_marginTop="123dp"
+                android:layout_marginTop="133dp"
                 android:background="@drawable/dogaddinput_bg"
                 android:entries="@array/dog_sex_entries"
                 android:text="Dog Sex"
@@ -173,7 +167,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="145dp"
+                android:layout_marginTop="155dp"
                 android:fontFamily="@font/farro_light"
                 android:text="Arrived Date"
                 android:textSize="15sp" />
@@ -184,13 +178,13 @@
             Tapos ichange lng yung value ng text para idisplay ang date.
             -->
             <EditText
-                android:focusable="false"
                 android:id="@+id/addDogArrivedDateButton"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="210dp"
-                android:layout_marginTop="145dp"
+                android:layout_marginTop="155dp"
                 android:background="@drawable/dogaddinput_bg"
+                android:focusable="false"
                 android:inputType="text"
                 android:paddingLeft="5dp"
                 android:text="Set Date"
@@ -201,7 +195,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="167dp"
+                android:layout_marginTop="177dp"
                 android:fontFamily="@font/farro_light"
                 android:text="Arrived From"
                 android:textSize="15sp" />
@@ -211,7 +205,7 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="210dp"
-                android:layout_marginTop="167dp"
+                android:layout_marginTop="177dp"
                 android:background="@drawable/dogaddinput_bg"
                 android:inputType="text"
                 android:paddingLeft="5dp"
@@ -223,7 +217,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="189dp"
+                android:layout_marginTop="199dp"
                 android:fontFamily="@font/farro_light"
                 android:text="Size"
                 android:textSize="15sp" />
@@ -234,7 +228,7 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="210dp"
-                android:layout_marginTop="189dp"
+                android:layout_marginTop="199dp"
                 android:background="@drawable/dogaddinput_bg"
                 android:entries="@array/dog_size_entries"
                 android:text="Where"
@@ -245,7 +239,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="211dp"
+                android:layout_marginTop="221dp"
                 android:fontFamily="@font/farro_light"
                 android:text="Location"
                 android:textSize="15sp" />
@@ -255,7 +249,7 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="210dp"
-                android:layout_marginTop="211dp"
+                android:layout_marginTop="221dp"
                 android:background="@drawable/dogaddinput_bg"
                 android:inputType="text"
                 android:paddingLeft="5dp"
@@ -267,11 +261,12 @@
                 android:id="@+id/addDogButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="115dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="130dp"
+                android:backgroundTint="#E3BC7B"
                 android:fontFamily="@font/farro_bold"
                 android:text="Add Dog Record"
-                android:layout_gravity="center"
-                />
+                app:cornerRadius="4dp" />
 
         </androidx.cardview.widget.CardView>
 
@@ -291,34 +286,32 @@
             android:id="@+id/cardView"
             android:layout_width="370dp"
 
-            android:layout_height="196dp"
-            android:layout_marginStart="5dp"
+            android:layout_height="200dp"
 
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="14dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="12dp"
             app:cardCornerRadius="20dp"
-            app:layout_constraintBottom_toTopOf="@+id/cardView2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
             <Button
                 android:id="@+id/addDogSelectImageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Upload Photo"
+                android:layout_gravity="center"
+                android:backgroundTint="#00FFFFFF"
+                android:text="Upload New Photo"
+                android:textColor="#000000"
+                app:cornerRadius="0dp"
                 app:layout_constraintStart_toEndOf="@+id/addDogNameField"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_gravity="center"
-                />
+                app:strokeWidth="1dp" />
 
             <ImageView
                 android:id="@+id/addDogDisplayImageView"
                 android:layout_width="335dp"
                 android:layout_height="170dp"
-                android:layout_gravity="center"
-                />
+                android:layout_gravity="center" />
         </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
