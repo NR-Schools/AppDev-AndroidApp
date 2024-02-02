@@ -70,8 +70,9 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="41dp"
-        android:background="@drawable/loginsignup_btnbg"
+        android:backgroundTint="#4CD3A0"
         android:text="Sign up"
+        app:cornerRadius="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signUpConfirmPasswordField" />
@@ -108,25 +109,10 @@
         android:layout_height="36dp"
         android:fontFamily="@font/farro"
         android:text="Sign up for free and search for your ideal companion on four legs."
-        android:textColor="#D1D1D1"
+        android:textColor="#8A8A8A"
         android:textSize="13dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.287"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
-
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="296dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="75dp"
-        android:fontFamily="@font/farro"
-        android:text="                                                  Save a dog’s life and discover the joy of adoption."
-        android:textColor="#18C17C"
-        android:textSize="13dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.264"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -135,14 +121,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="322dp"
         android:fontFamily="@font/farro_bold"
         android:text="Name:"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <TextView
         android:id="@+id/textView12"
@@ -195,7 +181,7 @@
         android:layout_marginEnd="2dp"
         android:fontFamily="@font/farro"
         android:text="Already have an account?"
-        android:textColor="#D1D1D1"
+        android:textColor="#8A8A8A"
         android:textSize="15dp"
         app:layout_constraintEnd_toStartOf="@+id/signUpViewToLogInView"
         app:layout_constraintStart_toStartOf="parent"
@@ -214,5 +200,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView15"
         app:layout_constraintTop_toBottomOf="@+id/signUpButton" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="250dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="72dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -42,15 +42,15 @@
         android:layout_width="330dp"
         android:layout_height="45dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="41dp"
-        android:background="@drawable/loginsignup_btnbg"
-        android:backgroundTintMode="add"
+        android:backgroundTint="#4CD3A0"
         android:fontFamily="@font/farro_bold"
         android:text="LOGIN"
+        app:cornerRadius="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/logInPasswordField" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -87,7 +87,7 @@
         android:layout_marginEnd="2dp"
         android:fontFamily="@font/farro"
         android:text="Doesn't have an account yet?"
-        android:textColor="#D1D1D1"
+        android:textColor="#8A8A8A"
         android:textSize="13dp"
         app:layout_constraintEnd_toStartOf="@+id/logInViewToSignUpView"
         app:layout_constraintStart_toStartOf="parent"
@@ -135,20 +135,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logInEmailField" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="142dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="143dp"
-        android:fontFamily="@font/farro_bold"
-        android:text="Forgot Password?"
-        android:textColor="#18C17C"
-        android:textSize="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logInPasswordField" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
