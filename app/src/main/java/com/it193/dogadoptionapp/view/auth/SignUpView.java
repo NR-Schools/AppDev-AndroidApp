@@ -102,6 +102,6 @@ public class SignUpView extends AppCompatActivity {
     }
 
     private void handleSignUpResult(Object responseObject, String errorMessage) {
-        //
+        startActivity(new Intent(SignUpView.this, LogInView.class));
     }
 }
