@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ListView;
@@ -19,6 +20,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 
 import com.google.android.material.navigation.NavigationView;
+import com.it193.dogadoptionapp.view.shared.DogDetailsView;
+import com.it193.dogadoptionapp.view.shared.DogRequestView;
 
 import java.util.List;
 
@@ -28,15 +31,13 @@ public class UserDashboardView extends AppCompatActivity implements NavigationVi
     private ListView dogListView;
     private Button goToUserDogRequest;
     private DrawerLayout drawerLayout;
-    //@SuppressLint("MissingInflatedId")
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_withnav);
+        setContentView(R.layout.activity_user_dashboard_view);
 
         // Initialize the Drawer
-        drawer_init();
+        //drawer_init();
 
         // Initialize Components and Data
         initComponents();
@@ -73,12 +74,12 @@ public class UserDashboardView extends AppCompatActivity implements NavigationVi
         goToUserDogRequest = findViewById(R.id.userDashboardViewToUserDogRequestView);
     }
     private void handleActions() {
-        /*goToUserDogRequest.setOnClickListener(v -> startActivity(new Intent(UserDashboardView.this, DogRequestView.class)));
+        goToUserDogRequest.setOnClickListener(v -> startActivity(new Intent(UserDashboardView.this, DogRequestView.class)));
         dogListView.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(UserDashboardView.this, DogDetailsView.class);
             intent.putExtra("dogId", dogs.get(position).getId());
             startActivity(intent);
-        });*/
+        });
     }
 
     @Override
@@ -96,7 +97,7 @@ public class UserDashboardView extends AppCompatActivity implements NavigationVi
         }
     }
 
-    public void drawer_init(){
+    /*public void drawer_init(){
         drawerLayout = findViewById(R.id.drawer_layout);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -105,7 +106,7 @@ public class UserDashboardView extends AppCompatActivity implements NavigationVi
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-    }
+    }*/
 
 
 }

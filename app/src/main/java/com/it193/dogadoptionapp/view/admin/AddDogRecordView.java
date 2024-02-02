@@ -46,7 +46,7 @@ public class AddDogRecordView extends AppCompatActivity {
     private Spinner dogSexField;
 
     //region Handle arrivedDate with separate view and text view
-    private TextView dogArrivedDateDisplayField;
+    private EditText dogArrivedDateDisplayField;
     private View dogArrivedDateButton;
     //endregion
     private EditText dogArrivedFromField;
@@ -80,6 +80,7 @@ public class AddDogRecordView extends AppCompatActivity {
         dogAgeField = findViewById(R.id.addDogAgeField);
         dogSexField = findViewById(R.id.addDogSexField);
         dogArrivedDateButton = findViewById(R.id.addDogArrivedDateButton);
+        dogArrivedDateDisplayField = findViewById(R.id.addDogArrivedDateButton);
         //dogArrivedDateDisplayField = findViewById(R.id.addDogArrivedDateDisplay);
         dogArrivedFromField = findViewById(R.id.addDogArrivedFromField);
         dogSizeField = findViewById(R.id.addDogSizeField);

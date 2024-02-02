@@ -16,9 +16,9 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView3"
-            android:layout_width="387dp"
+            android:layout_width="370dp"
 
-            android:layout_height="123dp"
+            android:layout_height="133dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="14dp"
             android:layout_marginEnd="5dp"
@@ -40,29 +40,27 @@
 
             <EditText
                 android:id="@+id/addDogDescriptionField"
-                android:layout_width="350dp"
-                android:layout_height="75dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="35dp"
+                android:layout_width="330dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="12dp"
                 android:background="@drawable/dogaddinput_bg"
                 android:inputType="text"
                 android:paddingLeft="5dp"
                 android:text="Add dog description..."
                 android:textColor="#747b79"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:layout_gravity="center"/>
 
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView2"
-            android:layout_width="387dp"
+            android:layout_width="370dp"
 
             android:layout_height="300dp"
             android:layout_marginStart="5dp"
 
-            android:layout_marginTop="5dp"
             android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
             app:cardCornerRadius="20dp"
             app:layout_constraintBottom_toTopOf="@+id/cardView3"
             app:layout_constraintEnd_toEndOf="parent"
@@ -186,6 +184,7 @@
             Tapos ichange lng yung value ng text para idisplay ang date.
             -->
             <EditText
+                android:focusable="false"
                 android:id="@+id/addDogArrivedDateButton"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
@@ -268,10 +267,11 @@
                 android:id="@+id/addDogButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="115dp"
-                android:layout_marginTop="242dp"
+                android:layout_marginTop="115dp"
                 android:fontFamily="@font/farro_bold"
-                android:text="Add Dog Record" />
+                android:text="Add Dog Record"
+                android:layout_gravity="center"
+                />
 
         </androidx.cardview.widget.CardView>
 
@@ -289,9 +289,9 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
-            android:layout_width="387dp"
+            android:layout_width="370dp"
 
-            android:layout_height="186dp"
+            android:layout_height="196dp"
             android:layout_marginStart="5dp"
 
             android:layout_marginTop="16dp"
@@ -307,20 +307,18 @@
                 android:id="@+id/addDogSelectImageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="55dp"
-                android:layout_marginTop="40dp"
-                android:text="upload photo"
+                android:text="Upload Photo"
                 app:layout_constraintStart_toEndOf="@+id/addDogNameField"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_gravity="center"
+                />
 
             <ImageView
                 android:id="@+id/addDogDisplayImageView"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_marginTop="28dp"
-                android:layout_marginEnd="32dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/addDogSelectImageButton" />
+                android:layout_width="335dp"
+                android:layout_height="170dp"
+                android:layout_gravity="center"
+                />
         </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

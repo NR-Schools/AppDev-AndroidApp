@@ -26,7 +26,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15sp"
             android:text="Sample"
-            android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -36,7 +35,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15sp"
             android:text="Sample"
-            android:textColor="@color/material_dynamic_neutral30"
             android:textSize="16sp"
             android:textStyle="italic" />
     </LinearLayout>

@@ -111,7 +111,8 @@ public class UpdateDogRecordView extends AppCompatActivity {
         dogAgeField = findViewById(R.id.updateDogAgeField);
         dogSexField = findViewById(R.id.updateDogSexField);
         dogArrivedDateButton = findViewById(R.id.updateDogArrivedDateButton);
-        dogArrivedDateDisplayField = findViewById(R.id.updateDogArrivedDateDisplay);
+        dogArrivedDateDisplayField  = findViewById(R.id.updateDogArrivedDateButton);
+        //dogArrivedDateDisplayField = findViewById(R.id.updateDogArrivedDateDisplay);
         dogArrivedFromField = findViewById(R.id.updateDogArrivedFromField);
         dogSizeField = findViewById(R.id.updateDogSizeField);
         dogLocationField = findViewById(R.id.updateDogLocationField);
