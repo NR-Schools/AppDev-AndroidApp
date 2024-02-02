@@ -52,6 +52,7 @@
         android:layout_width="119dp"
         android:layout_height="42dp"
         android:layout_marginTop="4dp"
+        android:backgroundTint="#A7D7C5"
         android:text="Sign Up"
         android:textSize="15sp"
         app:cornerRadius="0dp"
@@ -72,9 +73,10 @@
 
     <Button
         android:id="@+id/welcomeViewToLogIn"
-        android:layout_width="115dp"
-        android:layout_height="41dp"
+        android:layout_width="116dp"
+        android:layout_height="42dp"
         android:layout_marginTop="4dp"
+        android:backgroundTint="#A7D7C5"
         android:text="Log In"
         android:textSize="15sp"
         app:cornerRadius="0dp"
