@@ -14,262 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView3"
-            android:layout_width="370dp"
-
-            android:layout_height="125dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="12dp"
-            app:cardCornerRadius="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView2">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/farro_medium"
-                android:text="Additional Information"
-                android:textSize="20sp" />
-
-            <EditText
-                android:id="@+id/updateDogDescriptionField"
-                android:layout_width="330dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/dogaddinput_bg"
-                android:inputType="text"
-                android:paddingLeft="5dp"
-                android:text="Add dog description..."
-                android:textColor="#747b79"
-                android:textSize="15sp" />
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView2"
-            android:layout_width="370dp"
-
-            android:layout_height="350dp"
-
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="12dp"
-            app:cardCornerRadius="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView">
-
-
-            <EditText
-                android:id="@+id/updateDogNameField"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/dogname_bg"
-                android:fontFamily="@font/farro_bold"
-                android:inputType="text"
-                android:padding="3dp"
-                android:text="Dog Name"
-                android:textSize="25sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="67dp"
-                android:fontFamily="@font/farro_light"
-                android:text="Breed"
-                android:textSize="15sp" />
-
-            <EditText
-                android:id="@+id/updateDogBreedField"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="210dp"
-                android:layout_marginTop="67dp"
-                android:background="@drawable/dogaddinput_bg"
-                android:inputType="text"
-                android:paddingLeft="5dp"
-                android:text="Dog Breed"
-                android:textColor="#747b79"
-                android:textSize="15sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="89dp"
-                android:fontFamily="@font/farro_light"
-                android:text="Color"
-                android:textSize="15sp" />
-
-
-            <EditText
-                android:id="@+id/updateDogColorField"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="210dp"
-                android:layout_marginTop="89dp"
-                android:background="@drawable/dogaddinput_bg"
-                android:inputType="text"
-                android:paddingLeft="5dp"
-                android:text="Dog Color"
-                android:textColor="#747b79"
-                android:textSize="15sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="111dp"
-                android:fontFamily="@font/farro_light"
-                android:text="Age"
-                android:textSize="15sp" />
-
-            <EditText
-                android:id="@+id/updateDogAgeField"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="210dp"
-                android:layout_marginTop="111dp"
-                android:background="@drawable/dogaddinput_bg"
-                android:inputType="text"
-                android:paddingLeft="5dp"
-                android:text="Dog Age"
-                android:textColor="#747b79"
-                android:textSize="15sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="133dp"
-                android:fontFamily="@font/farro_light"
-                android:text="Sex"
-                android:textSize="15sp" />
-
-            <Spinner
-                android:id="@+id/updateDogSexField"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="210dp"
-                android:layout_marginTop="133dp"
-                android:background="@drawable/dogaddinput_bg"
-                android:entries="@array/dog_sex_entries"
-                android:text="Dog Sex"
-                android:textColor="#747b79"
-                android:textSize="15sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="155dp"
-                android:fontFamily="@font/farro_light"
-                android:text="Arrived Date"
-                android:textSize="15sp" />
-
-            <!--
-            Plano ko sana dito is magset ng OnClickListener sa edittext
-            para pagclick sa "Set Date", magpapakita ang dates thingy.
-            Tapos ichange lng yung value ng text para idisplay ang date.
-            -->
-            <EditText
-                android:id="@+id/updateDogArrivedDateButton"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="210dp"
-                android:layout_marginTop="155dp"
-                android:background="@drawable/dogaddinput_bg"
-                android:focusable="false"
-                android:inputType="text"
-                android:paddingLeft="5dp"
-                android:text="Set Date"
-                android:textColor="#747b79"
-                android:textSize="15sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="177dp"
-                android:fontFamily="@font/farro_light"
-                android:text="Arrived From"
-                android:textSize="15sp" />
-
-            <EditText
-                android:id="@+id/updateDogArrivedFromField"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="210dp"
-                android:layout_marginTop="177dp"
-                android:background="@drawable/dogaddinput_bg"
-                android:inputType="text"
-                android:paddingLeft="5dp"
-                android:text="Where"
-                android:textColor="#747b79"
-                android:textSize="15sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="199dp"
-                android:fontFamily="@font/farro_light"
-                android:text="Size"
-                android:textSize="15sp" />
-
-
-            <Spinner
-                android:id="@+id/updateDogSizeField"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="210dp"
-                android:layout_marginTop="199dp"
-                android:background="@drawable/dogaddinput_bg"
-                android:entries="@array/dog_size_entries"
-                android:text="Where"
-                android:textColor="#747b79"
-                android:textSize="15sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="221dp"
-                android:fontFamily="@font/farro_light"
-                android:text="Location"
-                android:textSize="15sp" />
-
-            <EditText
-                android:id="@+id/updateDogLocationField"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="210dp"
-                android:layout_marginTop="221dp"
-                android:background="@drawable/dogaddinput_bg"
-                android:inputType="text"
-                android:paddingLeft="5dp"
-                android:text="Location"
-                android:textColor="#747b79"
-                android:textSize="15sp" />
-
-            <Button
-                android:id="@+id/updateDogButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="130dp"
-                android:backgroundTint="#E3BC7B"
-                android:fontFamily="@font/farro_bold"
-                android:text="Update Dog Record"
-                app:cornerRadius="4dp" />
-
-        </androidx.cardview.widget.CardView>
-
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -282,37 +26,304 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
-            android:layout_width="370dp"
-
-            android:layout_height="200dp"
-
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="12dp"
-            app:cardCornerRadius="20dp"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-            <Button
-                android:id="@+id/updateDogSelectImageButton"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:backgroundTint="#9FFFFFFF"
-                android:text="Upload New Photo"
-                android:textColor="#000000"
-                app:cornerRadius="0dp"
-                app:layout_constraintStart_toEndOf="@+id/addDogNameField"
-                app:layout_constraintTop_toTopOf="parent"
-                app:strokeWidth="1dp" />
+                android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/updateDogDisplayImageView"
-                android:layout_width="335dp"
-                android:layout_height="170dp"
-                android:layout_gravity="center" />
-        </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView"
+                    android:layout_width="370dp"
+
+                    android:layout_height="200dp"
+
+                    android:layout_gravity="end"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="12dp"
+                    app:cardCornerRadius="20dp">
+
+                    <Button
+                        android:id="@+id/updateDogSelectImageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:backgroundTint="#9FFFFFFF"
+                        android:text="Upload New Photo"
+                        android:textColor="#000000"
+                        app:cornerRadius="0dp"
+                        app:layout_constraintStart_toEndOf="@+id/addDogNameField"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:strokeWidth="1dp" />
+
+                    <ImageView
+                        android:id="@+id/updateDogDisplayImageView"
+                        android:layout_width="335dp"
+                        android:layout_height="170dp"
+                        android:layout_gravity="center" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView2"
+                    android:layout_width="370dp"
+
+                    android:layout_height="350dp"
+
+                    android:layout_gravity="end"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="12dp"
+                    app:cardCornerRadius="20dp">
+
+
+                    <EditText
+                        android:id="@+id/updateDogNameField"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/dogname_bg"
+                        android:fontFamily="@font/farro_bold"
+                        android:inputType="text"
+                        android:padding="3dp"
+                        android:text="Dog Name"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="67dp"
+                        android:fontFamily="@font/farro_light"
+                        android:text="Breed"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:id="@+id/updateDogBreedField"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="210dp"
+                        android:layout_marginTop="67dp"
+                        android:background="@drawable/dogaddinput_bg"
+                        android:inputType="text"
+                        android:paddingLeft="5dp"
+                        android:text="Dog Breed"
+                        android:textColor="#747b79"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="89dp"
+                        android:fontFamily="@font/farro_light"
+                        android:text="Color"
+                        android:textSize="15sp" />
+
+
+                    <EditText
+                        android:id="@+id/updateDogColorField"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="210dp"
+                        android:layout_marginTop="89dp"
+                        android:background="@drawable/dogaddinput_bg"
+                        android:inputType="text"
+                        android:paddingLeft="5dp"
+                        android:text="Dog Color"
+                        android:textColor="#747b79"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="111dp"
+                        android:fontFamily="@font/farro_light"
+                        android:text="Age"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:id="@+id/updateDogAgeField"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="210dp"
+                        android:layout_marginTop="111dp"
+                        android:background="@drawable/dogaddinput_bg"
+                        android:inputType="text"
+                        android:paddingLeft="5dp"
+                        android:text="Dog Age"
+                        android:textColor="#747b79"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="133dp"
+                        android:fontFamily="@font/farro_light"
+                        android:text="Sex"
+                        android:textSize="15sp" />
+
+                    <Spinner
+                        android:id="@+id/updateDogSexField"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="210dp"
+                        android:layout_marginTop="133dp"
+                        android:background="@drawable/dogaddinput_bg"
+                        android:entries="@array/dog_sex_entries"
+                        android:text="Dog Sex"
+                        android:textColor="#747b79"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="155dp"
+                        android:fontFamily="@font/farro_light"
+                        android:text="Arrived Date"
+                        android:textSize="15sp" />
+
+                    <!--
+            Plano ko sana dito is magset ng OnClickListener sa edittext
+            para pagclick sa "Set Date", magpapakita ang dates thingy.
+            Tapos ichange lng yung value ng text para idisplay ang date.
+            -->
+                    <EditText
+                        android:id="@+id/updateDogArrivedDateButton"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="210dp"
+                        android:layout_marginTop="155dp"
+                        android:background="@drawable/dogaddinput_bg"
+                        android:focusable="false"
+                        android:inputType="text"
+                        android:paddingLeft="5dp"
+                        android:text="Set Date"
+                        android:textColor="#747b79"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="177dp"
+                        android:fontFamily="@font/farro_light"
+                        android:text="Arrived From"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:id="@+id/updateDogArrivedFromField"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="210dp"
+                        android:layout_marginTop="177dp"
+                        android:background="@drawable/dogaddinput_bg"
+                        android:inputType="text"
+                        android:paddingLeft="5dp"
+                        android:text="Where"
+                        android:textColor="#747b79"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="199dp"
+                        android:fontFamily="@font/farro_light"
+                        android:text="Size"
+                        android:textSize="15sp" />
+
+
+                    <Spinner
+                        android:id="@+id/updateDogSizeField"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="210dp"
+                        android:layout_marginTop="199dp"
+                        android:background="@drawable/dogaddinput_bg"
+                        android:entries="@array/dog_size_entries"
+                        android:text="Where"
+                        android:textColor="#747b79"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="221dp"
+                        android:fontFamily="@font/farro_light"
+                        android:text="Location"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:id="@+id/updateDogLocationField"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="210dp"
+                        android:layout_marginTop="221dp"
+                        android:background="@drawable/dogaddinput_bg"
+                        android:inputType="text"
+                        android:paddingLeft="5dp"
+                        android:text="Location"
+                        android:textColor="#747b79"
+                        android:textSize="15sp" />
+
+                    <Button
+                        android:id="@+id/updateDogButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="130dp"
+                        android:backgroundTint="#E3BC7B"
+                        android:fontFamily="@font/farro_bold"
+                        android:text="Update Dog Record"
+                        app:cornerRadius="4dp" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView3"
+                    android:layout_width="370dp"
+
+                    android:layout_height="140dp"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="12dp"
+                    app:cardCornerRadius="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/farro_medium"
+                        android:text="Additional Information"
+                        android:textSize="20sp" />
+
+                    <EditText
+                        android:id="@+id/updateDogDescriptionField"
+                        android:layout_width="330dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="12dp"
+                        android:background="@drawable/dogaddinput_bg"
+                        android:inputType="text"
+                        android:paddingLeft="5dp"
+                        android:text="Add dog description..."
+                        android:textColor="#747b79"
+                        android:textSize="15sp" />
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+        </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
