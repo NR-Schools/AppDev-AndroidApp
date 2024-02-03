@@ -1,11 +1,15 @@
 package com.it193.dogadoptionapp.view.user;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Html;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -34,16 +38,16 @@ public class UserDashboardView extends AppCompatActivity implements NavigationVi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_dashboard_view);
+        setContentView(R.layout.main_withnav);
 
         // Initialize the Drawer
-        //drawer_init();
+        drawer_init();
 
         // Initialize Components and Data
-        initComponents();
+        //initComponents();
 
         // Handle Actions
-        handleActions();
+        //handleActions();
     }
 
     @Override
@@ -59,7 +63,7 @@ public class UserDashboardView extends AppCompatActivity implements NavigationVi
     private void setInitialData(Object responseObject, String errorMessage) {
         if (responseObject == null)
             return;
-
+        /*
         dogs = (List<Dog>) responseObject;
         if (!dogs.isEmpty()) {
             UserDogListAdapter dogListAdapter = new UserDogListAdapter(
@@ -68,6 +72,8 @@ public class UserDashboardView extends AppCompatActivity implements NavigationVi
             );
             dogListView.setAdapter(dogListAdapter);
         }
+
+         */
     }
     private void initComponents() {
         dogListView = findViewById(R.id.userDashboardDogList);
@@ -97,7 +103,7 @@ public class UserDashboardView extends AppCompatActivity implements NavigationVi
         }
     }
 
-    /*public void drawer_init(){
+    public void drawer_init(){
         drawerLayout = findViewById(R.id.drawer_layout);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -106,7 +112,11 @@ public class UserDashboardView extends AppCompatActivity implements NavigationVi
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-    }*/
+        navigationView.setBackgroundColor(getResources().getColor(R.color.white));
+        View customNavView = getLayoutInflater().inflate(R.layout.custom_nav_menu, navigationView, false);
+        navigationView.addHeaderView(customNavView);
+        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"black\">" + "Dashboard" + "</font>"));
+    }
 
 
 }

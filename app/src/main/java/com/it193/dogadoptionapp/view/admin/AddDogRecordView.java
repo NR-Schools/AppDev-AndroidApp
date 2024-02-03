@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Html;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,8 +17,13 @@ import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.google.android.material.navigation.NavigationView;
 import com.it193.dogadoptionapp.R;
 import com.it193.dogadoptionapp.repository.DogRepository;
 import com.it193.dogadoptionapp.retrofit.DogApi;
@@ -25,7 +32,7 @@ import com.it193.dogadoptionapp.utils.NotificationUtility;
 
 import java.io.ByteArrayOutputStream;
 
-public class AddDogRecordView extends AppCompatActivity {
+public class AddDogRecordView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DogApi dogApi;
 
@@ -56,6 +63,7 @@ public class AddDogRecordView extends AppCompatActivity {
 
     private Button addDogButton;
     //endregion
+    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +72,9 @@ public class AddDogRecordView extends AppCompatActivity {
 
         // Get Inputs
         initComponents();
+
+        // Initialize the Drawer
+        drawer_init();
 
         // Handle Actions
         selectDogImageButton.setOnClickListener(this::handleSelectDogImageAction);
@@ -170,6 +181,36 @@ public class AddDogRecordView extends AppCompatActivity {
                         dogArrivedDate, dogArrivedFrom, dogSize, dogLocation, dogDescription
                 )
                 .setCallback((a, b) -> {});
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+
+        return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    public void drawer_init(){
+        drawerLayout = findViewById(R.id.drawer_layout);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        navigationView.setBackgroundColor(getResources().getColor(R.color.white));
+        View customNavView = getLayoutInflater().inflate(R.layout.custom_nav_menu, navigationView, false);
+        navigationView.addHeaderView(customNavView);
+        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"black\">" + "Add A Dog" + "</font>"));
     }
 
 }
