@@ -28,7 +28,7 @@ public class AdminDogListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return dogList.size();
+        return dogList.size() + 1;
     }
 
     @Override
@@ -43,18 +43,28 @@ public class AdminDogListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
+        if (position == 0) {
+            convertView = inflater.inflate(R.layout.item_adddog, null);
+            ImageView dogAddView = (ImageView) convertView.findViewById(R.id.adminDashboardViewToAddDogView);
+            dogAddView.setImageResource(R.drawable.adddog);
+            return convertView;
+        } else {
         convertView = inflater.inflate(
-                R.layout.item_dog_info,
+                R.layout.item_dog_info_withremove,
                 null
-        );
+            );
+        }
 
         ImageView dogImageView = (ImageView) convertView.findViewById(R.id.custom_item_image);
+        ImageView dogRemoveView = (ImageView) convertView.findViewById(R.id.dog_removebtn);
         TextView dogNameView = (TextView) convertView.findViewById(R.id.custom_item_text1);
         TextView dogBreedView = (TextView) convertView.findViewById(R.id.custom_item_text2);
 
         // Set Default Image
         dogImageView.setImageResource(R.drawable.no_dog_icon);
-
+        dogRemoveView.setImageResource(R.drawable.removebtn);
+        position = position - 1;
         if (dogList.get(position).getPhotoBytes().length != 0) {
             // Set Actual Dog Image
             dogImageView.setImageBitmap(

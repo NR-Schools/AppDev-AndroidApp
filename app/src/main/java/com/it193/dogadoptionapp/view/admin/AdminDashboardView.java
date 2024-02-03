@@ -3,6 +3,7 @@ package com.it193.dogadoptionapp.view.admin;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +19,7 @@ public class AdminDashboardView extends AppCompatActivity {
 
     private List<Dog> dogs;
 
-    private ListView dogListView;
+    private GridView dogListView;
     private Button goToAddDog;
     private Button goToDogRequest;
 
@@ -46,17 +47,25 @@ public class AdminDashboardView extends AppCompatActivity {
     }
 
     private void initComponents() {
-        goToAddDog = findViewById(R.id.adminDashboardViewToAddDogView);
-        goToDogRequest = findViewById(R.id.adminDashboardViewToAdminDogRequestView);
+        //goToAddDog = findViewById(R.id.adminDashboardViewToAddDogView);
+        //goToDogRequest = findViewById(R.id.adminDashboardViewToAdminDogRequestView);
         dogListView = findViewById(R.id.adminDashboardDogList);
     }
     private void handleActions() {
-        goToAddDog.setOnClickListener(v -> startActivity(new Intent(AdminDashboardView.this, AddDogRecordView.class)));
-        goToDogRequest.setOnClickListener(v -> startActivity(new Intent(AdminDashboardView.this, DogRequestView.class)));
+        //goToAddDog.setOnClickListener(v -> startActivity(new Intent(AdminDashboardView.this, AddDogRecordView.class)));
+        //goToDogRequest.setOnClickListener(v -> startActivity(new Intent(AdminDashboardView.this, DogRequestView.class)));
         dogListView.setOnItemClickListener((parent, view, position, id) -> {
-            Intent intent = new Intent(AdminDashboardView.this, UpdateDogRecordView.class);
-            intent.putExtra("dogId", dogs.get(position).getId());
-            startActivity(intent);
+
+                if(position==0){
+                    startActivity(new Intent(AdminDashboardView.this, AddDogRecordView.class));
+                }
+                else{
+                    position = position - 1;
+                    Intent intent = new Intent(AdminDashboardView.this, UpdateDogRecordView.class);
+                    intent.putExtra("dogId", dogs.get(position).getId());
+                    startActivity(intent);
+                }
+
         });
     }
 
