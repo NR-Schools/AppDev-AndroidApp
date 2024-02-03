@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ListView;
 
 import com.it193.dogadoptionapp.R;
@@ -32,22 +33,22 @@ import java.util.List;
 public class UserDashboardView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private List<Dog> dogs;
-    private ListView dogListView;
+    private GridView dogListView;
     private Button goToUserDogRequest;
     private DrawerLayout drawerLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_withnav);
+        setContentView(R.layout.activity_user_dashboard_view);
 
         // Initialize the Drawer
         drawer_init();
 
         // Initialize Components and Data
-        //initComponents();
+        initComponents();
 
         // Handle Actions
-        //handleActions();
+        handleActions();
     }
 
     @Override
@@ -63,7 +64,7 @@ public class UserDashboardView extends AppCompatActivity implements NavigationVi
     private void setInitialData(Object responseObject, String errorMessage) {
         if (responseObject == null)
             return;
-        /*
+
         dogs = (List<Dog>) responseObject;
         if (!dogs.isEmpty()) {
             UserDogListAdapter dogListAdapter = new UserDogListAdapter(
@@ -73,14 +74,14 @@ public class UserDashboardView extends AppCompatActivity implements NavigationVi
             dogListView.setAdapter(dogListAdapter);
         }
 
-         */
+
     }
     private void initComponents() {
         dogListView = findViewById(R.id.userDashboardDogList);
-        goToUserDogRequest = findViewById(R.id.userDashboardViewToUserDogRequestView);
+        //goToUserDogRequest = findViewById(R.id.userDashboardViewToUserDogRequestView);
     }
     private void handleActions() {
-        goToUserDogRequest.setOnClickListener(v -> startActivity(new Intent(UserDashboardView.this, DogRequestView.class)));
+        //goToUserDogRequest.setOnClickListener(v -> startActivity(new Intent(UserDashboardView.this, DogRequestView.class)));
         dogListView.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(UserDashboardView.this, DogDetailsView.class);
             intent.putExtra("dogId", dogs.get(position).getId());

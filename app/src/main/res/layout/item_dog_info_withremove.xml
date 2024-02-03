@@ -12,22 +12,23 @@
         >
 
         <androidx.cardview.widget.CardView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            app:cardElevation="10dp"
-            android:layout_gravity="center"
-            app:cardCornerRadius="20dp"
-            android:layout_marginBottom="20dp"
-            android:padding="50dp">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardElevation="21dp"
+            app:cardCornerRadius="50dp"
+            android:layout_marginLeft="150dp"
+            >
 
             <ImageView
-                android:id="@+id/custom_item_image"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_background"
-                />
+                android:id="@+id/dog_removebtn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:srcCompat="@drawable/removebtn" />
+
         </androidx.cardview.widget.CardView>
+
+
+
         <!--
         android:id="@+id/custom_item_text1"
         android:id="@+id/custom_item_text2"
@@ -52,6 +53,25 @@
             android:layout_gravity="center"
             android:text="Breed"
             android:textSize="15dp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:cardElevation="10dp"
+            android:layout_gravity="center"
+            app:cardCornerRadius="20dp"
+            android:layout_marginBottom="20dp"
+            android:padding="50dp">
+
+            <ImageView
+                android:id="@+id/custom_item_image"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_launcher_background"
+                />
+        </androidx.cardview.widget.CardView>
+
     </androidx.cardview.widget.CardView>
 
 
