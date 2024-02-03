@@ -110,9 +110,9 @@
                         android:layout_marginLeft="210dp"
                         android:layout_marginTop="67dp"
                         android:background="@drawable/dogaddinput_bg"
+                        android:hint="Dog Breed"
                         android:inputType="text"
                         android:paddingLeft="5dp"
-                        android:text="Dog Breed"
                         android:textColor="#747b79"
                         android:textSize="15sp" />
 
@@ -133,9 +133,9 @@
                         android:layout_marginLeft="210dp"
                         android:layout_marginTop="89dp"
                         android:background="@drawable/dogaddinput_bg"
+                        android:hint="Dog Color"
                         android:inputType="text"
                         android:paddingLeft="5dp"
-                        android:text="Dog Color"
                         android:textColor="#747b79"
                         android:textSize="15sp" />
 
@@ -155,9 +155,9 @@
                         android:layout_marginLeft="210dp"
                         android:layout_marginTop="111dp"
                         android:background="@drawable/dogaddinput_bg"
+                        android:hint="Dog Age"
                         android:inputType="text"
                         android:paddingLeft="5dp"
-                        android:text="Dog Age"
                         android:textColor="#747b79"
                         android:textSize="15sp" />
 
@@ -178,7 +178,6 @@
                         android:layout_marginTop="133dp"
                         android:background="@drawable/dogaddinput_bg"
                         android:entries="@array/dog_sex_entries"
-                        android:text="Dog Sex"
                         android:textColor="#747b79"
                         android:textSize="15sp" />
 
@@ -204,9 +203,9 @@
                         android:layout_marginTop="155dp"
                         android:background="@drawable/dogaddinput_bg"
                         android:focusable="false"
+                        android:hint="Set Date"
                         android:inputType="text"
                         android:paddingLeft="5dp"
-                        android:text="Set Date"
                         android:textColor="#747b79"
                         android:textSize="15sp" />
 
@@ -226,9 +225,9 @@
                         android:layout_marginLeft="210dp"
                         android:layout_marginTop="177dp"
                         android:background="@drawable/dogaddinput_bg"
+                        android:hint="Where"
                         android:inputType="text"
                         android:paddingLeft="5dp"
-                        android:text="Where"
                         android:textColor="#747b79"
                         android:textSize="15sp" />
 
@@ -250,7 +249,6 @@
                         android:layout_marginTop="199dp"
                         android:background="@drawable/dogaddinput_bg"
                         android:entries="@array/dog_size_entries"
-                        android:text="Where"
                         android:textColor="#747b79"
                         android:textSize="15sp" />
 
@@ -270,9 +268,9 @@
                         android:layout_marginLeft="210dp"
                         android:layout_marginTop="221dp"
                         android:background="@drawable/dogaddinput_bg"
+                        android:hint="Location"
                         android:inputType="text"
                         android:paddingLeft="5dp"
-                        android:text="Location"
                         android:textColor="#747b79"
                         android:textSize="15sp" />
 
