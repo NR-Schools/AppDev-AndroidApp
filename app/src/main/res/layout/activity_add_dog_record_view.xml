@@ -90,9 +90,9 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/dogname_bg"
                         android:fontFamily="@font/farro_bold"
+                        android:hint="Dog Name"
                         android:inputType="text"
                         android:padding="3dp"
-                        android:text="Dog Name"
                         android:textSize="25sp" />
 
                     <TextView

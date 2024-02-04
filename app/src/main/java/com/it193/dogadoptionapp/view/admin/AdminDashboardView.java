@@ -89,13 +89,12 @@ public class AdminDashboardView extends AppCompatActivity implements NavigationV
             return;
 
         dogs = (List<Dog>) responseObject;
-        if (!dogs.isEmpty()) {
-            AdminDogListAdapter dogListAdapter = new AdminDogListAdapter(
-                    getApplicationContext(),
-                    dogs
-            );
-            dogListView.setAdapter(dogListAdapter);
-        }
+        AdminDogListAdapter dogListAdapter = new AdminDogListAdapter(
+                getApplicationContext(),
+                dogs
+        );
+        dogListView.setAdapter(dogListAdapter);
+
     }
 
     @Override
