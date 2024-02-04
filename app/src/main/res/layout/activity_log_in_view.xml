@@ -47,6 +47,7 @@
         android:backgroundTint="#4CD3A0"
         android:fontFamily="@font/farro_bold"
         android:text="LOGIN"
+        android:textSize="18dp"
         app:cornerRadius="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

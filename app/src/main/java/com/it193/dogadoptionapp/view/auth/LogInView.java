@@ -95,5 +95,9 @@ public class LogInView extends AppCompatActivity {
             classToRedirect = AdminDashboardView.class;
 
         startActivity(new Intent(LogInView.this, classToRedirect));
+
+        //Clear Fields
+        emailField.setText("");
+        passwordField.setText("");
     }
 }
