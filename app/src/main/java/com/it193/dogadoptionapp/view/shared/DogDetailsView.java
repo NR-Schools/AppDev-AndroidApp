@@ -29,6 +29,9 @@ import com.it193.dogadoptionapp.retrofit.RetrofitService;
 import com.it193.dogadoptionapp.storage.AppStateStorage;
 import com.it193.dogadoptionapp.utils.AnimationUtility;
 import com.it193.dogadoptionapp.utils.InputUtility;
+import com.it193.dogadoptionapp.view.admin.AdminDashboardView;
+import com.it193.dogadoptionapp.view.admin.UpdateDogRecordView;
+import com.it193.dogadoptionapp.view.user.UserDashboardView;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -46,19 +49,32 @@ public class DogDetailsView extends AppCompatActivity implements NavigationView.
     private Button dogRequestButton;
 
     private DrawerLayout drawerLayout;
+
+    private Button goToDogRequest;
+
+    private Button goToDogDashboard;
+
+    private View customNavView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dog_details_view);
 
-        // Get Inputs
-        initComponents();
 
         // Initialize the Drawer
         drawer_init();
 
+        // Get Inputs
+        initComponents();
+
+
+
         // Handle Actions
         dogRequestButton.setOnClickListener(this::handleDogRequestAction);
+
+        // Handle Navigation Actions
+        goToDogRequest.setOnClickListener(v -> startActivity(new Intent(DogDetailsView.this, DogRequestView.class)));
+        goToDogDashboard.setOnClickListener(v -> startActivity(new Intent(DogDetailsView.this, UserDashboardView.class)));
     }
 
     @Override
@@ -78,6 +94,9 @@ public class DogDetailsView extends AppCompatActivity implements NavigationView.
         dogImageView = findViewById(R.id.dogDetailsImageDisplay);
         dogNameField = findViewById(R.id.dogDetailsNameField);
         dogRequestButton = findViewById(R.id.dogDetailsRequestDogButton);
+
+        goToDogRequest = customNavView.findViewById(R.id.GoToDogRequestView);
+        goToDogDashboard = customNavView.findViewById(R.id.GoToDogDashboard);
     }
 
     private void setInitialData(Object responseObject, String errorMessage) {
@@ -131,7 +150,7 @@ public class DogDetailsView extends AppCompatActivity implements NavigationView.
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setBackgroundColor(getResources().getColor(R.color.white));
-        View customNavView = getLayoutInflater().inflate(R.layout.custom_nav_menu, navigationView, false);
+        customNavView = getLayoutInflater().inflate(R.layout.custom_nav_menu, navigationView, false);
         navigationView.addHeaderView(customNavView);
         getSupportActionBar().setTitle(Html.fromHtml("<font color=\"black\">" + "Dog Information" + "</font>"));
     }

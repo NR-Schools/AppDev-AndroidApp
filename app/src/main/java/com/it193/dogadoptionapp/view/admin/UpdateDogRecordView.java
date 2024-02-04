@@ -36,6 +36,7 @@ import com.it193.dogadoptionapp.storage.AppStateStorage;
 import com.it193.dogadoptionapp.utils.AnimationUtility;
 import com.it193.dogadoptionapp.utils.InputUtility;
 import com.it193.dogadoptionapp.utils.NotificationUtility;
+import com.it193.dogadoptionapp.view.shared.DogRequestView;
 
 import java.io.ByteArrayOutputStream;
 import java.time.format.DateTimeFormatter;
@@ -83,22 +84,35 @@ public class UpdateDogRecordView extends AppCompatActivity implements Navigation
     private Button updateDogButton;
     //endregion
 
+    private Button goToDogRequest;
+
+    private Button goToDogDashboard;
+
     private DrawerLayout drawerLayout;
+
+    private View customNavView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_dog_record_view);
 
-        // Get Inputs
-        initComponents();
 
         // Initialize the Drawer
         drawer_init();
+
+        // Get Inputs
+        initComponents();
+
+
 
         // Handle Actions
         selectDogImageButton.setOnClickListener(this::handleSelectDogImageAction);
         dogArrivedDateButton.setOnClickListener(this::handleSelectDateActions);
         updateDogButton.setOnClickListener(this::handleUpdateDogAction);
+
+        // Handle Navigation Menu Actions
+        goToDogRequest.setOnClickListener(v -> startActivity(new Intent(UpdateDogRecordView.this, DogRequestView.class)));
+        goToDogDashboard.setOnClickListener(v -> startActivity(new Intent(UpdateDogRecordView.this, AdminDashboardView.class)));
     }
 
     @Override
@@ -130,6 +144,8 @@ public class UpdateDogRecordView extends AppCompatActivity implements Navigation
         dogLocationField = findViewById(R.id.updateDogLocationField);
         dogDescriptionField = findViewById(R.id.updateDogDescriptionField);
         updateDogButton = findViewById(R.id.updateDogButton);
+        goToDogRequest = customNavView.findViewById(R.id.GoToDogRequestView);
+        goToDogDashboard = customNavView.findViewById(R.id.GoToDogDashboard);
 
         dogImageActionLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -272,7 +288,7 @@ public class UpdateDogRecordView extends AppCompatActivity implements Navigation
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setBackgroundColor(getResources().getColor(R.color.white));
-        View customNavView = getLayoutInflater().inflate(R.layout.custom_nav_menu, navigationView, false);
+        customNavView = getLayoutInflater().inflate(R.layout.custom_nav_menu, navigationView, false);
         navigationView.addHeaderView(customNavView);
         getSupportActionBar().setTitle(Html.fromHtml("<font color=\"black\">" + "Update Information" + "</font>"));
     }

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,6 +26,10 @@ public class DogRequestListAdapter extends BaseAdapter {
     List<Dog> dogRequestList;
     boolean isAdmin;
 
+    Button adminReject;
+    Button adminAccept;
+    Button userCancel;
+
     public DogRequestListAdapter(Context ctx, List<Dog> dogRequestList) {
         this.ctx = ctx;
         this.dogRequestList = dogRequestList;
@@ -34,6 +39,7 @@ public class DogRequestListAdapter extends BaseAdapter {
         isAdmin = false;
         if (AppStateStorage.getInstance().getActiveAccount().getEmail().equals("Admin"))
             isAdmin = true;
+
     }
 
     @Override
@@ -53,20 +59,36 @@ public class DogRequestListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = inflater.inflate(
-                R.layout.item_dog_request_info,
-                null
-        );
+
+        if (isAdmin) {
+            convertView = inflater.inflate(
+                    R.layout.item_dog_adminrequest,
+                    null
+            );
+            TextView userNameField = convertView.findViewById(R.id.itemDogRequestUserNameField);
+            adminReject = convertView.findViewById(R.id.itemDogRequestAdminRejectRequest);
+            adminAccept = convertView.findViewById(R.id.itemDogRequestAdminAcceptRequest);
+            userNameField.setText(dogRequestList.get(position).getAccount().getEmail());
+
+            adminReject.setOnClickListener(v -> handleAdminReject(position));
+            adminAccept.setOnClickListener(v -> handleAdminAccept(position));
+        }
+        else {
+            convertView = inflater.inflate(
+                    R.layout.item_dog_userrequest,
+                    null
+            );
+            TextView breedField = convertView.findViewById(R.id.itemDogRequestBreedField);
+            userCancel = convertView.findViewById(R.id.itemDogRequestUserCancelRequest);
+            breedField.setText(dogRequestList.get(position).getAccount().getEmail());
+
+
+        }
+
 
         // Fetch Views
         ImageView dogImageView = convertView.findViewById(R.id.itemDogRequestImageDisplay);
         TextView dogNameField = convertView.findViewById(R.id.itemDogRequestNameField);
-        TextView userNameField = convertView.findViewById(R.id.itemDogRequestUserNameField);
-        LinearLayout adminContainer = convertView.findViewById(R.id.itemDogRequestAdminActionContainer);
-        LinearLayout userContainer = convertView.findViewById(R.id.itemDogRequestUserActionContainer);
-        Button adminReject = convertView.findViewById(R.id.itemDogRequestAdminRejectRequest);
-        Button adminAccept = convertView.findViewById(R.id.itemDogRequestAdminAcceptRequest);
-        Button userCancel = convertView.findViewById(R.id.itemDogRequestUserCancelRequest);
 
         // Set Values
         dogImageView.setImageBitmap(
@@ -77,47 +99,63 @@ public class DogRequestListAdapter extends BaseAdapter {
                 )
         );
         dogNameField.setText(dogRequestList.get(position).getName());
-        userNameField.setText(dogRequestList.get(position).getAccount().getEmail());
 
-        if (isAdmin) {
-            userContainer.setVisibility(View.GONE);
-            adminReject.setOnClickListener(v -> handleAdminReject(position));
-            adminAccept.setOnClickListener(v -> handleAdminAccept(position));
-        }
-        else {
-            adminContainer.setVisibility(View.GONE);
-            userCancel.setOnClickListener(v -> handleUserCancel(position));
-        }
+
 
         return convertView;
     }
 
     // Handle Actions
-    private void handleAdminReject(int position) {
+    public void handleAdminReject(int position) {
         DogRequestRepository
                 .getRepository(ctx)
                 .adminConfirmRequest(
                         dogRequestList.get(position),
                         false
                 )
-                .setCallback((a, b) -> {});
+                .setCallback((a, b) -> {
+                    // Update the data and refresh the adapter
+                    notifyDataSetChanged();
+                });
     }
 
-    private void handleAdminAccept(int position) {
+    public void handleAdminAccept(int position) {
         DogRequestRepository
                 .getRepository(ctx)
                 .adminConfirmRequest(
                         dogRequestList.get(position),
                         true
                 )
-                .setCallback((a, b) -> {});
+                .setCallback((a, b) -> {
+                    // Update the data and refresh the adapter
+                    notifyDataSetChanged();
+                });
     }
-    private void handleUserCancel(int position) {
+    public void handleUserCancel(int position) {
         DogRequestRepository
                 .getRepository(ctx)
                 .userCancelDogRequest(
                         dogRequestList.get(position)
                 )
-                .setCallback((a, b) -> {});
+                .setCallback((a, b) -> {
+                    // Update the data and refresh the adapter
+                    notifyDataSetChanged();
+                });
+    }
+
+    public Button getAdminReject() {
+        return adminReject;
+    }
+
+    public Button getAdminAccept() {
+        return adminAccept;
+    }
+
+    public Button getUserCancel() {
+        return userCancel;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
     }
 }

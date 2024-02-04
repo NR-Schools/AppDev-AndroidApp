@@ -29,6 +29,7 @@ import com.it193.dogadoptionapp.repository.DogRepository;
 import com.it193.dogadoptionapp.retrofit.DogApi;
 import com.it193.dogadoptionapp.utils.InputUtility;
 import com.it193.dogadoptionapp.utils.NotificationUtility;
+import com.it193.dogadoptionapp.view.shared.DogRequestView;
 
 import java.io.ByteArrayOutputStream;
 
@@ -65,21 +66,30 @@ public class AddDogRecordView extends AppCompatActivity implements NavigationVie
     //endregion
     private DrawerLayout drawerLayout;
 
+    private Button goToDogRequest;
+
+    private Button goToDogDashboard;
+    private View customNavView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_dog_record_view);
 
-        // Get Inputs
-        initComponents();
 
         // Initialize the Drawer
         drawer_init();
+        // Get Inputs
+        initComponents();
 
         // Handle Actions
         selectDogImageButton.setOnClickListener(this::handleSelectDogImageAction);
         dogArrivedDateButton.setOnClickListener(this::handleSelectDateActions);
         addDogButton.setOnClickListener(this::handleAddDogAction);
+
+        // Handle Navigation Menu Actions
+        goToDogRequest.setOnClickListener(v -> startActivity(new Intent(AddDogRecordView.this, DogRequestView.class)));
+        goToDogDashboard.setOnClickListener(v -> startActivity(new Intent(AddDogRecordView.this, AdminDashboardView.class)));
     }
 
     private void initComponents() {
@@ -98,6 +108,8 @@ public class AddDogRecordView extends AppCompatActivity implements NavigationVie
         dogLocationField = findViewById(R.id.addDogLocationField);
         dogDescriptionField = findViewById(R.id.addDogDescriptionField);
         addDogButton = findViewById(R.id.addDogButton);
+        goToDogRequest = customNavView.findViewById(R.id.GoToDogRequestView);
+        goToDogDashboard = customNavView.findViewById(R.id.GoToDogDashboard);
 
         dogImageActionLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -208,7 +220,7 @@ public class AddDogRecordView extends AppCompatActivity implements NavigationVie
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setBackgroundColor(getResources().getColor(R.color.white));
-        View customNavView = getLayoutInflater().inflate(R.layout.custom_nav_menu, navigationView, false);
+        customNavView = getLayoutInflater().inflate(R.layout.custom_nav_menu, navigationView, false);
         navigationView.addHeaderView(customNavView);
         getSupportActionBar().setTitle(Html.fromHtml("<font color=\"black\">" + "Add A Dog" + "</font>"));
     }

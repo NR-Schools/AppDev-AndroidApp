@@ -21,7 +21,7 @@
             android:padding="50dp">
 
             <ImageView
-                android:id="@+id/custom_item_image"
+                android:id="@+id/itemDogRequestImageDisplay"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:scaleType="centerCrop"
@@ -33,7 +33,7 @@
         android:id="@+id/custom_item_text2"
         android:id="@+id/custom_item_image"-->
         <TextView
-            android:id="@+id/custom_item_text1"
+            android:id="@+id/itemDogRequestNameField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
@@ -44,7 +44,7 @@
             android:textSize="20dp" />
 
         <TextView
-            android:id="@+id/custom_item_text2"
+            android:id="@+id/itemDogRequestBreedField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="65dp"
@@ -54,7 +54,7 @@
             android:textSize="15dp" />
 
         <Button
-            android:id="@+id/dog_cancelbtn"
+            android:id="@+id/itemDogRequestUserCancelRequest"
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:text="Cancel"

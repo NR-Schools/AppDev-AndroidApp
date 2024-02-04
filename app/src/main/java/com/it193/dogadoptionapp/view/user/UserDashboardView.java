@@ -36,6 +36,8 @@ public class UserDashboardView extends AppCompatActivity implements NavigationVi
     private GridView dogListView;
     private Button goToUserDogRequest;
     private DrawerLayout drawerLayout;
+    private View customNavView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,10 +80,10 @@ public class UserDashboardView extends AppCompatActivity implements NavigationVi
     }
     private void initComponents() {
         dogListView = findViewById(R.id.userDashboardDogList);
-        //goToUserDogRequest = findViewById(R.id.userDashboardViewToUserDogRequestView);
+        goToUserDogRequest = customNavView.findViewById(R.id.GoToDogRequestView);
     }
     private void handleActions() {
-        //goToUserDogRequest.setOnClickListener(v -> startActivity(new Intent(UserDashboardView.this, DogRequestView.class)));
+        goToUserDogRequest.setOnClickListener(v -> startActivity(new Intent(UserDashboardView.this, DogRequestView.class)));
         dogListView.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(UserDashboardView.this, DogDetailsView.class);
             intent.putExtra("dogId", dogs.get(position).getId());
@@ -114,7 +116,7 @@ public class UserDashboardView extends AppCompatActivity implements NavigationVi
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setBackgroundColor(getResources().getColor(R.color.white));
-        View customNavView = getLayoutInflater().inflate(R.layout.custom_nav_menu, navigationView, false);
+        customNavView = getLayoutInflater().inflate(R.layout.custom_nav_menu, navigationView, false);
         navigationView.addHeaderView(customNavView);
         getSupportActionBar().setTitle(Html.fromHtml("<font color=\"black\">" + "Dashboard" + "</font>"));
     }

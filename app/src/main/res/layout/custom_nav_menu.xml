@@ -186,7 +186,7 @@
             />
 
         <Button
-            android:id="@+id/nav_dashboardbtn"
+            android:id="@+id/GoToDogDashboard"
             android:layout_width="177dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
@@ -199,7 +199,7 @@
             android:textSize="20dp" />
 
         <Button
-            android:id="@+id/nav_requestbtn"
+            android:id="@+id/GoToDogRequestView"
             android:layout_width="155dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
