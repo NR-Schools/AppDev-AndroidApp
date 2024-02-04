@@ -6,18 +6,19 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:padding="10dp">
+
     <androidx.cardview.widget.CardView
 
         android:layout_width="190dp"
         android:layout_height="220dp"
-        >
+        app:cardBackgroundColor="#FFFFFF">
 
 
         <ImageView
             android:id="@+id/adminDashboardViewToAddDogView"
-            android:layout_gravity="center"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:layout_gravity="center"
             app:srcCompat="@drawable/adddog" />
     </androidx.cardview.widget.CardView>
 

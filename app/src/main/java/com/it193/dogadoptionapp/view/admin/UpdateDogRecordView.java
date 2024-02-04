@@ -261,6 +261,9 @@ public class UpdateDogRecordView extends AppCompatActivity implements Navigation
                         dogSex, dogArrivedDate, dogArrivedFrom, dogSize, dogLocation, dogDescription
                 )
                 .setCallback((a, b) -> {});
+
+        //Return to Admin Dashboard
+        startActivity(new Intent(UpdateDogRecordView.this, AdminDashboardView.class));
     }
 
     @Override

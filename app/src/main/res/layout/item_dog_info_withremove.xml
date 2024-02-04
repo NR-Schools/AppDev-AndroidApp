@@ -6,19 +6,19 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:padding="10dp">
+
     <androidx.cardview.widget.CardView
         android:layout_width="190dp"
         android:layout_height="220dp"
-        >
+        app:cardBackgroundColor="#FFFFFF">
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardElevation="21dp"
-            app:cardCornerRadius="50dp"
             android:layout_marginLeft="150dp"
             android:layout_marginTop="5dp"
-            >
+            app:cardCornerRadius="50dp"
+            app:cardElevation="21dp">
 
             <ImageView
                 android:id="@+id/dog_removebtn"
@@ -29,7 +29,6 @@
         </androidx.cardview.widget.CardView>
 
 
-
         <!--
         android:id="@+id/custom_item_text1"
         android:id="@+id/custom_item_text2"
@@ -38,9 +37,9 @@
             android:id="@+id/custom_item_text1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="70dp"
             android:fontFamily="@font/farro_bold"
-            android:layout_gravity="center"
             android:text="Name"
             android:textColor="#18C17C"
             android:textSize="20dp" />
@@ -49,28 +48,27 @@
             android:id="@+id/custom_item_text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="95dp"
             android:fontFamily="@font/farro"
-            android:layout_gravity="center"
             android:text="Breed"
             android:textSize="15dp" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="150dp"
             android:layout_height="150dp"
-            app:cardElevation="10dp"
             android:layout_gravity="center"
-            app:cardCornerRadius="20dp"
             android:layout_marginBottom="20dp"
-            android:padding="50dp">
+            android:padding="50dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp">
 
             <ImageView
                 android:id="@+id/custom_item_image"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_background"
-                />
+                android:src="@drawable/ic_launcher_background" />
         </androidx.cardview.widget.CardView>
 
     </androidx.cardview.widget.CardView>

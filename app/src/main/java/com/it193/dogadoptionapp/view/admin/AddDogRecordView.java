@@ -30,6 +30,7 @@ import com.it193.dogadoptionapp.retrofit.DogApi;
 import com.it193.dogadoptionapp.utils.InputUtility;
 import com.it193.dogadoptionapp.utils.NotificationUtility;
 import com.it193.dogadoptionapp.view.shared.DogRequestView;
+import com.it193.dogadoptionapp.view.user.UserDashboardView;
 
 import java.io.ByteArrayOutputStream;
 
@@ -193,6 +194,9 @@ public class AddDogRecordView extends AppCompatActivity implements NavigationVie
                         dogArrivedDate, dogArrivedFrom, dogSize, dogLocation, dogDescription
                 )
                 .setCallback((a, b) -> {});
+
+        //Return to Admin Dashboard
+        startActivity(new Intent(AddDogRecordView.this, AdminDashboardView.class));
     }
 
     @Override

@@ -134,15 +134,13 @@
             android:id="@+id/nav_resetbtn"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:text="Reset"
-            app:cornerRadius="4dp"
-            android:textColor="#E3BC7B"
-            android:backgroundTint="@color/white"
-            app:strokeColor="#E3BC7B"
-            app:strokeWidth="1dp"
-            android:layout_marginRight="70dp"
             android:layout_gravity="center"
-            />
+            android:layout_marginRight="70dp"
+            android:backgroundTint="#E3BC7B"
+            android:text="Reset"
+            android:textColor="#FFFFFF"
+            app:cornerRadius="4dp"
+            app:strokeColor="#E3BC7B" />
 
         <Button
             android:id="@+id/nav_filterbtn"
