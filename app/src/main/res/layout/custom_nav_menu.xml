@@ -23,13 +23,19 @@
             android:textSize="15dp"
             />
 
-        <Spinner
-            android:id="@+id/nav_breed_spinner"
+        <EditText
+            android:id="@+id/editTextText2"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
+            android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:background="@drawable/dropdown"
-            android:layout_gravity="center"/>
+            android:background="#F0EFF2"
+            android:backgroundTint="#F0EFF2"
+            android:ems="13"
+            android:hint="Breed"
+            android:inputType="text"
+            android:paddingLeft="8dp" />
+
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -46,13 +52,19 @@
             android:textSize="15dp"
             />
 
-        <Spinner
-            android:id="@+id/nav_color_spinner"
+        <EditText
+            android:id="@+id/editTextText"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
+            android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:background="@drawable/dropdown"
-            android:layout_gravity="center"/>
+            android:background="#F0EFF2"
+            android:backgroundTint="#F0EFF2"
+            android:ems="13"
+            android:hint="Color"
+            android:inputType="text"
+            android:paddingLeft="8dp" />
+
     </androidx.cardview.widget.CardView>
 
 
@@ -116,13 +128,19 @@
             android:textSize="15dp"
             />
 
-        <Spinner
-            android:id="@+id/nav_age_spinner"
+        <EditText
+            android:id="@+id/editTextText3"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
+            android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:background="@drawable/dropdown"
-            android:layout_gravity="center"/>
+            android:background="#F0EFF2"
+            android:backgroundTint="#F0EFF2"
+            android:ems="13"
+            android:hint="Age"
+            android:inputType="text"
+            android:paddingLeft="8dp" />
+
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
