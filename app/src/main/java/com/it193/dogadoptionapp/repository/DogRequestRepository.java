@@ -110,6 +110,7 @@ public class DogRequestRepository extends RepositoryBase {
                         ctx,
                         "User Cancel Dog Request Successful"
                 );
+                callback.onResponseEvent(response.body(), null);
             }
 
             @Override
@@ -120,6 +121,7 @@ public class DogRequestRepository extends RepositoryBase {
                         "Dog Request",
                         "User Cancel Dog Request Failed"
                 );
+                callback.onResponseEvent(null, t.getMessage());
             }
         });
 

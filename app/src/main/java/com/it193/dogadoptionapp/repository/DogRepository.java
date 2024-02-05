@@ -160,6 +160,7 @@ public class DogRepository extends RepositoryBase {
                         ctx,
                         "Update Dog Action Successfully!"
                 );
+                callback.onResponseEvent(response.body(), null);
             }
 
             @Override
@@ -170,6 +171,7 @@ public class DogRepository extends RepositoryBase {
                         "Add Dog",
                         "Failed to add new dog!"
                 );
+                callback.onResponseEvent(null, t.getMessage());
             }
         });
 
