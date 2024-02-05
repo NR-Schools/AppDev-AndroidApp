@@ -181,7 +181,6 @@ public class DogRepository extends RepositoryBase {
     public DogRepository deleteDogRecord(long dogId) {
         Account currentAccount = AppStateStorage.getInstance().getActiveAccount();
 
-        AnimationUtility.getInstance().startLoading();
         dogApi.deleteDog(
                 currentAccount.getEmail(),
                 currentAccount.getSessionAuthString(),
@@ -189,7 +188,6 @@ public class DogRepository extends RepositoryBase {
         ).enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                AnimationUtility.getInstance().endLoading();
                 NotificationUtility.successAlert(
                         ctx,
                         "Dog Record Deletion is Successful!"
@@ -199,7 +197,6 @@ public class DogRepository extends RepositoryBase {
 
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
-                AnimationUtility.getInstance().endLoading();
                 NotificationUtility.errorAlert(
                         ctx,
                         "Delete Dog",

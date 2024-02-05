@@ -23,7 +23,7 @@ import com.it193.dogadoptionapp.view.shared.DogRequestView;
 
 import java.util.List;
 
-public class AdminDashboardView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class AdminDashboardView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, AdminDogListAdapter.AdminDashboardActionListener {
 
     private List<Dog> dogs;
 
@@ -69,19 +69,6 @@ public class AdminDashboardView extends AppCompatActivity implements NavigationV
     private void handleActions() {
         //goToAddDog.setOnClickListener(v -> startActivity(new Intent(AdminDashboardView.this, AddDogRecordView.class)));
         goToDogRequest.setOnClickListener(v -> startActivity(new Intent(AdminDashboardView.this, DogRequestView.class)));
-        dogListView.setOnItemClickListener((parent, view, position, id) -> {
-
-                if(position==0){
-                    startActivity(new Intent(AdminDashboardView.this, AddDogRecordView.class));
-                }
-                else{
-                    position = position - 1;
-                    Intent intent = new Intent(AdminDashboardView.this, UpdateDogRecordView.class);
-                    intent.putExtra("dogId", dogs.get(position).getId());
-                    startActivity(intent);
-                }
-
-        });
     }
 
     private void setInitialData(Object responseObject, String errorMessage) {
@@ -91,7 +78,8 @@ public class AdminDashboardView extends AppCompatActivity implements NavigationV
         dogs = (List<Dog>) responseObject;
         AdminDogListAdapter dogListAdapter = new AdminDogListAdapter(
                 getApplicationContext(),
-                dogs
+                dogs,
+                this
         );
         dogListView.setAdapter(dogListAdapter);
 
@@ -125,5 +113,23 @@ public class AdminDashboardView extends AppCompatActivity implements NavigationV
         customNavView = getLayoutInflater().inflate(R.layout.custom_nav_menu, navigationView, false);
         navigationView.addHeaderView(customNavView);
         getSupportActionBar().setTitle(Html.fromHtml("<font color=\"black\">" + "Dashboard" + "</font>"));
+    }
+
+    @Override
+    public void updateDogInfo(int position) {
+        if(position==0){
+            startActivity(new Intent(AdminDashboardView.this, AddDogRecordView.class));
+        }
+        else{
+            position = position - 1;
+            Intent intent = new Intent(AdminDashboardView.this, UpdateDogRecordView.class);
+            intent.putExtra("dogId", dogs.get(position).getId());
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    public void deleteDogInfo() {
+        startActivity(new Intent(AdminDashboardView.this, AdminDashboardView.class));
     }
 }

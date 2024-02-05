@@ -8,14 +8,14 @@
     android:padding="10dp">
 
     <androidx.cardview.widget.CardView
-
+        android:id="@+id/adminDashboardViewToAddDogView"
         android:layout_width="190dp"
         android:layout_height="220dp"
         app:cardBackgroundColor="#FFFFFF">
 
 
         <ImageView
-            android:id="@+id/adminDashboardViewToAddDogView"
+            android:id="@+id/addDogItemPhoto"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
