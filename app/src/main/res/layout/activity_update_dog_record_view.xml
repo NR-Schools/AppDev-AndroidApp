@@ -157,7 +157,7 @@
                         android:layout_marginTop="111dp"
                         android:background="@drawable/dogaddinput_bg"
                         android:hint="Dog Age"
-                        android:inputType="text"
+                        android:inputType="number"
                         android:paddingLeft="5dp"
                         android:textColor="#747b79"
                         android:textSize="15sp" />

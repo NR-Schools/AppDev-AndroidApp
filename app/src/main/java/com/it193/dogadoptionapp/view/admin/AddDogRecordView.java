@@ -103,7 +103,6 @@ public class AddDogRecordView extends AppCompatActivity implements NavigationVie
         dogSexField = findViewById(R.id.addDogSexField);
         dogArrivedDateButton = findViewById(R.id.addDogArrivedDateButton);
         dogArrivedDateDisplayField = findViewById(R.id.addDogArrivedDateButton);
-        //dogArrivedDateDisplayField = findViewById(R.id.addDogArrivedDateDisplay);
         dogArrivedFromField = findViewById(R.id.addDogArrivedFromField);
         dogSizeField = findViewById(R.id.addDogSizeField);
         dogLocationField = findViewById(R.id.addDogLocationField);
@@ -185,6 +184,10 @@ public class AddDogRecordView extends AppCompatActivity implements NavigationVie
             );
             return;
         }
+
+        // Check for age (must be a valid int)
+        try { Integer.parseInt(dogAgeStr); }
+        catch (Exception ex) { return; }
 
         // Send Data
         DogRepository

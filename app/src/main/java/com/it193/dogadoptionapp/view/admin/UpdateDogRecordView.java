@@ -237,6 +237,10 @@ public class UpdateDogRecordView extends AppCompatActivity implements Navigation
             return;
         }
 
+        // Check for age (must be a valid int)
+        try { Integer.parseInt(dogAgeStr); }
+        catch (Exception ex) { return; }
+
         // Send Data
         DogRepository
                 .getRepository(this)
