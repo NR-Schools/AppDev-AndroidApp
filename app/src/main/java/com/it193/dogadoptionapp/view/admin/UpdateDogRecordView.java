@@ -26,14 +26,8 @@ import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.it193.dogadoptionapp.R;
-import com.it193.dogadoptionapp.data.ResponseCallback;
-import com.it193.dogadoptionapp.model.Account;
 import com.it193.dogadoptionapp.model.Dog;
 import com.it193.dogadoptionapp.repository.DogRepository;
-import com.it193.dogadoptionapp.retrofit.DogApi;
-import com.it193.dogadoptionapp.retrofit.RetrofitService;
-import com.it193.dogadoptionapp.storage.AppStateStorage;
-import com.it193.dogadoptionapp.utils.AnimationUtility;
 import com.it193.dogadoptionapp.utils.InputUtility;
 import com.it193.dogadoptionapp.utils.NotificationUtility;
 import com.it193.dogadoptionapp.view.shared.DogRequestView;
@@ -41,16 +35,6 @@ import com.it193.dogadoptionapp.view.shared.DogRequestView;
 import java.io.ByteArrayOutputStream;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.List;
-
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.http.Header;
-import retrofit2.http.Part;
 
 public class UpdateDogRecordView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 

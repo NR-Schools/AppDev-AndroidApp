@@ -1,25 +1,15 @@
 package com.it193.dogadoptionapp.repository;
 
 import android.content.Context;
-import android.graphics.BitmapFactory;
-import android.view.LayoutInflater;
 
-import com.it193.dogadoptionapp.R;
-import com.it193.dogadoptionapp.data.ResponseCallback;
 import com.it193.dogadoptionapp.model.Account;
 import com.it193.dogadoptionapp.model.Dog;
 import com.it193.dogadoptionapp.retrofit.DogApi;
 import com.it193.dogadoptionapp.retrofit.RetrofitService;
 import com.it193.dogadoptionapp.storage.AppStateStorage;
 import com.it193.dogadoptionapp.utils.AnimationUtility;
-import com.it193.dogadoptionapp.utils.InputUtility;
 import com.it193.dogadoptionapp.utils.NotificationUtility;
-import com.it193.dogadoptionapp.view.admin.AddDogRecordView;
-import com.it193.dogadoptionapp.view.admin.AdminDogListAdapter;
-import com.it193.dogadoptionapp.view.admin.UpdateDogRecordView;
 
-import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.List;
 
 import okhttp3.MediaType;
@@ -29,23 +19,17 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DogRepository {
-    private Context ctx;
+public class DogRepository extends RepositoryBase {
     private DogApi dogApi;
-    private ResponseCallback callback;
 
     private DogRepository(Context context) {
-        AnimationUtility.getInstance().initialize(context);
-        ctx = context;
+        super(context);
+
         RetrofitService retrofitService = new RetrofitService();
         dogApi = retrofitService.getRetrofit().create(DogApi.class);
     }
     public static DogRepository getRepository(Context ctx) {
         return new DogRepository(ctx);
-    }
-
-    public void setCallback(ResponseCallback callback) {
-        this.callback = callback;
     }
 
     public DogRepository addDogRecord(

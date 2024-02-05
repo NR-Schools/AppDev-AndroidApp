@@ -1,43 +1,30 @@
 package com.it193.dogadoptionapp.repository;
 
 import android.content.Context;
-import android.content.Intent;
-import android.view.LayoutInflater;
 
-import com.it193.dogadoptionapp.data.ResponseCallback;
 import com.it193.dogadoptionapp.model.Account;
 import com.it193.dogadoptionapp.retrofit.AccountApi;
 import com.it193.dogadoptionapp.retrofit.RetrofitService;
 import com.it193.dogadoptionapp.storage.AppStateStorage;
 import com.it193.dogadoptionapp.utils.AnimationUtility;
 import com.it193.dogadoptionapp.utils.NotificationUtility;
-import com.it193.dogadoptionapp.view.admin.AdminDashboardView;
-import com.it193.dogadoptionapp.view.auth.LogInView;
-import com.it193.dogadoptionapp.view.auth.SignUpView;
-import com.it193.dogadoptionapp.view.user.UserDashboardView;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AccountRepository {
+public class AccountRepository extends RepositoryBase {
 
-    private Context ctx;
     private AccountApi accountApi;
-    private ResponseCallback callback;
 
     private AccountRepository(Context context) {
-        AnimationUtility.getInstance().initialize(context);
-        ctx = context;
+        super(context);
+
         RetrofitService retrofitService = new RetrofitService();
         accountApi = retrofitService.getRetrofit().create(AccountApi.class);
     }
     public static AccountRepository getRepository(Context ctx) {
         return new AccountRepository(ctx);
-    }
-
-    public void setCallback(ResponseCallback callback) {
-        this.callback = callback;
     }
 
     public AccountRepository signUp(Account account) {

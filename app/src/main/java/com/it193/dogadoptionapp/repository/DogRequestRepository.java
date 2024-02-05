@@ -1,9 +1,7 @@
 package com.it193.dogadoptionapp.repository;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 
-import com.it193.dogadoptionapp.data.ResponseCallback;
 import com.it193.dogadoptionapp.model.Account;
 import com.it193.dogadoptionapp.model.Dog;
 import com.it193.dogadoptionapp.retrofit.DogApi;
@@ -11,7 +9,6 @@ import com.it193.dogadoptionapp.retrofit.RetrofitService;
 import com.it193.dogadoptionapp.storage.AppStateStorage;
 import com.it193.dogadoptionapp.utils.AnimationUtility;
 import com.it193.dogadoptionapp.utils.NotificationUtility;
-import com.it193.dogadoptionapp.view.shared.DogRequestListAdapter;
 
 import java.util.List;
 
@@ -19,23 +16,17 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DogRequestRepository {
-    private Context ctx;
+public class DogRequestRepository extends RepositoryBase {
     private DogApi dogApi;
-    private ResponseCallback callback;
 
     private DogRequestRepository(Context context) {
-        AnimationUtility.getInstance().initialize(context);
-        ctx = context;
+        super(context);
+
         RetrofitService retrofitService = new RetrofitService();
         dogApi = retrofitService.getRetrofit().create(DogApi.class);
     }
     public static DogRequestRepository getRepository(Context ctx) {
         return new DogRequestRepository(ctx);
-    }
-
-    public void setCallback(ResponseCallback callback) {
-        this.callback = callback;
     }
 
     public DogRequestRepository userDogRequest(long dogId) {

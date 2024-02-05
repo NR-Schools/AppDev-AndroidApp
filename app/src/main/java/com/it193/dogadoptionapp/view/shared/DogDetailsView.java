@@ -1,6 +1,5 @@
 package com.it193.dogadoptionapp.view.shared;
 
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -19,26 +18,10 @@ import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.it193.dogadoptionapp.R;
-import com.it193.dogadoptionapp.data.ResponseCallback;
-import com.it193.dogadoptionapp.model.Account;
 import com.it193.dogadoptionapp.model.Dog;
 import com.it193.dogadoptionapp.repository.DogRepository;
 import com.it193.dogadoptionapp.repository.DogRequestRepository;
-import com.it193.dogadoptionapp.retrofit.DogApi;
-import com.it193.dogadoptionapp.retrofit.RetrofitService;
-import com.it193.dogadoptionapp.storage.AppStateStorage;
-import com.it193.dogadoptionapp.utils.AnimationUtility;
-import com.it193.dogadoptionapp.utils.InputUtility;
-import com.it193.dogadoptionapp.view.admin.AdminDashboardView;
-import com.it193.dogadoptionapp.view.admin.UpdateDogRecordView;
 import com.it193.dogadoptionapp.view.user.UserDashboardView;
-
-import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class DogDetailsView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
