@@ -3,6 +3,7 @@ package com.it193.dogadoptionapp.view.shared;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -24,23 +25,20 @@ import com.it193.dogadoptionapp.storage.AppStateStorage;
 import com.it193.dogadoptionapp.view.admin.AddDogRecordView;
 import com.it193.dogadoptionapp.view.admin.AdminDashboardView;
 import com.it193.dogadoptionapp.view.admin.UpdateDogRecordView;
+import com.it193.dogadoptionapp.view.user.UserDashboardView;
 
 import java.util.List;
 
-public class DogRequestView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class DogRequestView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DogRequestListAdapter.RequestActionListener {
 
     private List<Dog> dogs;
     private GridView dogRequestListView;
-
     private DrawerLayout drawerLayout;
-
-    DogRequestListAdapter dogListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dog_request_view);
-
 
         // Initialize the Drawer
         drawer_init();
@@ -73,23 +71,12 @@ public class DogRequestView extends AppCompatActivity implements NavigationView.
 
         dogs = (List<Dog>) responseObject;
         if (!dogs.isEmpty()) {
-            dogListAdapter = new DogRequestListAdapter(
+            DogRequestListAdapter dogListAdapter = new DogRequestListAdapter(
                     getApplicationContext(),
-                    dogs
+                    dogs,
+                    this
             );
             dogRequestListView.setAdapter(dogListAdapter);
-
-            if(dogListAdapter.isAdmin()){
-                Button request_accept = dogListAdapter.getAdminAccept();
-                request_accept.setOnClickListener(v -> startActivity(new Intent(DogRequestView.this, DogRequestView.class)));
-
-                Button request_reject = dogListAdapter.getAdminReject();
-                request_reject.setOnClickListener(v -> startActivity(new Intent(DogRequestView.this, DogRequestView.class)));
-            }
-            else{
-                Button request_cancel = dogListAdapter.getUserCancel();
-                request_cancel.setOnClickListener(v -> startActivity(new Intent(DogRequestView.this, DogRequestView.class)));
-            }
         }
 
     }
@@ -112,7 +99,9 @@ public class DogRequestView extends AppCompatActivity implements NavigationView.
     public void drawer_init(){
         drawerLayout = findViewById(R.id.drawer_layout);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        if (getSupportActionBar() == null) {
+            setSupportActionBar(toolbar);
+        }
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav);
@@ -122,7 +111,10 @@ public class DogRequestView extends AppCompatActivity implements NavigationView.
         View customNavView = getLayoutInflater().inflate(R.layout.custom_nav_menu, navigationView, false);
         navigationView.addHeaderView(customNavView);
         getSupportActionBar().setTitle(Html.fromHtml("<font color=\"black\">" + "Dog Requests" + "</font>"));
+
     }
-
-
+    @Override
+    public void refreshGrid() {
+        startActivity(new Intent(DogRequestView.this, DogRequestView.class));
+    }
 }

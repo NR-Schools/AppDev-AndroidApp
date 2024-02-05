@@ -1,7 +1,10 @@
 package com.it193.dogadoptionapp.view.shared;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +19,7 @@ import com.it193.dogadoptionapp.R;
 import com.it193.dogadoptionapp.model.Dog;
 import com.it193.dogadoptionapp.repository.DogRequestRepository;
 import com.it193.dogadoptionapp.storage.AppStateStorage;
+import com.it193.dogadoptionapp.view.user.UserDashboardView;
 
 import java.util.List;
 
@@ -25,20 +29,21 @@ public class DogRequestListAdapter extends BaseAdapter {
     LayoutInflater inflater;
     List<Dog> dogRequestList;
     boolean isAdmin;
+    private RequestActionListener actionListener;
 
-    Button adminReject;
-    Button adminAccept;
-    Button userCancel;
 
-    public DogRequestListAdapter(Context ctx, List<Dog> dogRequestList) {
+    public DogRequestListAdapter(Context ctx, List<Dog> dogRequestList, RequestActionListener actionListener) {
         this.ctx = ctx;
         this.dogRequestList = dogRequestList;
         this.inflater = LayoutInflater.from(ctx);
+        this.actionListener = actionListener;
 
         // Check if Admin
         isAdmin = false;
-        if (AppStateStorage.getInstance().getActiveAccount().getEmail().equals("Admin"))
+        if (AppStateStorage.getInstance().getActiveAccount().getEmail().equals("Admin")){
             isAdmin = true;
+        }
+
 
     }
 
@@ -66,12 +71,13 @@ public class DogRequestListAdapter extends BaseAdapter {
                     null
             );
             TextView userNameField = convertView.findViewById(R.id.itemDogRequestUserNameField);
-            adminReject = convertView.findViewById(R.id.itemDogRequestAdminRejectRequest);
-            adminAccept = convertView.findViewById(R.id.itemDogRequestAdminAcceptRequest);
-            userNameField.setText(dogRequestList.get(position).getAccount().getEmail());
+            Button adminReject = convertView.findViewById(R.id.itemDogRequestAdminRejectRequest);
+            Button adminAccept = convertView.findViewById(R.id.itemDogRequestAdminAcceptRequest);
 
-            adminReject.setOnClickListener(v -> handleAdminReject(position));
+            userNameField.setText(dogRequestList.get(position).getAccount().getEmail());
             adminAccept.setOnClickListener(v -> handleAdminAccept(position));
+            adminReject.setOnClickListener(v -> handleAdminReject(position));
+
         }
         else {
             convertView = inflater.inflate(
@@ -79,10 +85,10 @@ public class DogRequestListAdapter extends BaseAdapter {
                     null
             );
             TextView breedField = convertView.findViewById(R.id.itemDogRequestBreedField);
-            userCancel = convertView.findViewById(R.id.itemDogRequestUserCancelRequest);
+            Button userCancel = convertView.findViewById(R.id.itemDogRequestUserCancelRequest);
+
             breedField.setText(dogRequestList.get(position).getAccount().getEmail());
-
-
+            userCancel.setOnClickListener(v -> handleUserCancel(position));
         }
 
 
@@ -100,8 +106,6 @@ public class DogRequestListAdapter extends BaseAdapter {
         );
         dogNameField.setText(dogRequestList.get(position).getName());
 
-
-
         return convertView;
     }
 
@@ -113,10 +117,13 @@ public class DogRequestListAdapter extends BaseAdapter {
                         dogRequestList.get(position),
                         false
                 )
-                .setCallback((a, b) -> {
-                    // Update the data and refresh the adapter
-                    notifyDataSetChanged();
-                });
+                .setCallback((a, b) -> {});
+
+        notifyDataSetChanged();
+
+        if (actionListener != null) {
+            actionListener.refreshGrid();
+        }
     }
 
     public void handleAdminAccept(int position) {
@@ -126,10 +133,13 @@ public class DogRequestListAdapter extends BaseAdapter {
                         dogRequestList.get(position),
                         true
                 )
-                .setCallback((a, b) -> {
-                    // Update the data and refresh the adapter
-                    notifyDataSetChanged();
-                });
+                .setCallback((a, b) -> {});
+
+        notifyDataSetChanged();
+
+        if (actionListener != null) {
+            actionListener.refreshGrid();
+        }
     }
     public void handleUserCancel(int position) {
         DogRequestRepository
@@ -137,25 +147,17 @@ public class DogRequestListAdapter extends BaseAdapter {
                 .userCancelDogRequest(
                         dogRequestList.get(position)
                 )
-                .setCallback((a, b) -> {
-                    // Update the data and refresh the adapter
-                    notifyDataSetChanged();
-                });
+                .setCallback((a, b) -> {});
+
+        notifyDataSetChanged();
+
+        if (actionListener != null) {
+            actionListener.refreshGrid();
+        }
+
     }
 
-    public Button getAdminReject() {
-        return adminReject;
-    }
-
-    public Button getAdminAccept() {
-        return adminAccept;
-    }
-
-    public Button getUserCancel() {
-        return userCancel;
-    }
-
-    public boolean isAdmin() {
-        return isAdmin;
+    public interface RequestActionListener {
+        void refreshGrid();
     }
 }

@@ -106,6 +106,7 @@ public class DogRequestRepository {
         dog.setAdoptRequested(false);
         dog.setAccount(dogReqItem.getAccount());
 
+        //AnimationUtility.getInstance().startLoading();
         dogApi.userCancelDogAdoptRequest(
                 currentAccount.getEmail(),
                 currentAccount.getSessionAuthString(),
@@ -113,6 +114,7 @@ public class DogRequestRepository {
         ).enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                //AnimationUtility.getInstance().endLoading();
                 NotificationUtility.successAlert(
                         ctx,
                         "User Cancel Dog Request Successful"
@@ -121,6 +123,7 @@ public class DogRequestRepository {
 
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
+                //AnimationUtility.getInstance().endLoading();
                 NotificationUtility.errorAlert(
                         ctx,
                         "Dog Request",
@@ -164,7 +167,6 @@ public class DogRequestRepository {
         dog.setAdoptRequested(dogReqItem.isAdoptRequested());
         dog.setAccount(dogReqItem.getAccount());
 
-        AnimationUtility.getInstance().startLoading();
         dogApi.adminConfirmReq(
                 currentAccount.getEmail(),
                 currentAccount.getSessionAuthString(),
@@ -172,7 +174,6 @@ public class DogRequestRepository {
         ).enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                AnimationUtility.getInstance().endLoading();
                 NotificationUtility.successAlert(
                         ctx,
                         "Admin Confirm Dog Request Successful"
@@ -182,7 +183,6 @@ public class DogRequestRepository {
 
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
-                AnimationUtility.getInstance().endLoading();
                 NotificationUtility.errorAlert(
                         ctx,
                         "Dog Request",
