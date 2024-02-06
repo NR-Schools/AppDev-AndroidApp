@@ -6,27 +6,27 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:padding="10dp">
+
     <androidx.cardview.widget.CardView
         android:layout_width="190dp"
         android:layout_height="330dp"
-        >
+        app:cardBackgroundColor="#FFFFFF">
 
         <androidx.cardview.widget.CardView
             android:layout_width="150dp"
             android:layout_height="150dp"
-            app:cardElevation="10dp"
             android:layout_gravity="center"
-            app:cardCornerRadius="20dp"
             android:layout_marginBottom="75dp"
-            android:padding="50dp">
+            android:padding="50dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp">
 
             <ImageView
                 android:id="@+id/itemDogRequestImageDisplay"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_background"
-                />
+                android:src="@drawable/ic_launcher_background" />
         </androidx.cardview.widget.CardView>
         <!--
         android:id="@+id/custom_item_text1"
@@ -36,9 +36,9 @@
             android:id="@+id/itemDogRequestNameField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="15dp"
             android:fontFamily="@font/farro_bold"
-            android:layout_gravity="center"
             android:text="Name"
             android:textColor="#18C17C"
             android:textSize="20dp" />
@@ -59,29 +59,25 @@
             android:id="@+id/itemDogRequestAdminAcceptRequest"
             android:layout_width="101dp"
             android:layout_height="40dp"
-            android:text="Confirm"
             android:layout_gravity="center"
             android:layout_marginTop="85dp"
-            app:cornerRadius="4dp"
             android:backgroundTint="#E3BC7B"
-            android:textColor="@color/black"
             android:fontFamily="@font/farro_bold"
-            />
+            android:text="Confirm"
+            android:textColor="@color/black"
+            app:cornerRadius="4dp" />
 
         <Button
             android:id="@+id/itemDogRequestAdminRejectRequest"
             android:layout_width="101dp"
             android:layout_height="40dp"
-            android:text="Decline"
             android:layout_gravity="center"
             android:layout_marginTop="130dp"
-            app:cornerRadius="4dp"
             android:backgroundTint="#E3BC7B"
-            android:textColor="@color/black"
             android:fontFamily="@font/farro_bold"
-            />
-
-
+            android:text="Decline"
+            android:textColor="@color/black"
+            app:cornerRadius="4dp" />
 
 
     </androidx.cardview.widget.CardView>
