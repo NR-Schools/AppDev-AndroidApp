@@ -1,25 +1,19 @@
 package com.it193.dogadoptionapp.view.shared;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.it193.dogadoptionapp.R;
 import com.it193.dogadoptionapp.model.Dog;
 import com.it193.dogadoptionapp.repository.DogRequestRepository;
 import com.it193.dogadoptionapp.storage.AppStateStorage;
-import com.it193.dogadoptionapp.view.user.UserDashboardView;
 
 import java.util.List;
 

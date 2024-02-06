@@ -2,7 +2,6 @@ package com.it193.dogadoptionapp.repository;
 
 import android.content.Context;
 
-import com.it193.dogadoptionapp.retrofit.RetrofitService;
 import com.it193.dogadoptionapp.utils.AnimationUtility;
 
 public abstract class RepositoryBase {

@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,7 +13,6 @@ import com.it193.dogadoptionapp.R;
 import com.it193.dogadoptionapp.model.Dog;
 
 import java.util.List;
-import java.util.Objects;
 
 public class UserDogListAdapter extends BaseAdapter {
     Context ctx;

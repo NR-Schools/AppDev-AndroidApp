@@ -1,11 +1,7 @@
 package com.it193.dogadoptionapp.view.admin;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +14,6 @@ import androidx.cardview.widget.CardView;
 import com.it193.dogadoptionapp.R;
 import com.it193.dogadoptionapp.model.Dog;
 import com.it193.dogadoptionapp.repository.DogRepository;
-import com.it193.dogadoptionapp.repository.ResponseCallback;
-import com.it193.dogadoptionapp.view.shared.DogRequestListAdapter;
 
 import java.util.List;
 
@@ -99,11 +93,11 @@ public class AdminDogListAdapter extends BaseAdapter {
     }
 
     public void goToAddDog(){
-        actionListener.addDogInfo();
+        actionListener.onAddDogInfo();
     }
 
     public void goToUpdateDog(int position){
-        actionListener.updateDogInfo(dogList.get(position));
+        actionListener.onUpdateDogInfo(dogList.get(position));
     }
 
     public void handleDogDelete(int position){
@@ -113,7 +107,7 @@ public class AdminDogListAdapter extends BaseAdapter {
                         dogList.get(position).getId()
                 )
                 .setCallback((responseObject, errorMessage) -> {
-                    actionListener.deleteDogInfo();
+                    actionListener.onDeleteDogInfo();
                 });
     }
 

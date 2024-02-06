@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -31,7 +30,6 @@ import com.it193.dogadoptionapp.retrofit.DogApi;
 import com.it193.dogadoptionapp.utils.InputUtility;
 import com.it193.dogadoptionapp.utils.NotificationUtility;
 import com.it193.dogadoptionapp.view.shared.DogRequestView;
-import com.it193.dogadoptionapp.view.user.UserDashboardView;
 
 import java.io.ByteArrayOutputStream;
 
@@ -81,7 +79,7 @@ public class AddDogRecordView extends AppCompatActivity implements NavigationVie
 
 
         // Initialize the Drawer
-        drawer_init();
+        drawerInit();
         // Get Inputs
         initComponents();
 
@@ -221,7 +219,7 @@ public class AddDogRecordView extends AppCompatActivity implements NavigationVie
         }
     }
 
-    public void drawer_init(){
+    public void drawerInit(){
         drawerLayout = findViewById(R.id.drawer_layout);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

@@ -1,10 +1,5 @@
 package com.it193.dogadoptionapp.view.user;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -16,13 +11,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import com.google.android.material.navigation.NavigationView;
 import com.it193.dogadoptionapp.MainActivity;
 import com.it193.dogadoptionapp.R;
 import com.it193.dogadoptionapp.model.Dog;
 import com.it193.dogadoptionapp.repository.DogRepository;
 import com.it193.dogadoptionapp.repository.DogRequestRepository;
-import com.it193.dogadoptionapp.repository.ResponseCallback;
 import com.it193.dogadoptionapp.utils.NotificationUtility;
 import com.it193.dogadoptionapp.view.shared.DogRequestView;
 

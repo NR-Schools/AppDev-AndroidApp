@@ -1,7 +1,6 @@
 package com.it193.dogadoptionapp.utils;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;

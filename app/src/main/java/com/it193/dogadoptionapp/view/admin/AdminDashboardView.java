@@ -112,17 +112,17 @@ public class AdminDashboardView extends AppCompatActivity implements NavigationV
 
 
     @Override
-    public void addDogInfo() {
+    public void onAddDogInfo() {
         startActivity(new Intent(AdminDashboardView.this, AddDogRecordView.class));
     }
     @Override
-    public void updateDogInfo(Dog dog) {
+    public void onUpdateDogInfo(Dog dog) {
         Intent intent = new Intent(AdminDashboardView.this, UpdateDogRecordView.class);
         intent.putExtra("dogId", dog.getId());
         startActivity(intent);
     }
     @Override
-    public void deleteDogInfo() {
+    public void onDeleteDogInfo() {
         loadOrRefreshData();
     }
 }

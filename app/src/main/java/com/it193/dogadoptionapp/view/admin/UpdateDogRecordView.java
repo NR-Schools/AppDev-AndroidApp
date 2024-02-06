@@ -5,7 +5,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.DatePickerDialog;
@@ -84,7 +83,7 @@ public class UpdateDogRecordView extends AppCompatActivity implements Navigation
 
 
         // Initialize the Drawer
-        drawer_init();
+        drawerInit();
 
         // Get Inputs
         initComponents();
@@ -125,7 +124,6 @@ public class UpdateDogRecordView extends AppCompatActivity implements Navigation
         dogSexField = findViewById(R.id.updateDogSexField);
         dogArrivedDateButton = findViewById(R.id.updateDogArrivedDateButton);
         dogArrivedDateDisplayField  = findViewById(R.id.updateDogArrivedDateButton);
-        //dogArrivedDateDisplayField = findViewById(R.id.updateDogArrivedDateDisplay);
         dogArrivedFromField = findViewById(R.id.updateDogArrivedFromField);
         dogSizeField = findViewById(R.id.updateDogSizeField);
         dogLocationField = findViewById(R.id.updateDogLocationField);
@@ -251,8 +249,7 @@ public class UpdateDogRecordView extends AppCompatActivity implements Navigation
                 .updateDogRecord(
                         dogId, dogImageBytes, isPhotoSet, dogName, dogBreed, dogColor, dogAgeStr,
                         dogSex, dogArrivedDate, dogArrivedFrom, dogSize, dogLocation, dogDescription
-                )
-                .setCallback((a, b) -> {});
+                );
 
         //Return to Admin Dashboard
         startActivity(new Intent(UpdateDogRecordView.this, AdminDashboardView.class));
@@ -260,20 +257,10 @@ public class UpdateDogRecordView extends AppCompatActivity implements Navigation
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-
         return false;
     }
 
-    @Override
-    public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    public void drawer_init(){
+    public void drawerInit() {
         drawerLayout = findViewById(R.id.drawer_layout);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
