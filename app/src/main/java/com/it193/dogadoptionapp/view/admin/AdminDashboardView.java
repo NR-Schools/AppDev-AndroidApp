@@ -7,12 +7,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ListView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
@@ -24,7 +22,7 @@ import com.it193.dogadoptionapp.view.shared.DogRequestView;
 
 import java.util.List;
 
-public class AdminDashboardView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, AdminDogListAdapter.AdminDashboardActionListener {
+public class AdminDashboardView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, AdminDashboardActionListener {
 
     private List<Dog> dogs;
 
@@ -41,7 +39,7 @@ public class AdminDashboardView extends AppCompatActivity implements NavigationV
         setContentView(R.layout.activity_admin_dashboard_view);
 
         // Initialize the Drawer
-        drawer_init();
+        drawerInit();
 
         // Initialize Components and Data
         initComponents();
@@ -54,11 +52,7 @@ public class AdminDashboardView extends AppCompatActivity implements NavigationV
     protected void onStart() {
         super.onStart();
 
-        // Load Dogs
-        DogRepository
-                .getRepository(this)
-                .getAllDogRecords()
-                .setCallback(this::setInitialData);
+        loadOrRefreshData();
     }
 
     private void initComponents() {
@@ -70,7 +64,6 @@ public class AdminDashboardView extends AppCompatActivity implements NavigationV
         goToDogRequest.setOnClickListener(v -> startActivity(new Intent(AdminDashboardView.this, DogRequestView.class)));
         logOut.setOnClickListener(v -> startActivity(new Intent(AdminDashboardView.this, MainActivity.class)));
     }
-
     private void setInitialData(Object responseObject, String errorMessage) {
         if (responseObject == null)
             return;
@@ -84,26 +77,23 @@ public class AdminDashboardView extends AppCompatActivity implements NavigationV
         dogListView.setAdapter(dogListAdapter);
 
     }
+    private void loadOrRefreshData() {
+        DogRepository
+                .getRepository(this)
+                .getAllDogRecords()
+                .setCallback(this::setInitialData);
+    }
+
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-
         return false;
     }
 
-    @Override
-    public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    public void drawer_init(){
+    public void drawerInit() {
         drawerLayout = findViewById(R.id.drawer_layout);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setSupportActionBar(findViewById(R.id.toolbar));
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav);
@@ -115,19 +105,19 @@ public class AdminDashboardView extends AppCompatActivity implements NavigationV
         getSupportActionBar().setTitle(Html.fromHtml("<font color=\"black\">" + "Dashboard" + "</font>"));
     }
 
-    @Override
-    public void updateDogInfo(int position) {
-        Intent intent = new Intent(AdminDashboardView.this, UpdateDogRecordView.class);
-        intent.putExtra("dogId", dogs.get(position).getId());
-        startActivity(intent);
-    }
 
-    public void addDogInfo(){
+    @Override
+    public void addDogInfo() {
         startActivity(new Intent(AdminDashboardView.this, AddDogRecordView.class));
     }
-
+    @Override
+    public void updateDogInfo(Dog dog) {
+        Intent intent = new Intent(AdminDashboardView.this, UpdateDogRecordView.class);
+        intent.putExtra("dogId", dog.getId());
+        startActivity(intent);
+    }
     @Override
     public void deleteDogInfo() {
-        startActivity(new Intent(AdminDashboardView.this, AdminDashboardView.class));
+        loadOrRefreshData();
     }
 }

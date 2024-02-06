@@ -97,37 +97,22 @@ public class AdminDogListAdapter extends BaseAdapter {
         return convertView;
     }
 
-
-    public void goToUpdateDog(int position){
-        if (actionListener != null) {
-            actionListener.updateDogInfo(position);
-        }
+    public void goToAddDog(){
+        actionListener.addDogInfo();
     }
 
-    public void goToAddDog(){
-        if (actionListener != null) {
-            actionListener.addDogInfo();
-        }
+    public void goToUpdateDog(int position){
+        actionListener.updateDogInfo(dogList.get(position));
     }
 
     public void handleDogDelete(int position){
-
         DogRepository
                 .getRepository(ctx)
                 .deleteDogRecord(
                         dogList.get(position).getId()
-                )
-                .setCallback((a, b) -> {});
+                );
 
-        if (actionListener != null) {
-            actionListener.deleteDogInfo();
-        }
+        actionListener.deleteDogInfo();
     }
 
-
-    public interface AdminDashboardActionListener {
-        void updateDogInfo(int position);
-        void deleteDogInfo();
-        void addDogInfo();
-    }
 }
