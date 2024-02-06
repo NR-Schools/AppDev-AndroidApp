@@ -1,18 +1,14 @@
 package com.it193.dogadoptionapp.view.user;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ListView;
 
 import com.it193.dogadoptionapp.MainActivity;
 import com.it193.dogadoptionapp.R;
@@ -26,8 +22,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 
 import com.google.android.material.navigation.NavigationView;
-import com.it193.dogadoptionapp.view.admin.AdminDashboardView;
-import com.it193.dogadoptionapp.view.shared.DogDetailsView;
 import com.it193.dogadoptionapp.view.shared.DogRequestView;
 
 import java.util.List;

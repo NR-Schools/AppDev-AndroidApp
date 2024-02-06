@@ -18,6 +18,7 @@ import androidx.cardview.widget.CardView;
 import com.it193.dogadoptionapp.R;
 import com.it193.dogadoptionapp.model.Dog;
 import com.it193.dogadoptionapp.repository.DogRepository;
+import com.it193.dogadoptionapp.repository.ResponseCallback;
 import com.it193.dogadoptionapp.view.shared.DogRequestListAdapter;
 
 import java.util.List;
@@ -110,9 +111,10 @@ public class AdminDogListAdapter extends BaseAdapter {
                 .getRepository(ctx)
                 .deleteDogRecord(
                         dogList.get(position).getId()
-                );
-
-        actionListener.deleteDogInfo();
+                )
+                .setCallback((responseObject, errorMessage) -> {
+                    actionListener.deleteDogInfo();
+                });
     }
 
 }

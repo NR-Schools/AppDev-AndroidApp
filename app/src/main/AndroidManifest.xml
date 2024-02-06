@@ -17,7 +17,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".view.shared.DogDetailsView"
+            android:name=".view.user.DogDetailsView"
             android:exported="false" />
         <activity
             android:name=".view.admin.AdminDashboardView"

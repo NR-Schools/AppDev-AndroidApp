@@ -50,8 +50,8 @@ public class RetrofitService {
                     jsonObject.get("size").getAsString(),
                     jsonObject.get("location").getAsString(),
                     Base64.getDecoder().decode(jsonObject.get("photoBytes").getAsString()),
-                    jsonObject.get("adoptRequested").isJsonNull() ? null : jsonObject.get("adoptRequested").getAsBoolean(),
-                    jsonObject.get("adoptAccepted").isJsonNull() ? null : jsonObject.get("adoptAccepted").getAsBoolean(),
+                    jsonObject.get("adoptRequested").getAsBoolean(),
+                    jsonObject.get("adoptAccepted").getAsBoolean(),
                     account
             );
         };

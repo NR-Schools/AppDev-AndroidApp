@@ -1,13 +1,13 @@
-package com.it193.dogadoptionapp.view.shared;
+package com.it193.dogadoptionapp.view.user;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.MenuItem;
@@ -22,12 +22,14 @@ import com.it193.dogadoptionapp.R;
 import com.it193.dogadoptionapp.model.Dog;
 import com.it193.dogadoptionapp.repository.DogRepository;
 import com.it193.dogadoptionapp.repository.DogRequestRepository;
-import com.it193.dogadoptionapp.view.admin.AdminDashboardView;
-import com.it193.dogadoptionapp.view.user.UserDashboardView;
+import com.it193.dogadoptionapp.repository.ResponseCallback;
+import com.it193.dogadoptionapp.utils.NotificationUtility;
+import com.it193.dogadoptionapp.view.shared.DogRequestView;
 
 public class DogDetailsView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private long dogId;
+    private Dog dog;
 
     private ImageView dogImageView;
     private TextView dogNameField;
@@ -48,15 +50,11 @@ public class DogDetailsView extends AppCompatActivity implements NavigationView.
 
 
         // Initialize the Drawer
-        drawer_init();
+        drawerInit();
 
         // Get Inputs
         initComponents();
 
-
-
-        // Handle Actions
-        dogRequestButton.setOnClickListener(this::handleDogRequestAction);
 
         // Handle Navigation Actions
         goToDogRequest.setOnClickListener(v -> startActivity(new Intent(DogDetailsView.this, DogRequestView.class)));
@@ -71,10 +69,7 @@ public class DogDetailsView extends AppCompatActivity implements NavigationView.
         Intent intent = getIntent();
         dogId = intent.getLongExtra("dogId", -1);
 
-        DogRepository
-                .getRepository(this)
-                .getDogRecord(dogId)
-                .setCallback(this::setInitialData);
+        loadOrRefreshData();
     }
 
     private void initComponents() {
@@ -92,8 +87,7 @@ public class DogDetailsView extends AppCompatActivity implements NavigationView.
         if (responseObject == null)
             return;
 
-        Dog dog = (Dog) responseObject;
-
+        dog = (Dog) responseObject;
         dogImageView.setImageBitmap(
                 BitmapFactory.decodeByteArray(
                         dog.getPhotoBytes(),
@@ -101,34 +95,43 @@ public class DogDetailsView extends AppCompatActivity implements NavigationView.
                         dog.getPhotoBytes().length
                 )
         );
-
         dogNameField.setText(dog.getName());
+
+        // Check if dog is already adopted
+        if (dog.isAdoptRequested()) {
+            dogRequestButton.setBackgroundColor(Color.RED);
+            dogRequestButton.setOnClickListener(v -> NotificationUtility.infoAlert(
+                    this,
+                    "Dog is already requested"
+            ));
+        } else {
+            dogRequestButton.setOnClickListener(this::handleDogRequestAction);
+        }
     }
 
     private void handleDogRequestAction(View v) {
         DogRequestRepository
                 .getRepository(this)
                 .userDogRequest(dogId)
-                .setCallback((a, b) -> {});
+                .setCallback((responseObject, errorMessage) -> {
+                    loadOrRefreshData();
+                });
+    }
+
+    private void loadOrRefreshData() {
+        DogRepository
+                .getRepository(this)
+                .getDogRecord(dogId)
+                .setCallback(this::setInitialData);
     }
 
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-
         return false;
     }
 
-    @Override
-    public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    public void drawer_init(){
+    public void drawerInit() {
         drawerLayout = findViewById(R.id.drawer_layout);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

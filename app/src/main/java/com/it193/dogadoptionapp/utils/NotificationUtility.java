@@ -20,14 +20,19 @@ public class NotificationUtility {
                 .setIcon(R.drawable.ic_launcher_foreground)
                 .setMessage(message + " Error")
                 .setCancelable(false)
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
+                .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
                 .create()
                 .show();
     }
 
+    public static void infoAlert(Context ctx, String message) {
+        new AlertDialog.Builder(ctx)
+                .setTitle("Information Alert")
+                .setIcon(R.drawable.ic_launcher_foreground)
+                .setMessage(message)
+                .setCancelable(false)
+                .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
+                .create()
+                .show();
+    }
 }
