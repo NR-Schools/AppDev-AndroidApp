@@ -5,6 +5,7 @@ import static androidx.core.content.ContextCompat.startActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,6 @@ public class AdminDogListAdapter extends BaseAdapter {
     Context ctx;
     LayoutInflater inflater;
     List<Dog> dogList;
-
     private AdminDashboardActionListener actionListener;
 
     public AdminDogListAdapter(Context ctx, List<Dog> dogList, AdminDashboardActionListener actionListener) {
@@ -54,56 +54,49 @@ public class AdminDogListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
+        Log.i("counter:", Integer.toString(position));
         if (position == 0) {
             convertView = inflater.inflate(R.layout.item_adddog, null);
             CardView dogAddView = convertView.findViewById(R.id.adminDashboardViewToAddDogView);
             ImageView dogAddViewPhoto = convertView.findViewById(R.id.addDogItemPhoto);
 
             dogAddViewPhoto.setImageResource(R.drawable.adddog);
-            dogAddView.setOnClickListener(v -> goToUpdateDog(0));
-
-            return convertView;
-        } else {
-        convertView = inflater.inflate(
+            dogAddView.setOnClickListener(v -> goToAddDog());
+            Log.i("ADD DOG", "ADD DOG");
+        }
+        else {
+            convertView = inflater.inflate(
                 R.layout.item_dog_info_withremove,
                 null
             );
+            CardView dogToUpdate = convertView.findViewById(R.id.dog_updateinfo);
+            CardView dogToRemove = convertView.findViewById(R.id.dog_removebtn);
+            ImageView dogImageView = convertView.findViewById(R.id.custom_item_image);
+            ImageView dogRemoveViewImage = convertView.findViewById(R.id.dog_removebtnimage);
+            TextView dogNameView = convertView.findViewById(R.id.custom_item_text1);
+            TextView dogBreedView = convertView.findViewById(R.id.custom_item_text2);
+
+            // Set Default Image
+            dogImageView.setImageResource(R.drawable.no_dog_icon);
+            dogRemoveViewImage.setImageResource(R.drawable.removebtn);
+
+            int actualPosition = position - 1; // Adjusted position for dogList
+            dogToUpdate.setOnClickListener(v -> goToUpdateDog(actualPosition));
+            dogToRemove.setOnClickListener(v -> handleDogDelete(actualPosition));
+
+            if (dogList.get(actualPosition).getPhotoBytes().length != 0) {
+                // Set Actual Dog Image
+                dogImageView.setImageBitmap(BitmapFactory.decodeByteArray(
+                        dogList.get(actualPosition).getPhotoBytes(),
+                        0,
+                        dogList.get(actualPosition).getPhotoBytes().length
+                ));
+            }
+
+            dogNameView.setText(dogList.get(actualPosition).getName());
+            dogBreedView.setText(dogList.get(actualPosition).getBreed());
+            Log.i("DOG CARD", "DOG CARD");
         }
-
-
-        CardView dogToUpdate = convertView.findViewById((R.id.dog_updateinfo));
-        CardView dogToRemove = convertView.findViewById((R.id.dog_removebtn));
-        ImageView dogImageView = (ImageView) convertView.findViewById(R.id.custom_item_image);
-        ImageView dogRemoveViewImage = (ImageView) convertView.findViewById(R.id.dog_removebtnimage);
-        TextView dogNameView = (TextView) convertView.findViewById(R.id.custom_item_text1);
-        TextView dogBreedView = (TextView) convertView.findViewById(R.id.custom_item_text2);
-
-
-
-        // Set Default Image
-        dogImageView.setImageResource(R.drawable.no_dog_icon);
-        dogRemoveViewImage.setImageResource(R.drawable.removebtn);
-        position = position - 1;
-
-        int finalPosition = position;
-        dogToUpdate.setOnClickListener(v -> goToUpdateDog(finalPosition));
-        dogToRemove.setOnClickListener(v -> handleDogDelete(finalPosition));
-
-        if (dogList.get(position).getPhotoBytes().length != 0) {
-            // Set Actual Dog Image
-            dogImageView.setImageBitmap(
-                    BitmapFactory.decodeByteArray(
-                            dogList.get(position).getPhotoBytes(),
-                            0,
-                            dogList.get(position).getPhotoBytes().length
-                    )
-            );
-        }
-
-        dogNameView.setText(dogList.get(position).getName());
-        dogBreedView.setText(dogList.get(position).getBreed());
-
         return convertView;
     }
 
@@ -111,6 +104,12 @@ public class AdminDogListAdapter extends BaseAdapter {
     public void goToUpdateDog(int position){
         if (actionListener != null) {
             actionListener.updateDogInfo(position);
+        }
+    }
+
+    public void goToAddDog(){
+        if (actionListener != null) {
+            actionListener.addDogInfo();
         }
     }
 
@@ -132,5 +131,6 @@ public class AdminDogListAdapter extends BaseAdapter {
     public interface AdminDashboardActionListener {
         void updateDogInfo(int position);
         void deleteDogInfo();
+        void addDogInfo();
     }
 }

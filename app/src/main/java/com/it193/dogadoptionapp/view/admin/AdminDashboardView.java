@@ -38,7 +38,6 @@ public class AdminDashboardView extends AppCompatActivity implements NavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_dashboard_view);
 
-
         // Initialize the Drawer
         drawer_init();
 
@@ -114,15 +113,13 @@ public class AdminDashboardView extends AppCompatActivity implements NavigationV
 
     @Override
     public void updateDogInfo(int position) {
-        if(position==0){
-            startActivity(new Intent(AdminDashboardView.this, AddDogRecordView.class));
-        }
-        else{
-            position = position - 1;
-            Intent intent = new Intent(AdminDashboardView.this, UpdateDogRecordView.class);
-            intent.putExtra("dogId", dogs.get(position).getId());
-            startActivity(intent);
-        }
+        Intent intent = new Intent(AdminDashboardView.this, UpdateDogRecordView.class);
+        intent.putExtra("dogId", dogs.get(position).getId());
+        startActivity(intent);
+    }
+
+    public void addDogInfo(){
+        startActivity(new Intent(AdminDashboardView.this, AddDogRecordView.class));
     }
 
     @Override
