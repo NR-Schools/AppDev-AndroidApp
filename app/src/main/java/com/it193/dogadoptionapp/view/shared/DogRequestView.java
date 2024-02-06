@@ -34,6 +34,9 @@ public class DogRequestView extends AppCompatActivity implements NavigationView.
     private List<Dog> dogs;
     private GridView dogRequestListView;
     private DrawerLayout drawerLayout;
+    private View customNavView;
+    private Button goToDogDashboard;
+    private Account currentAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,17 +54,23 @@ public class DogRequestView extends AppCompatActivity implements NavigationView.
     protected void onStart() {
         super.onStart();
 
-        Account currentAccount = AppStateStorage.getInstance().getActiveAccount();
+        currentAccount = AppStateStorage.getInstance().getActiveAccount();
 
         DogRequestRepository dogRequestRepository = DogRequestRepository.getRepository(this);
-        if (currentAccount.getEmail().equals("Admin"))
+        if (currentAccount.getEmail().equals("Admin")){
             dogRequestRepository = dogRequestRepository.adminViewAllDogRequest();
-        else
+            goToDogDashboard.setOnClickListener(v -> startActivity(new Intent(DogRequestView.this, AdminDashboardView.class)));
+        }
+        else{
             dogRequestRepository = dogRequestRepository.userViewAllDogRequest();
+            goToDogDashboard.setOnClickListener(v -> startActivity(new Intent(DogRequestView.this, UserDashboardView.class)));
+        }
         dogRequestRepository.setCallback(this::setInitialData);
+
     }
 
     private void initComponents() {
+        goToDogDashboard = customNavView.findViewById(R.id.GoToDogDashboard);
         dogRequestListView = findViewById(R.id.userDogRequestListView);
     }
 
@@ -108,7 +117,7 @@ public class DogRequestView extends AppCompatActivity implements NavigationView.
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setBackgroundColor(getResources().getColor(R.color.white));
-        View customNavView = getLayoutInflater().inflate(R.layout.custom_nav_menu, navigationView, false);
+        customNavView = getLayoutInflater().inflate(R.layout.custom_nav_menu, navigationView, false);
         navigationView.addHeaderView(customNavView);
         getSupportActionBar().setTitle(Html.fromHtml("<font color=\"black\">" + "Dog Requests" + "</font>"));
 

@@ -28,7 +28,6 @@ public class AdminDashboardView extends AppCompatActivity implements NavigationV
     private List<Dog> dogs;
 
     private GridView dogListView;
-    private Button goToAddDog;
     private Button goToDogRequest;
 
     private DrawerLayout drawerLayout;
@@ -62,12 +61,10 @@ public class AdminDashboardView extends AppCompatActivity implements NavigationV
     }
 
     private void initComponents() {
-        //goToAddDog = findViewById(R.id.adminDashboardViewToAddDogView);
         goToDogRequest = customNavView.findViewById(R.id.GoToDogRequestView);
         dogListView = findViewById(R.id.adminDashboardDogList);
     }
     private void handleActions() {
-        //goToAddDog.setOnClickListener(v -> startActivity(new Intent(AdminDashboardView.this, AddDogRecordView.class)));
         goToDogRequest.setOnClickListener(v -> startActivity(new Intent(AdminDashboardView.this, DogRequestView.class)));
     }
 
