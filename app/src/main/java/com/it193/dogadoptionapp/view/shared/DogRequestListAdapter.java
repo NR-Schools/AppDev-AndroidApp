@@ -29,10 +29,10 @@ public class DogRequestListAdapter extends BaseAdapter {
     LayoutInflater inflater;
     List<Dog> dogRequestList;
     boolean isAdmin;
-    private RequestActionListener actionListener;
+    private DogRequestActionListener actionListener;
 
 
-    public DogRequestListAdapter(Context ctx, List<Dog> dogRequestList, RequestActionListener actionListener) {
+    public DogRequestListAdapter(Context ctx, List<Dog> dogRequestList, DogRequestActionListener actionListener) {
         this.ctx = ctx;
         this.dogRequestList = dogRequestList;
         this.inflater = LayoutInflater.from(ctx);
@@ -43,8 +43,6 @@ public class DogRequestListAdapter extends BaseAdapter {
         if (AppStateStorage.getInstance().getActiveAccount().getEmail().equals("Admin")){
             isAdmin = true;
         }
-
-
     }
 
     @Override
@@ -117,13 +115,9 @@ public class DogRequestListAdapter extends BaseAdapter {
                         dogRequestList.get(position),
                         false
                 )
-                .setCallback((a, b) -> {});
-
-        notifyDataSetChanged();
-
-        if (actionListener != null) {
-            actionListener.refreshGrid();
-        }
+                .setCallback((a, b) -> {
+                    actionListener.onRefreshData();
+                });
     }
 
     public void handleAdminAccept(int position) {
@@ -133,13 +127,9 @@ public class DogRequestListAdapter extends BaseAdapter {
                         dogRequestList.get(position),
                         true
                 )
-                .setCallback((a, b) -> {});
-
-        notifyDataSetChanged();
-
-        if (actionListener != null) {
-            actionListener.refreshGrid();
-        }
+                .setCallback((a, b) -> {
+                    actionListener.onRefreshData();
+                });
     }
     public void handleUserCancel(int position) {
         DogRequestRepository
@@ -147,17 +137,8 @@ public class DogRequestListAdapter extends BaseAdapter {
                 .userCancelDogRequest(
                         dogRequestList.get(position)
                 )
-                .setCallback((a, b) -> {});
-
-        notifyDataSetChanged();
-
-        if (actionListener != null) {
-            actionListener.refreshGrid();
-        }
-
-    }
-
-    public interface RequestActionListener {
-        void refreshGrid();
+                .setCallback((a, b) -> {
+                    actionListener.onRefreshData();
+                });
     }
 }
