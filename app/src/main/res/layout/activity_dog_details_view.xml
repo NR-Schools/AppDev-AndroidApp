@@ -61,7 +61,7 @@ android:background="#F0EFF2">
                 android:id="@+id/cardView2"
                 android:layout_width="370dp"
 
-                android:layout_height="350dp"
+                android:layout_height="360dp"
 
                 android:layout_gravity="end"
                 android:layout_marginTop="10dp"
@@ -87,7 +87,7 @@ android:background="#F0EFF2">
                     android:layout_marginTop="67dp"
                     android:fontFamily="@font/farro_light"
                     android:text="Breed"
-                    android:textSize="15sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -97,147 +97,147 @@ android:background="#F0EFF2">
                     android:fontFamily="@font/farro_light"
                     android:text="Breed"
                     android:textColor="#747b79"
-                    android:textSize="15sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="89dp"
+                    android:layout_marginTop="95dp"
                     android:fontFamily="@font/farro_light"
                     android:text="Color"
-                    android:textSize="15sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="210dp"
-                    android:layout_marginTop="89dp"
+                    android:layout_marginTop="95dp"
                     android:fontFamily="@font/farro_light"
                     android:text="Color"
                     android:textColor="#747b79"
-                    android:textSize="15sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="111dp"
+                    android:layout_marginTop="124dp"
                     android:fontFamily="@font/farro_light"
                     android:text="Age"
-                    android:textSize="15sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="210dp"
-                    android:layout_marginTop="111dp"
+                    android:layout_marginTop="124dp"
                     android:fontFamily="@font/farro_light"
                     android:text="Age"
                     android:textColor="#747b79"
-                    android:textSize="15sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="133dp"
+                    android:layout_marginTop="152dp"
                     android:fontFamily="@font/farro_light"
                     android:text="Sex"
-                    android:textSize="15sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="210dp"
-                    android:layout_marginTop="133dp"
+                    android:layout_marginTop="152dp"
                     android:fontFamily="@font/farro_light"
                     android:text="Sex"
                     android:textColor="#747b79"
-                    android:textSize="15sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="155dp"
+                    android:layout_marginTop="180dp"
                     android:fontFamily="@font/farro_light"
                     android:text="Arrived Date"
-                    android:textSize="15sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="210dp"
-                    android:layout_marginTop="155dp"
+                    android:layout_marginTop="180dp"
                     android:fontFamily="@font/farro_light"
                     android:text="Arrived Date"
                     android:textColor="#747b79"
-                    android:textSize="15sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="177dp"
+                    android:layout_marginTop="209dp"
                     android:fontFamily="@font/farro_light"
                     android:text="Arrived From"
-                    android:textSize="15sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="210dp"
-                    android:layout_marginTop="177dp"
+                    android:layout_marginTop="209dp"
                     android:fontFamily="@font/farro_light"
                     android:text="Arrived From"
                     android:textColor="#747b79"
-                    android:textSize="15sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="199dp"
+                    android:layout_marginTop="238dp"
                     android:fontFamily="@font/farro_light"
                     android:text="Size"
-                    android:textSize="15sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="210dp"
-                    android:layout_marginTop="199dp"
+                    android:layout_marginTop="238dp"
                     android:fontFamily="@font/farro_light"
                     android:text="Size"
                     android:textColor="#747b79"
-                    android:textSize="15sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="221dp"
+                    android:layout_marginTop="266dp"
                     android:fontFamily="@font/farro_light"
                     android:text="Location"
-                    android:textSize="15sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="210dp"
-                    android:layout_marginTop="221dp"
+                    android:layout_marginTop="266dp"
                     android:fontFamily="@font/farro_light"
                     android:text="Location"
                     android:textColor="#747b79"
-                    android:textSize="15sp" />
+                    android:textSize="18sp" />
 
                 <Button
                     android:id="@+id/dogDetailsRequestDogButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="130dp"
+                    android:layout_marginTop="150dp"
                     android:backgroundTint="#E3BC7B"
                     android:fontFamily="@font/farro_bold"
                     android:text="Adopt"
@@ -249,7 +249,7 @@ android:background="#F0EFF2">
                 android:id="@+id/cardView4"
                 android:layout_width="370dp"
 
-                android:layout_height="140dp"
+                android:layout_height="170dp"
                 android:layout_gravity="end"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="12dp"
@@ -266,7 +266,7 @@ android:background="#F0EFF2">
 
                 <TextView
                     android:layout_width="330dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="12dp"
                     android:fontFamily="@font/farro"
