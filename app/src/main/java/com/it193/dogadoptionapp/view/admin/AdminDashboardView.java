@@ -71,9 +71,6 @@ public class AdminDashboardView extends AppCompatActivity implements NavigationV
         dogs = (List<Dog>) responseObject;
         dogListView.setAdapter(null);
 
-        if (!dogs.isEmpty())
-            return;
-
         AdminDogListAdapter dogListAdapter = new AdminDogListAdapter(
                 getApplicationContext(),
                 dogs,
