@@ -17,6 +17,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.it193.dogadoptionapp.MainActivity;
 import com.it193.dogadoptionapp.R;
 import com.it193.dogadoptionapp.model.Account;
 import com.it193.dogadoptionapp.model.Dog;
@@ -38,6 +39,8 @@ public class DogRequestView extends AppCompatActivity implements NavigationView.
     private Button goToDogDashboard;
     private Account currentAccount;
 
+    private Button logOut;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +51,8 @@ public class DogRequestView extends AppCompatActivity implements NavigationView.
 
         // Initialize Components and Data
         initComponents();
+
+        logOut.setOnClickListener(v -> startActivity(new Intent(DogRequestView.this, MainActivity.class)));
     }
 
     @Override
@@ -72,6 +77,7 @@ public class DogRequestView extends AppCompatActivity implements NavigationView.
     private void initComponents() {
         goToDogDashboard = customNavView.findViewById(R.id.GoToDogDashboard);
         dogRequestListView = findViewById(R.id.userDogRequestListView);
+        logOut = customNavView.findViewById(R.id.logoutbutton);
     }
 
     private void setInitialData(Object responseObject, String errorMessage) {
@@ -117,7 +123,7 @@ public class DogRequestView extends AppCompatActivity implements NavigationView.
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setBackgroundColor(getResources().getColor(R.color.white));
-        customNavView = getLayoutInflater().inflate(R.layout.custom_nav_menu, navigationView, false);
+        customNavView = getLayoutInflater().inflate(R.layout.custom_nav_menu2, navigationView, false);
         navigationView.addHeaderView(customNavView);
         getSupportActionBar().setTitle(Html.fromHtml("<font color=\"black\">" + "Dog Requests" + "</font>"));
 

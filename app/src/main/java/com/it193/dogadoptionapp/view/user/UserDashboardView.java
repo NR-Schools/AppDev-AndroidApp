@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListView;
 
+import com.it193.dogadoptionapp.MainActivity;
 import com.it193.dogadoptionapp.R;
 import com.it193.dogadoptionapp.model.Dog;
 import com.it193.dogadoptionapp.repository.DogRepository;
@@ -25,6 +26,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 
 import com.google.android.material.navigation.NavigationView;
+import com.it193.dogadoptionapp.view.admin.AdminDashboardView;
 import com.it193.dogadoptionapp.view.shared.DogDetailsView;
 import com.it193.dogadoptionapp.view.shared.DogRequestView;
 
@@ -37,7 +39,7 @@ public class UserDashboardView extends AppCompatActivity implements NavigationVi
     private Button goToUserDogRequest;
     private DrawerLayout drawerLayout;
     private View customNavView;
-
+    private Button logOut;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +83,7 @@ public class UserDashboardView extends AppCompatActivity implements NavigationVi
     private void initComponents() {
         dogListView = findViewById(R.id.userDashboardDogList);
         goToUserDogRequest = customNavView.findViewById(R.id.GoToDogRequestView);
+        logOut = customNavView.findViewById(R.id.logoutbutton);
     }
     private void handleActions() {
         goToUserDogRequest.setOnClickListener(v -> startActivity(new Intent(UserDashboardView.this, DogRequestView.class)));
@@ -89,6 +92,7 @@ public class UserDashboardView extends AppCompatActivity implements NavigationVi
             intent.putExtra("dogId", dogs.get(position).getId());
             startActivity(intent);
         });
+        logOut.setOnClickListener(v -> startActivity(new Intent(UserDashboardView.this, MainActivity.class)));
     }
 
     @Override

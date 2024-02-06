@@ -54,7 +54,6 @@ public class AdminDogListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Log.i("counter:", Integer.toString(position));
         if (position == 0) {
             convertView = inflater.inflate(R.layout.item_adddog, null);
             CardView dogAddView = convertView.findViewById(R.id.adminDashboardViewToAddDogView);
@@ -62,7 +61,6 @@ public class AdminDogListAdapter extends BaseAdapter {
 
             dogAddViewPhoto.setImageResource(R.drawable.adddog);
             dogAddView.setOnClickListener(v -> goToAddDog());
-            Log.i("ADD DOG", "ADD DOG");
         }
         else {
             convertView = inflater.inflate(
@@ -95,7 +93,6 @@ public class AdminDogListAdapter extends BaseAdapter {
 
             dogNameView.setText(dogList.get(actualPosition).getName());
             dogBreedView.setText(dogList.get(actualPosition).getBreed());
-            Log.i("DOG CARD", "DOG CARD");
         }
         return convertView;
     }

@@ -16,6 +16,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.it193.dogadoptionapp.MainActivity;
 import com.it193.dogadoptionapp.R;
 import com.it193.dogadoptionapp.model.Dog;
 import com.it193.dogadoptionapp.repository.DogRepository;
@@ -30,6 +31,7 @@ public class AdminDashboardView extends AppCompatActivity implements NavigationV
     private GridView dogListView;
     private Button goToDogRequest;
 
+    private Button logOut;
     private DrawerLayout drawerLayout;
     private View customNavView;
 
@@ -60,11 +62,13 @@ public class AdminDashboardView extends AppCompatActivity implements NavigationV
     }
 
     private void initComponents() {
+        logOut = customNavView.findViewById(R.id.logoutbutton);
         goToDogRequest = customNavView.findViewById(R.id.GoToDogRequestView);
         dogListView = findViewById(R.id.adminDashboardDogList);
     }
     private void handleActions() {
         goToDogRequest.setOnClickListener(v -> startActivity(new Intent(AdminDashboardView.this, DogRequestView.class)));
+        logOut.setOnClickListener(v -> startActivity(new Intent(AdminDashboardView.this, MainActivity.class)));
     }
 
     private void setInitialData(Object responseObject, String errorMessage) {

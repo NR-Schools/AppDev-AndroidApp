@@ -24,6 +24,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.it193.dogadoptionapp.MainActivity;
 import com.it193.dogadoptionapp.R;
 import com.it193.dogadoptionapp.repository.DogRepository;
 import com.it193.dogadoptionapp.retrofit.DogApi;
@@ -71,6 +72,7 @@ public class AddDogRecordView extends AppCompatActivity implements NavigationVie
 
     private Button goToDogDashboard;
     private View customNavView;
+    private Button logOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +93,7 @@ public class AddDogRecordView extends AppCompatActivity implements NavigationVie
         // Handle Navigation Menu Actions
         goToDogRequest.setOnClickListener(v -> startActivity(new Intent(AddDogRecordView.this, DogRequestView.class)));
         goToDogDashboard.setOnClickListener(v -> startActivity(new Intent(AddDogRecordView.this, AdminDashboardView.class)));
+        logOut.setOnClickListener(v -> startActivity(new Intent(AddDogRecordView.this, MainActivity.class)));
     }
 
     private void initComponents() {
@@ -110,6 +113,7 @@ public class AddDogRecordView extends AppCompatActivity implements NavigationVie
         addDogButton = findViewById(R.id.addDogButton);
         goToDogRequest = customNavView.findViewById(R.id.GoToDogRequestView);
         goToDogDashboard = customNavView.findViewById(R.id.GoToDogDashboard);
+        logOut = customNavView.findViewById(R.id.logoutbutton);
 
         dogImageActionLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -227,7 +231,7 @@ public class AddDogRecordView extends AppCompatActivity implements NavigationVie
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setBackgroundColor(getResources().getColor(R.color.white));
-        customNavView = getLayoutInflater().inflate(R.layout.custom_nav_menu, navigationView, false);
+        customNavView = getLayoutInflater().inflate(R.layout.custom_nav_menu2, navigationView, false);
         navigationView.addHeaderView(customNavView);
         getSupportActionBar().setTitle(Html.fromHtml("<font color=\"black\">" + "Add A Dog" + "</font>"));
     }
