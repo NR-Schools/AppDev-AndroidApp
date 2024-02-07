@@ -9,14 +9,14 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="190dp"
-        android:layout_height="220dp"
+        android:layout_height="260dp"
         app:cardBackgroundColor="#FFFFFF">
 
         <androidx.cardview.widget.CardView
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="35dp"
             android:padding="50dp"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp">
@@ -25,6 +25,7 @@
                 android:id="@+id/custom_item_image"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
+                android:layout_marginBottom="100dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_launcher_background" />
         </androidx.cardview.widget.CardView>
@@ -37,21 +38,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="60dp"
             android:fontFamily="@font/farro_bold"
             android:text="Name"
             android:textColor="#18C17C"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/custom_item_text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="95dp"
+            android:layout_marginTop="85dp"
             android:fontFamily="@font/farro"
             android:text="Breed"
-            android:textSize="15dp" />
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/custom_item_text3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="105dp"
+            android:text="Age"
+            android:textSize="16dp" />
     </androidx.cardview.widget.CardView>
 
 

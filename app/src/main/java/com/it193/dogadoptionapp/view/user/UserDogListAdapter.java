@@ -50,6 +50,7 @@ public class UserDogListAdapter extends BaseAdapter {
         ImageView dogImageView = (ImageView) convertView.findViewById(R.id.custom_item_image);
         TextView dogNameView = (TextView) convertView.findViewById(R.id.custom_item_text1);
         TextView dogBreedView = (TextView) convertView.findViewById(R.id.custom_item_text2);
+        TextView dogAgeView = (TextView) convertView.findViewById(R.id.custom_item_text3);
 
         // Set Default Image
         dogImageView.setImageResource(R.drawable.no_dog_icon);
@@ -67,6 +68,7 @@ public class UserDogListAdapter extends BaseAdapter {
 
         dogNameView.setText(dogList.get(position).getName());
         dogBreedView.setText(dogList.get(position).getBreed());
+        dogAgeView.setText(dogList.get(position).getAge() + " year/s old");
 
         return convertView;
     }
