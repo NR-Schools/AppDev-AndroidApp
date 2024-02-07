@@ -1,12 +1,5 @@
 package com.it193.dogadoptionapp.view.admin;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,8 +7,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.Html;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,7 +14,9 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.google.android.material.navigation.NavigationView;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+
 import com.it193.dogadoptionapp.MainActivity;
 import com.it193.dogadoptionapp.R;
 import com.it193.dogadoptionapp.model.Dog;
@@ -83,6 +76,16 @@ public class UpdateDogRecordView extends CustomDrawerNoFilterView {
         // Get Inputs
         initComponents();
 
+        // Get dogId to update
+        Intent intent = getIntent();
+        dogId = intent.getLongExtra("dogId", -1);
+
+        // fetch dog by id
+        DogRepository
+                .getRepository(this)
+                .getDogRecord(dogId)
+                .setCallback(this::setInitialData);
+
         // Handle Actions
         selectDogImageButton.setOnClickListener(this::handleSelectDogImageAction);
         dogArrivedDateButton.setOnClickListener(this::handleSelectDateActions);
@@ -92,19 +95,6 @@ public class UpdateDogRecordView extends CustomDrawerNoFilterView {
         goToDogRequest.setOnClickListener(v -> startActivity(new Intent(UpdateDogRecordView.this, DogRequestView.class)));
         logOut.setOnClickListener(v -> startActivity(new Intent(UpdateDogRecordView.this, MainActivity.class)));
         goToDogDashboard.setOnClickListener(v -> startActivity(new Intent(UpdateDogRecordView.this, AdminDashboardView.class)));
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        Intent intent = getIntent();
-        dogId = intent.getLongExtra("dogId", -1);
-
-        DogRepository
-                .getRepository(this)
-                .getDogRecord(dogId)
-                .setCallback(this::setInitialData);
     }
 
     private void initComponents() {
