@@ -130,4 +130,16 @@ public class AdminDashboardView extends CustomDrawerView implements AdminDashboa
 
         super.handleFilterAction();
     }
+
+    @Override
+    public void handleResetFilterAction() {
+
+        // Reset Data
+        filteredDogs = new ArrayList<>(dogs);
+
+        // Refresh Adapter
+        updateFilteredData();
+
+        super.handleResetFilterAction();
+    }
 }

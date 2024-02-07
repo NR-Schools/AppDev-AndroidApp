@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -54,6 +55,12 @@ public abstract class CustomDrawerView extends AppCompatActivity implements Navi
         getSupportActionBar().setTitle(Html.fromHtml("<font color=\"black\">" + "Dashboard" + "</font>"));
     }
 
+    private void closeDrawer() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }
+    }
+
     // Filter Function
     public void filterInit() {
         // Get Filter Fields
@@ -69,7 +76,7 @@ public abstract class CustomDrawerView extends AppCompatActivity implements Navi
 
         // Handle Actions
         filterBtn.setOnClickListener(v -> handleFilterAction());
-        resetFilterBtn.setOnClickListener(this::handleResetFilterAction);
+        resetFilterBtn.setOnClickListener(v -> handleResetFilterAction());
     }
 
     public void handleFilterAction() {
@@ -77,7 +84,7 @@ public abstract class CustomDrawerView extends AppCompatActivity implements Navi
         closeDrawer();
     }
 
-    public void handleResetFilterAction(View v) {
+    public void handleResetFilterAction() {
         dogBreedFilter.setText("");
         dogColorFilter.setText("");
         dogSizeFilter.setSelection(0);
@@ -86,11 +93,5 @@ public abstract class CustomDrawerView extends AppCompatActivity implements Navi
 
         // Close Drawer
         closeDrawer();
-    }
-
-    private void closeDrawer() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        }
     }
 }

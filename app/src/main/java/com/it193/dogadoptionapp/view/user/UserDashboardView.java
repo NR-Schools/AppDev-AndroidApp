@@ -124,4 +124,16 @@ public class UserDashboardView extends CustomDrawerView {
 
         super.handleFilterAction();
     }
+
+    @Override
+    public void handleResetFilterAction() {
+
+        // Reset Data
+        filteredDogs = new ArrayList<>(dogs);
+
+        // Refresh Adapter
+        updateFilteredData();
+
+        super.handleResetFilterAction();
+    }
 }
