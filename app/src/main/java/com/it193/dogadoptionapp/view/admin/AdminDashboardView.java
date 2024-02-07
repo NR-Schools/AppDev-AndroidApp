@@ -18,20 +18,17 @@ import com.it193.dogadoptionapp.MainActivity;
 import com.it193.dogadoptionapp.R;
 import com.it193.dogadoptionapp.model.Dog;
 import com.it193.dogadoptionapp.repository.DogRepository;
+import com.it193.dogadoptionapp.view.shared.CustomDrawerView;
 import com.it193.dogadoptionapp.view.shared.DogRequestView;
 
 import java.util.List;
 
-public class AdminDashboardView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, AdminDashboardActionListener {
+public class AdminDashboardView extends CustomDrawerView implements AdminDashboardActionListener {
 
     private List<Dog> dogs;
-
     private GridView dogListView;
     private Button goToDogRequest;
-
     private Button logOut;
-    private DrawerLayout drawerLayout;
-    private View customNavView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,27 +81,6 @@ public class AdminDashboardView extends AppCompatActivity implements NavigationV
                 .getRepository(this)
                 .getAllDogRecords()
                 .setCallback(this::setInitialData);
-    }
-
-
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        return false;
-    }
-
-    public void drawerInit() {
-        drawerLayout = findViewById(R.id.drawer_layout);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(findViewById(R.id.toolbar));
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-        navigationView.setBackgroundColor(getResources().getColor(R.color.white));
-        customNavView = getLayoutInflater().inflate(R.layout.custom_nav_menu, navigationView, false);
-        navigationView.addHeaderView(customNavView);
-        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"black\">" + "Dashboard" + "</font>"));
     }
 
 
