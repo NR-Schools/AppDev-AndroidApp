@@ -30,17 +30,17 @@ import com.it193.dogadoptionapp.model.Dog;
 import com.it193.dogadoptionapp.repository.DogRepository;
 import com.it193.dogadoptionapp.utils.InputUtility;
 import com.it193.dogadoptionapp.utils.NotificationUtility;
+import com.it193.dogadoptionapp.view.shared.CustomDrawerNoFilterView;
 import com.it193.dogadoptionapp.view.shared.DogRequestView;
 
 import java.io.ByteArrayOutputStream;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
-public class UpdateDogRecordView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class UpdateDogRecordView extends CustomDrawerNoFilterView {
 
     private ActivityResultLauncher<Intent> dogImageActionLauncher;
     private long dogId;
-
 
     //region Form Fields
 
@@ -69,26 +69,19 @@ public class UpdateDogRecordView extends AppCompatActivity implements Navigation
     //endregion
 
     private Button goToDogRequest;
-
     private Button goToDogDashboard;
-
-    private DrawerLayout drawerLayout;
-
     private Button logOut;
-    private View customNavView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_dog_record_view);
-
 
         // Initialize the Drawer
         drawerInit();
 
         // Get Inputs
         initComponents();
-
-
 
         // Handle Actions
         selectDogImageButton.setOnClickListener(this::handleSelectDogImageAction);
@@ -147,12 +140,10 @@ public class UpdateDogRecordView extends AppCompatActivity implements Navigation
     }
 
     private void setInitialData(Object responseObject, String errorMessage) {
-
         if (responseObject == null)
             return;
 
         Dog dog = (Dog) responseObject;
-
         displayImage.setImageBitmap(
                 BitmapFactory.decodeByteArray(
                         dog.getPhotoBytes(),
@@ -253,25 +244,5 @@ public class UpdateDogRecordView extends AppCompatActivity implements Navigation
 
         //Return to Admin Dashboard
         startActivity(new Intent(UpdateDogRecordView.this, AdminDashboardView.class));
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        return false;
-    }
-
-    public void drawerInit() {
-        drawerLayout = findViewById(R.id.drawer_layout);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-        navigationView.setBackgroundColor(getResources().getColor(R.color.white));
-        customNavView = getLayoutInflater().inflate(R.layout.custom_nav_menu2, navigationView, false);
-        navigationView.addHeaderView(customNavView);
-        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"black\">" + "Update Information" + "</font>"));
     }
 }

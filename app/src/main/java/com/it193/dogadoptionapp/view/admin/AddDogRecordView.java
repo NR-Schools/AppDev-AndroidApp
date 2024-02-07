@@ -29,13 +29,12 @@ import com.it193.dogadoptionapp.repository.DogRepository;
 import com.it193.dogadoptionapp.retrofit.DogApi;
 import com.it193.dogadoptionapp.utils.InputUtility;
 import com.it193.dogadoptionapp.utils.NotificationUtility;
+import com.it193.dogadoptionapp.view.shared.CustomDrawerNoFilterView;
 import com.it193.dogadoptionapp.view.shared.DogRequestView;
 
 import java.io.ByteArrayOutputStream;
 
-public class AddDogRecordView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-    private DogApi dogApi;
+public class AddDogRecordView extends CustomDrawerNoFilterView {
 
     private ActivityResultLauncher<Intent> dogImageActionLauncher;
 
@@ -64,12 +63,9 @@ public class AddDogRecordView extends AppCompatActivity implements NavigationVie
 
     private Button addDogButton;
     //endregion
-    private DrawerLayout drawerLayout;
 
     private Button goToDogRequest;
-
     private Button goToDogDashboard;
-    private View customNavView;
     private Button logOut;
 
     @Override
@@ -77,9 +73,9 @@ public class AddDogRecordView extends AppCompatActivity implements NavigationVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_dog_record_view);
 
-
         // Initialize the Drawer
         drawerInit();
+
         // Get Inputs
         initComponents();
 
@@ -203,35 +199,4 @@ public class AddDogRecordView extends AppCompatActivity implements NavigationVie
         //Return to Admin Dashboard
         startActivity(new Intent(AddDogRecordView.this, AdminDashboardView.class));
     }
-
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-
-        return false;
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    public void drawerInit(){
-        drawerLayout = findViewById(R.id.drawer_layout);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-        navigationView.setBackgroundColor(getResources().getColor(R.color.white));
-        customNavView = getLayoutInflater().inflate(R.layout.custom_nav_menu2, navigationView, false);
-        navigationView.addHeaderView(customNavView);
-        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"black\">" + "Add A Dog" + "</font>"));
-    }
-
 }

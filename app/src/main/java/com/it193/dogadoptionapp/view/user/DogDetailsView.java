@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -23,9 +22,10 @@ import com.it193.dogadoptionapp.model.Dog;
 import com.it193.dogadoptionapp.repository.DogRepository;
 import com.it193.dogadoptionapp.repository.DogRequestRepository;
 import com.it193.dogadoptionapp.utils.NotificationUtility;
+import com.it193.dogadoptionapp.view.shared.CustomDrawerNoFilterView;
 import com.it193.dogadoptionapp.view.shared.DogRequestView;
 
-public class DogDetailsView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class DogDetailsView extends CustomDrawerNoFilterView {
 
     private long dogId;
     private Dog dog;
@@ -33,27 +33,20 @@ public class DogDetailsView extends AppCompatActivity implements NavigationView.
     private ImageView dogImageView;
     private TextView dogNameField;
     private Button dogRequestButton;
-
-    private DrawerLayout drawerLayout;
-
     private Button goToDogRequest;
-
     private Button goToDogDashboard;
-
     private Button logOut;
-    private View customNavView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dog_details_view);
-
 
         // Initialize the Drawer
         drawerInit();
 
         // Get Inputs
         initComponents();
-
 
         // Handle Navigation Actions
         goToDogRequest.setOnClickListener(v -> startActivity(new Intent(DogDetailsView.this, DogRequestView.class)));
@@ -82,7 +75,6 @@ public class DogDetailsView extends AppCompatActivity implements NavigationView.
     }
 
     private void setInitialData(Object responseObject, String errorMessage) {
-
         if (responseObject == null)
             return;
 
@@ -122,26 +114,5 @@ public class DogDetailsView extends AppCompatActivity implements NavigationView.
                 .getRepository(this)
                 .getDogRecord(dogId)
                 .setCallback(this::setInitialData);
-    }
-
-
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        return false;
-    }
-
-    public void drawerInit() {
-        drawerLayout = findViewById(R.id.drawer_layout);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-        navigationView.setBackgroundColor(getResources().getColor(R.color.white));
-        customNavView = getLayoutInflater().inflate(R.layout.custom_nav_menu2, navigationView, false);
-        navigationView.addHeaderView(customNavView);
-        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"black\">" + "Dog Information" + "</font>"));
     }
 }

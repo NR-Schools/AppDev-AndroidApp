@@ -25,15 +25,12 @@ import com.it193.dogadoptionapp.view.user.UserDashboardView;
 
 import java.util.List;
 
-public class DogRequestView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DogRequestActionListener {
+public class DogRequestView extends CustomDrawerNoFilterView implements DogRequestActionListener {
 
     private List<Dog> dogs;
     private GridView dogRequestListView;
-    private DrawerLayout drawerLayout;
-    private View customNavView;
     private Button goToDogDashboard;
     private Account currentAccount;
-
     private Button logOut;
 
     @Override
@@ -55,7 +52,6 @@ public class DogRequestView extends AppCompatActivity implements NavigationView.
         super.onStart();
 
         loadOrRefreshData();
-
     }
 
     private void initComponents() {
@@ -63,7 +59,6 @@ public class DogRequestView extends AppCompatActivity implements NavigationView.
         dogRequestListView = findViewById(R.id.userDogRequestListView);
         logOut = customNavView.findViewById(R.id.logoutbutton);
     }
-
     private void setInitialData(Object responseObject, String errorMessage) {
         if (responseObject == null)
             return;
@@ -81,7 +76,6 @@ public class DogRequestView extends AppCompatActivity implements NavigationView.
         );
         dogRequestListView.setAdapter(dogListAdapter);
     }
-
     private void loadOrRefreshData() {
         currentAccount = AppStateStorage.getInstance().getActiveAccount();
         DogRequestRepository dogRequestRepository = DogRequestRepository.getRepository(this);
@@ -96,28 +90,6 @@ public class DogRequestView extends AppCompatActivity implements NavigationView.
         dogRequestRepository.setCallback(this::setInitialData);
     }
 
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        return false;
-    }
-
-    public void drawerInit() {
-        drawerLayout = findViewById(R.id.drawer_layout);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        if (getSupportActionBar() == null) {
-            setSupportActionBar(toolbar);
-        }
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-        navigationView.setBackgroundColor(getResources().getColor(R.color.white));
-        customNavView = getLayoutInflater().inflate(R.layout.custom_nav_menu2, navigationView, false);
-        navigationView.addHeaderView(customNavView);
-        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"black\">" + "Dog Requests" + "</font>"));
-
-    }
 
     @Override
     public void onRefreshData() {
