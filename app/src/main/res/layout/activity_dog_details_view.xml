@@ -280,6 +280,7 @@ android:background="#F0EFF2">
                     app:cardCornerRadius="20dp">
 
                     <TextView
+                        android:id="@+id/dogDetailsMeetDog"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"

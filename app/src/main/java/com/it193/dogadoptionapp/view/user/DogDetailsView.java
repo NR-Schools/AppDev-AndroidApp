@@ -43,6 +43,7 @@ public class DogDetailsView extends CustomDrawerNoFilterView {
     private TextView dogSizeField;
     private TextView dogLocationField;
     private TextView dogMoreDetailsField;
+    private TextView dogMeetDog;
     private Button dogRequestButton;
     private Button goToDogRequest;
     private Button goToDogDashboard;
@@ -86,6 +87,7 @@ public class DogDetailsView extends CustomDrawerNoFilterView {
         dogSizeField = findViewById(R.id.dogDetailsSizeField);
         dogLocationField = findViewById(R.id.dogDetailsLocationField);
         dogMoreDetailsField = findViewById(R.id.dogDetailsMoreDetailsField);
+        dogMeetDog = findViewById(R.id.dogDetailsMeetDog);
 
 
         dogRequestButton = findViewById(R.id.dogDetailsRequestDogButton);
@@ -118,6 +120,7 @@ public class DogDetailsView extends CustomDrawerNoFilterView {
         dogSizeField.setText(dog.getSize());
         dogLocationField.setText(dog.getLocation());
         dogMoreDetailsField.setText(dog.getDescription());
+        dogMeetDog.setText("Meet " + dog.getName());
 
 
 
