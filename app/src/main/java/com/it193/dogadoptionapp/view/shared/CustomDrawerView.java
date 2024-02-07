@@ -1,5 +1,6 @@
 package com.it193.dogadoptionapp.view.shared;
 
+import android.content.Intent;
 import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,8 +17,10 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.it193.dogadoptionapp.MainActivity;
 import com.it193.dogadoptionapp.R;
 import com.it193.dogadoptionapp.model.Account;
+import com.it193.dogadoptionapp.repository.AccountRepository;
 import com.it193.dogadoptionapp.storage.AppStateStorage;
 
 public abstract class CustomDrawerView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -57,12 +60,25 @@ public abstract class CustomDrawerView extends AppCompatActivity implements Navi
         navigationView.addHeaderView(customNavView);
         getSupportActionBar().setTitle(Html.fromHtml("<font color=\"black\">" + "Dashboard" + "</font>"));
 
+        // Get Account
+        Account currentAccount = AppStateStorage.getInstance().getActiveAccount();
+
+        // Logout handling
+        Button logoutBtn = customNavView.findViewById(R.id.logoutbutton);
+        logoutBtn.setOnClickListener(v -> {
+            AccountRepository
+                    .getRepository(this)
+                    .logOut(currentAccount);
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        });
+
         // Setup Proper Credentials in header
         View headerView = navigationView.getHeaderView(0);
-        TextView navUsername = (TextView) headerView.findViewById(R.id.navHeaderUserName);
-        TextView navUserEmail = (TextView) headerView.findViewById(R.id.navHeaderUserEmail);
+        TextView navUsername = headerView.findViewById(R.id.navHeaderUserName);
+        TextView navUserEmail = headerView.findViewById(R.id.navHeaderUserEmail);
 
-        Account currentAccount = AppStateStorage.getInstance().getActiveAccount();
         navUsername.setText(currentAccount.getUsername());
         navUserEmail.setText(currentAccount.getEmail());
     }

@@ -63,7 +63,6 @@ public class UpdateDogRecordView extends CustomDrawerNoFilterView {
 
     private Button goToDogRequest;
     private Button goToDogDashboard;
-    private Button logOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +92,6 @@ public class UpdateDogRecordView extends CustomDrawerNoFilterView {
 
         // Handle Navigation Menu Actions
         goToDogRequest.setOnClickListener(v -> startActivity(new Intent(UpdateDogRecordView.this, DogRequestView.class)));
-        logOut.setOnClickListener(v -> startActivity(new Intent(UpdateDogRecordView.this, MainActivity.class)));
         goToDogDashboard.setOnClickListener(v -> startActivity(new Intent(UpdateDogRecordView.this, AdminDashboardView.class)));
     }
 
@@ -114,7 +112,6 @@ public class UpdateDogRecordView extends CustomDrawerNoFilterView {
         updateDogButton = findViewById(R.id.updateDogButton);
         goToDogRequest = customNavView.findViewById(R.id.GoToDogRequestView);
         goToDogDashboard = customNavView.findViewById(R.id.GoToDogDashboard);
-        logOut = customNavView.findViewById(R.id.logoutbutton);
 
         dogImageActionLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),

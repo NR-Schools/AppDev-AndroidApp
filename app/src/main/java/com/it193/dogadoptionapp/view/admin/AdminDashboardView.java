@@ -30,7 +30,6 @@ public class AdminDashboardView extends CustomDrawerView implements AdminDashboa
     private List<Dog> filteredDogs;
     private GridView dogListView;
     private Button goToDogRequest;
-    private Button logOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +51,11 @@ public class AdminDashboardView extends CustomDrawerView implements AdminDashboa
     }
 
     private void initComponents() {
-        logOut = customNavView.findViewById(R.id.logoutbutton);
         goToDogRequest = customNavView.findViewById(R.id.GoToDogRequestView);
         dogListView = findViewById(R.id.adminDashboardDogList);
     }
     private void handleActions() {
         goToDogRequest.setOnClickListener(v -> startActivity(new Intent(AdminDashboardView.this, DogRequestView.class)));
-        logOut.setOnClickListener(v -> startActivity(new Intent(AdminDashboardView.this, MainActivity.class)));
     }
     private void setInitialData(Object responseObject, String errorMessage) {
         if (responseObject == null)

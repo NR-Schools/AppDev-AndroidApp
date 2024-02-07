@@ -104,6 +104,10 @@ public class AccountRepository extends RepositoryBase {
                                 ctx,
                                 "Log Out is Successful!"
                         );
+
+                        // Clear Account
+                        AppStateStorage.getInstance().clearActiveAccount();
+
                         callback.onResponseEvent(response.body(), null);
                     }
 

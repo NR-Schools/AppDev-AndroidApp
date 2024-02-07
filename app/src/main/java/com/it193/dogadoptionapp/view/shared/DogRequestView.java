@@ -31,7 +31,6 @@ public class DogRequestView extends CustomDrawerNoFilterView implements DogReque
     private GridView dogRequestListView;
     private Button goToDogDashboard;
     private Account currentAccount;
-    private Button logOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +42,6 @@ public class DogRequestView extends CustomDrawerNoFilterView implements DogReque
 
         // Initialize Components and Data
         initComponents();
-
-        logOut.setOnClickListener(v -> startActivity(new Intent(DogRequestView.this, MainActivity.class)));
     }
 
     @Override
@@ -57,7 +54,6 @@ public class DogRequestView extends CustomDrawerNoFilterView implements DogReque
     private void initComponents() {
         goToDogDashboard = customNavView.findViewById(R.id.GoToDogDashboard);
         dogRequestListView = findViewById(R.id.userDogRequestListView);
-        logOut = customNavView.findViewById(R.id.logoutbutton);
     }
     private void setInitialData(Object responseObject, String errorMessage) {
         if (responseObject == null)

@@ -34,7 +34,6 @@ public class UserDashboardView extends CustomDrawerView {
 
     private GridView dogListView;
     private Button goToUserDogRequest;
-    private Button logOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +85,6 @@ public class UserDashboardView extends CustomDrawerView {
     private void initComponents() {
         dogListView = findViewById(R.id.userDashboardDogList);
         goToUserDogRequest = customNavView.findViewById(R.id.GoToDogRequestView);
-        logOut = customNavView.findViewById(R.id.logoutbutton);
     }
     private void handleActions() {
         goToUserDogRequest.setOnClickListener(v -> startActivity(new Intent(UserDashboardView.this, DogRequestView.class)));
@@ -95,7 +93,6 @@ public class UserDashboardView extends CustomDrawerView {
             intent.putExtra("dogId", dogs.get(position).getId());
             startActivity(intent);
         });
-        logOut.setOnClickListener(v -> startActivity(new Intent(UserDashboardView.this, MainActivity.class)));
     }
 
     @Override

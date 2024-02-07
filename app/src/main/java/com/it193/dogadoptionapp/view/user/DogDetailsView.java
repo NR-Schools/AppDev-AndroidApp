@@ -46,7 +46,6 @@ public class DogDetailsView extends CustomDrawerNoFilterView {
     private Button dogRequestButton;
     private Button goToDogRequest;
     private Button goToDogDashboard;
-    private Button logOut;
     private Button statusButton;
 
     @Override
@@ -63,7 +62,6 @@ public class DogDetailsView extends CustomDrawerNoFilterView {
         // Handle Navigation Actions
         goToDogRequest.setOnClickListener(v -> startActivity(new Intent(DogDetailsView.this, DogRequestView.class)));
         goToDogDashboard.setOnClickListener(v -> startActivity(new Intent(DogDetailsView.this, UserDashboardView.class)));
-        logOut.setOnClickListener(v -> startActivity(new Intent(DogDetailsView.this, MainActivity.class)));
     }
 
     @Override
@@ -95,7 +93,6 @@ public class DogDetailsView extends CustomDrawerNoFilterView {
 
         goToDogRequest = customNavView.findViewById(R.id.GoToDogRequestView);
         goToDogDashboard = customNavView.findViewById(R.id.GoToDogDashboard);
-        logOut = customNavView.findViewById(R.id.logoutbutton);
     }
 
     private void setInitialData(Object responseObject, String errorMessage) {
