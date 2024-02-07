@@ -77,9 +77,11 @@ public class DogRequestListAdapter extends BaseAdapter {
                     null
             );
             TextView breedField = convertView.findViewById(R.id.itemDogRequestBreedField);
+            TextView ageField = convertView.findViewById(R.id.itemDogRequestAgeField);
             Button userCancel = convertView.findViewById(R.id.itemDogRequestUserCancelRequest);
 
-            breedField.setText(dogRequestList.get(position).getAccount().getEmail());
+            breedField.setText(dogRequestList.get(position).getBreed());
+            ageField.setText(dogRequestList.get(position).getAge() + " year/s old");
             userCancel.setOnClickListener(v -> handleUserCancel(position));
         }
 
