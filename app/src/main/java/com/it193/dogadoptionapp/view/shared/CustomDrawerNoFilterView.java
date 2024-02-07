@@ -22,7 +22,7 @@ public abstract class CustomDrawerNoFilterView extends AppCompatActivity impleme
         return false;
     }
 
-    public void drawerInit(){
+    public void drawerInit(String title){
         drawerLayout = findViewById(R.id.drawer_layout);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -34,6 +34,6 @@ public abstract class CustomDrawerNoFilterView extends AppCompatActivity impleme
         navigationView.setBackgroundColor(getResources().getColor(R.color.white));
         customNavView = getLayoutInflater().inflate(R.layout.custom_nav_menu2, navigationView, false);
         navigationView.addHeaderView(customNavView);
-        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"black\">" + "Add A Dog" + "</font>"));
+        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"black\">" + title + "</font>"));
     }
 }

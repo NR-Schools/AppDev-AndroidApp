@@ -43,7 +43,7 @@ public class DogDetailsView extends CustomDrawerNoFilterView {
         setContentView(R.layout.activity_dog_details_view);
 
         // Initialize the Drawer
-        drawerInit();
+        drawerInit("View A Dog");
 
         // Get Inputs
         initComponents();

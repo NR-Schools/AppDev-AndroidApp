@@ -39,7 +39,7 @@ public class DogRequestView extends CustomDrawerNoFilterView implements DogReque
         setContentView(R.layout.activity_dog_request_view);
 
         // Initialize the Drawer
-        drawerInit();
+        drawerInit("Request A Dog");
 
         // Initialize Components and Data
         initComponents();

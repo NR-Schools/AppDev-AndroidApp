@@ -74,7 +74,7 @@ public class AddDogRecordView extends CustomDrawerNoFilterView {
         setContentView(R.layout.activity_add_dog_record_view);
 
         // Initialize the Drawer
-        drawerInit();
+        drawerInit("Add A Dog");
 
         // Get Inputs
         initComponents();
