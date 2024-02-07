@@ -15,6 +15,7 @@
         android:src="@drawable/furever_logo_3" />
 
     <TextView
+        android:id="@+id/navHeaderUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="5dp"
@@ -25,6 +26,7 @@
 
 
     <TextView
+        android:id="@+id/navHeaderUserEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"

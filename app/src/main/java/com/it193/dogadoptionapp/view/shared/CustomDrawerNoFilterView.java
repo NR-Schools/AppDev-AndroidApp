@@ -3,6 +3,7 @@ package com.it193.dogadoptionapp.view.shared;
 import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +12,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.it193.dogadoptionapp.R;
+import com.it193.dogadoptionapp.model.Account;
+import com.it193.dogadoptionapp.storage.AppStateStorage;
 
 public abstract class CustomDrawerNoFilterView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -35,5 +38,14 @@ public abstract class CustomDrawerNoFilterView extends AppCompatActivity impleme
         customNavView = getLayoutInflater().inflate(R.layout.custom_nav_menu2, navigationView, false);
         navigationView.addHeaderView(customNavView);
         getSupportActionBar().setTitle(Html.fromHtml("<font color=\"black\">" + title + "</font>"));
+
+        // Setup Proper Credentials in header
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.navHeaderUserName);
+        TextView navUserEmail = (TextView) headerView.findViewById(R.id.navHeaderUserEmail);
+
+        Account currentAccount = AppStateStorage.getInstance().getActiveAccount();
+        navUsername.setText(currentAccount.getUsername());
+        navUserEmail.setText(currentAccount.getEmail());
     }
 }
