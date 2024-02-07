@@ -62,11 +62,13 @@ public class DogRequestListAdapter extends BaseAdapter {
                     R.layout.item_dog_adminrequest,
                     null
             );
+            TextView userEmailField = convertView.findViewById(R.id.itemDogRequestUserEmailField);
             TextView userNameField = convertView.findViewById(R.id.itemDogRequestUserNameField);
             Button adminReject = convertView.findViewById(R.id.itemDogRequestAdminRejectRequest);
             Button adminAccept = convertView.findViewById(R.id.itemDogRequestAdminAcceptRequest);
 
-            userNameField.setText(dogRequestList.get(position).getAccount().getEmail());
+            userEmailField.setText(dogRequestList.get(position).getAccount().getEmail());
+            userNameField.setText(dogRequestList.get(position).getAccount().getUsername());
             adminAccept.setOnClickListener(v -> handleAdminAccept(position));
             adminReject.setOnClickListener(v -> handleAdminReject(position));
 
