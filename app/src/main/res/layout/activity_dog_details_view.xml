@@ -246,6 +246,15 @@ android:background="#F0EFF2">
                         android:text="Adopt"
                         app:cornerRadius="4dp" />
 
+                    <Button
+                        android:id="@+id/button"
+                        android:layout_width="140dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="210dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Available"
+                        android:textSize="16sp" />
+
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
