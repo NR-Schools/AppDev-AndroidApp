@@ -113,7 +113,7 @@ public class UserDashboardView extends CustomDrawerView {
                 continue;
             if (!dog.getSex().toLowerCase().trim().contains(dogSexFilter.getSelectedItem().toString().toLowerCase().trim()))
                 continue;
-            if (dog.getAge() != Integer.parseInt(dogAgeFilter.getText().toString()))
+            if (!Integer.toString(dog.getAge()).contains(dogAgeFilter.getText().toString().toLowerCase().trim()))
                 continue;
 
             filteredDogs.add(dog);
