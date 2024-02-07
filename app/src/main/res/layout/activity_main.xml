@@ -121,14 +121,16 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="510dp"
+        android:layout_height="429dp"
         android:layout_marginTop="-80dp"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.581"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcomePageActionContainer"
+        app:layout_constraintVertical_bias="0.401"
         app:srcCompat="@drawable/doggo_welcome_page" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

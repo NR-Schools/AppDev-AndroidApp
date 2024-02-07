@@ -31,9 +31,9 @@
         <GridView
             android:id="@+id/userDashboardDogList"
             android:layout_width="390dp"
-            android:layout_height="669dp"
+            android:layout_height="match_parent"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="60dp"
             android:numColumns="2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
