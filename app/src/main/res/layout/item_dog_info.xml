@@ -61,6 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="105dp"
+            android:fontFamily="@font/farro"
             android:text="Age"
             android:textSize="16dp" />
     </androidx.cardview.widget.CardView>

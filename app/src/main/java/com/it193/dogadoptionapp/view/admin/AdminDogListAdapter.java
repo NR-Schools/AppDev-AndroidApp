@@ -68,6 +68,7 @@ public class AdminDogListAdapter extends BaseAdapter {
             ImageView dogRemoveViewImage = convertView.findViewById(R.id.dog_removebtnimage);
             TextView dogNameView = convertView.findViewById(R.id.custom_item_text1);
             TextView dogBreedView = convertView.findViewById(R.id.custom_item_text2);
+            TextView dogAgeView = convertView.findViewById(R.id.custom_item_age);
 
             // Set Default Image
             dogImageView.setImageResource(R.drawable.no_dog_icon);
@@ -88,6 +89,7 @@ public class AdminDogListAdapter extends BaseAdapter {
 
             dogNameView.setText(dogList.get(actualPosition).getName());
             dogBreedView.setText(dogList.get(actualPosition).getBreed());
+            dogAgeView.setText(dogList.get(actualPosition).getAge() + " year/s old");
         }
         return convertView;
     }

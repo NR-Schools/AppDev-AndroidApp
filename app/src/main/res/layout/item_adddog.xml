@@ -10,7 +10,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/adminDashboardViewToAddDogView"
         android:layout_width="190dp"
-        android:layout_height="220dp"
+        android:layout_height="260dp"
         app:cardBackgroundColor="#FFFFFF">
 
 
