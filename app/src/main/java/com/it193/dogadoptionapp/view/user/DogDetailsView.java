@@ -25,6 +25,8 @@ import com.it193.dogadoptionapp.utils.NotificationUtility;
 import com.it193.dogadoptionapp.view.shared.CustomDrawerNoFilterView;
 import com.it193.dogadoptionapp.view.shared.DogRequestView;
 
+import java.time.format.DateTimeFormatter;
+
 public class DogDetailsView extends CustomDrawerNoFilterView {
 
     private long dogId;
@@ -32,6 +34,15 @@ public class DogDetailsView extends CustomDrawerNoFilterView {
 
     private ImageView dogImageView;
     private TextView dogNameField;
+    private TextView dogBreedField;
+    private TextView dogColorField;
+    private TextView dogAgeField;
+    private TextView dogSexField;
+    private TextView dogDateField;
+    private TextView dogArrivedFromField;
+    private TextView dogSizeField;
+    private TextView dogLocationField;
+    private TextView dogMoreDetailsField;
     private Button dogRequestButton;
     private Button goToDogRequest;
     private Button goToDogDashboard;
@@ -68,6 +79,17 @@ public class DogDetailsView extends CustomDrawerNoFilterView {
     private void initComponents() {
         dogImageView = findViewById(R.id.dogDetailsImageDisplay);
         dogNameField = findViewById(R.id.dogDetailsNameField);
+        dogBreedField = findViewById(R.id.dogDetailsBreedField);
+        dogColorField = findViewById(R.id.dogDetailsColorField);
+        dogAgeField = findViewById(R.id.dogDetailsAgeField);
+        dogSexField = findViewById(R.id.dogDetailsSexField);
+        dogDateField = findViewById(R.id.dogDetailsDateField);
+        dogArrivedFromField = findViewById(R.id.dogDetailsArrivedFromField);
+        dogSizeField = findViewById(R.id.dogDetailsSizeField);
+        dogLocationField = findViewById(R.id.dogDetailsLocationField);
+        dogMoreDetailsField = findViewById(R.id.dogDetailsMoreDetailsField);
+
+
         dogRequestButton = findViewById(R.id.dogDetailsRequestDogButton);
         statusButton = findViewById(R.id.dogStatusButton);
 
@@ -89,6 +111,19 @@ public class DogDetailsView extends CustomDrawerNoFilterView {
                 )
         );
         dogNameField.setText(dog.getName());
+        dogBreedField.setText(dog.getBreed());
+        dogColorField.setText(dog.getColorCoat());
+        dogAgeField.setText(Integer.toString(dog.getAge()));
+        dogSexField.setText(dog.getSex());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        dogDateField.setText(dog.getArrivedDate().format(formatter));
+        dogArrivedFromField.setText(dog.getArrivedFrom());
+        dogSizeField.setText(dog.getSize());
+        dogLocationField.setText(dog.getLocation());
+        dogMoreDetailsField.setText(dog.getDescription());
+
+
+
 
         // Check if dog is already adopted
         if (dog.isAdoptRequested()) {

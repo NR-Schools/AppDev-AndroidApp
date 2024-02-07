@@ -93,6 +93,7 @@ android:background="#F0EFF2">
                         android:textSize="18sp" />
 
                     <TextView
+                        android:id="@+id/dogDetailsBreedField"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="210dp"
@@ -112,6 +113,7 @@ android:background="#F0EFF2">
                         android:textSize="18sp" />
 
                     <TextView
+                        android:id="@+id/dogDetailsColorField"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="210dp"
@@ -131,6 +133,7 @@ android:background="#F0EFF2">
                         android:textSize="18sp" />
 
                     <TextView
+                        android:id="@+id/dogDetailsAgeField"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="210dp"
@@ -150,6 +153,7 @@ android:background="#F0EFF2">
                         android:textSize="18sp" />
 
                     <TextView
+                        android:id="@+id/dogDetailsSexField"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="210dp"
@@ -169,6 +173,7 @@ android:background="#F0EFF2">
                         android:textSize="18sp" />
 
                     <TextView
+                        android:id="@+id/dogDetailsDateField"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="210dp"
@@ -188,6 +193,7 @@ android:background="#F0EFF2">
                         android:textSize="18sp" />
 
                     <TextView
+                        android:id="@+id/dogDetailsArrivedFromField"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="210dp"
@@ -207,6 +213,7 @@ android:background="#F0EFF2">
                         android:textSize="18sp" />
 
                     <TextView
+                        android:id="@+id/dogDetailsSizeField"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="210dp"
@@ -226,6 +233,7 @@ android:background="#F0EFF2">
                         android:textSize="18sp" />
 
                     <TextView
+                        android:id="@+id/dogDetailsLocationField"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="210dp"
@@ -281,6 +289,7 @@ android:background="#F0EFF2">
                         android:textSize="20sp" />
 
                     <TextView
+                        android:id="@+id/dogDetailsMoreDetailsField"
                         android:layout_width="330dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center"
