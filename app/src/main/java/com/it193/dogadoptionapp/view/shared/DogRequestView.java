@@ -71,7 +71,7 @@ public class DogRequestView extends AppCompatActivity implements NavigationView.
         dogs = (List<Dog>) responseObject;
         dogRequestListView.setAdapter(null);
 
-        if (!dogs.isEmpty())
+        if (dogs.isEmpty())
             return;
 
         DogRequestListAdapter dogListAdapter = new DogRequestListAdapter(
