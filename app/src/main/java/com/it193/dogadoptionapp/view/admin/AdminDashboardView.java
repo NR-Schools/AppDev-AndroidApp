@@ -127,5 +127,7 @@ public class AdminDashboardView extends CustomDrawerView implements AdminDashboa
 
         // Refresh Adapter
         updateFilteredData();
+
+        super.handleFilterAction();
     }
 }

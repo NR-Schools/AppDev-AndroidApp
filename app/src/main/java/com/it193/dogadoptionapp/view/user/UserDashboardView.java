@@ -121,5 +121,7 @@ public class UserDashboardView extends CustomDrawerView {
 
         // Refresh Adapter
         updateFilteredData();
+
+        super.handleFilterAction();
     }
 }
