@@ -66,7 +66,7 @@ public class UserDashboardView extends AppCompatActivity implements NavigationVi
         dogs = (List<Dog>) responseObject;
         dogListView.setAdapter(null);
 
-        if (!dogs.isEmpty())
+        if (dogs.isEmpty())
             return;
 
         UserDogListAdapter dogListAdapter = new UserDogListAdapter(
