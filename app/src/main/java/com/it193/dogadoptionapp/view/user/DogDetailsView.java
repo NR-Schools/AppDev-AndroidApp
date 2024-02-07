@@ -36,6 +36,7 @@ public class DogDetailsView extends CustomDrawerNoFilterView {
     private Button goToDogRequest;
     private Button goToDogDashboard;
     private Button logOut;
+    private Button statusButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,7 @@ public class DogDetailsView extends CustomDrawerNoFilterView {
         dogImageView = findViewById(R.id.dogDetailsImageDisplay);
         dogNameField = findViewById(R.id.dogDetailsNameField);
         dogRequestButton = findViewById(R.id.dogDetailsRequestDogButton);
+        statusButton = findViewById(R.id.dogStatusButton);
 
         goToDogRequest = customNavView.findViewById(R.id.GoToDogRequestView);
         goToDogDashboard = customNavView.findViewById(R.id.GoToDogDashboard);
@@ -90,7 +92,8 @@ public class DogDetailsView extends CustomDrawerNoFilterView {
 
         // Check if dog is already adopted
         if (dog.isAdoptRequested()) {
-            dogRequestButton.setBackgroundColor(Color.RED);
+            statusButton.setBackgroundColor(Color.RED);
+            statusButton.setText("Unavailable");
             dogRequestButton.setOnClickListener(v -> NotificationUtility.infoAlert(
                     this,
                     "Dog is already requested"

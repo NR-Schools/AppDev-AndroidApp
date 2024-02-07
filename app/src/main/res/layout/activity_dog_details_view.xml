@@ -247,13 +247,17 @@ android:background="#F0EFF2">
                         app:cornerRadius="4dp" />
 
                     <Button
-                        android:id="@+id/button"
+                        android:id="@+id/dogStatusButton"
                         android:layout_width="140dp"
-                        android:layout_height="40dp"
+                        android:layout_height="45dp"
                         android:layout_marginLeft="210dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="8dp"
+                        android:backgroundTint="#A6D6C4"
+                        android:enabled="false"
                         android:text="Available"
-                        android:textSize="16sp" />
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        app:cornerRadius="15dp" />
 
                 </androidx.cardview.widget.CardView>
 
