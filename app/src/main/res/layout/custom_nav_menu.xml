@@ -9,9 +9,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-
-        >
+        android:layout_height="75dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -20,11 +18,10 @@
             android:fontFamily="@font/farro_light"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="5dp"
-            android:textSize="15dp"
-            />
+            android:textSize="15dp" />
 
         <EditText
-            android:id="@+id/editTextText2"
+            android:id="@+id/breedFieldFilter"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="center"
@@ -49,11 +46,10 @@
             android:fontFamily="@font/farro_light"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="5dp"
-            android:textSize="15dp"
-            />
+            android:textSize="15dp" />
 
         <EditText
-            android:id="@+id/editTextText"
+            android:id="@+id/colorFieldFilter"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="center"
@@ -79,16 +75,17 @@
             android:fontFamily="@font/farro_light"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="5dp"
-            android:textSize="15dp"
-            />
+            android:textSize="15dp" />
 
         <Spinner
-            android:id="@+id/nav_size_spinner"
+            android:id="@+id/sizeFieldFilter"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/dropdown"
+            android:entries="@array/dog_size_entries"
             android:layout_gravity="center"/>
+
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -102,16 +99,17 @@
             android:fontFamily="@font/farro_light"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="5dp"
-            android:textSize="15dp"
-            />
+            android:textSize="15dp" />
 
         <Spinner
-            android:id="@+id/nav_sex_spinner"
+            android:id="@+id/sexFieldFilter"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/dropdown"
+            android:entries="@array/dog_sex_entries"
             android:layout_gravity="center"/>
+
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -125,11 +123,10 @@
             android:fontFamily="@font/farro_light"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="5dp"
-            android:textSize="15dp"
-            />
+            android:textSize="15dp" />
 
         <EditText
-            android:id="@+id/editTextText3"
+            android:id="@+id/ageFieldFilter"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="center"
@@ -138,7 +135,7 @@
             android:backgroundTint="#F0EFF2"
             android:ems="13"
             android:hint="Age"
-            android:inputType="text"
+            android:inputType="number"
             android:paddingLeft="8dp" />
 
     </androidx.cardview.widget.CardView>
@@ -147,9 +144,8 @@
         android:layout_width="match_parent"
         android:layout_height="60dp" >
 
-
         <Button
-            android:id="@+id/nav_resetbtn"
+            android:id="@+id/resetDogFilterBtn"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -161,7 +157,7 @@
             app:strokeColor="#E3BC7B" />
 
         <Button
-            android:id="@+id/nav_filterbtn"
+            android:id="@+id/dogFilterBtn"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:text="Filter"

@@ -21,11 +21,13 @@ import com.it193.dogadoptionapp.repository.DogRepository;
 import com.it193.dogadoptionapp.view.shared.CustomDrawerView;
 import com.it193.dogadoptionapp.view.shared.DogRequestView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdminDashboardView extends CustomDrawerView implements AdminDashboardActionListener {
 
     private List<Dog> dogs;
+    private List<Dog> filteredDogs;
     private GridView dogListView;
     private Button goToDogRequest;
     private Button logOut;
@@ -35,10 +37,8 @@ public class AdminDashboardView extends CustomDrawerView implements AdminDashboa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_dashboard_view);
 
-        // Initialize the Drawer
-        drawerInit();
-
         // Initialize Components and Data
+        initCustomDrawerView();
         initComponents();
 
         // Handle Actions
@@ -48,7 +48,6 @@ public class AdminDashboardView extends CustomDrawerView implements AdminDashboa
     @Override
     protected void onStart() {
         super.onStart();
-
         loadOrRefreshData();
     }
 
@@ -68,13 +67,19 @@ public class AdminDashboardView extends CustomDrawerView implements AdminDashboa
         dogs = (List<Dog>) responseObject;
         dogListView.setAdapter(null);
 
+        // Set dogs to filtered dogs
+        filteredDogs = new ArrayList<>(dogs);
+
+        // Refresh Adapter
+        updateFilteredData();
+    }
+    private void updateFilteredData() {
         AdminDogListAdapter dogListAdapter = new AdminDogListAdapter(
                 getApplicationContext(),
-                dogs,
+                filteredDogs,
                 this
         );
         dogListView.setAdapter(dogListAdapter);
-
     }
     private void loadOrRefreshData() {
         DogRepository
@@ -97,5 +102,30 @@ public class AdminDashboardView extends CustomDrawerView implements AdminDashboa
     @Override
     public void onDeleteDogInfo() {
         loadOrRefreshData();
+    }
+
+    @Override
+    public void handleFilterAction() {
+        // Clear List
+        filteredDogs.clear();
+
+        // Re-add dogs in the list
+        for (Dog dog : dogs) {
+            if (!dog.getBreed().toLowerCase().trim().contains(dogBreedFilter.getText().toString().toLowerCase().trim()))
+                continue;
+            if (!dog.getColorCoat().toLowerCase().trim().contains(dogColorFilter.getText().toString().toLowerCase().trim()))
+                continue;
+            if (!dog.getSize().toLowerCase().trim().contains(dogSizeFilter.getSelectedItem().toString().toLowerCase().trim()))
+                continue;
+            if (!dog.getSex().toLowerCase().trim().contains(dogSexFilter.getSelectedItem().toString().toLowerCase().trim()))
+                continue;
+            if (dog.getAge() != Integer.parseInt(dogAgeFilter.getText().toString()))
+                continue;
+
+            filteredDogs.add(dog);
+        }
+
+        // Refresh Adapter
+        updateFilteredData();
     }
 }

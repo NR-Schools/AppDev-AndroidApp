@@ -3,6 +3,9 @@ package com.it193.dogadoptionapp.view.shared;
 import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +19,19 @@ public abstract class CustomDrawerView extends AppCompatActivity implements Navi
 
     protected DrawerLayout drawerLayout;
     protected View customNavView;
+
+    //region Filters
+    protected EditText dogBreedFilter;
+    protected EditText dogColorFilter;
+    protected Spinner dogSizeFilter;
+    protected Spinner dogSexFilter;
+    protected EditText dogAgeFilter;
+    //endregion
+
+    public void initCustomDrawerView() {
+        drawerInit();
+        filterInit();
+    }
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -37,4 +53,31 @@ public abstract class CustomDrawerView extends AppCompatActivity implements Navi
         getSupportActionBar().setTitle(Html.fromHtml("<font color=\"black\">" + "Dashboard" + "</font>"));
     }
 
+    // Filter Function
+    public void filterInit() {
+        // Get Filter Fields
+        dogBreedFilter = customNavView.findViewById(R.id.breedFieldFilter);
+        dogColorFilter = customNavView.findViewById(R.id.colorFieldFilter);
+        dogSizeFilter = customNavView.findViewById(R.id.sizeFieldFilter);
+        dogSexFilter = customNavView.findViewById(R.id.sexFieldFilter);
+        dogAgeFilter = customNavView.findViewById(R.id.ageFieldFilter);
+
+        // Get Buttons
+        Button filterBtn = customNavView.findViewById(R.id.dogFilterBtn);
+        Button resetFilterBtn = customNavView.findViewById(R.id.resetDogFilterBtn);
+
+        // Handle Actions
+        filterBtn.setOnClickListener(v -> handleFilterAction());
+        resetFilterBtn.setOnClickListener(this::handleResetFilterAction);
+    }
+
+    public abstract void handleFilterAction();
+
+    public void handleResetFilterAction(View v) {
+        dogBreedFilter.setText("");
+        dogColorFilter.setText("");
+        dogSizeFilter.setSelection(0);
+        dogSexFilter.setSelection(0);
+        dogAgeFilter.setText("");
+    }
 }

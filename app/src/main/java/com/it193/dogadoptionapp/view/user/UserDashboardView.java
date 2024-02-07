@@ -24,11 +24,14 @@ import com.google.android.material.navigation.NavigationView;
 import com.it193.dogadoptionapp.view.shared.CustomDrawerView;
 import com.it193.dogadoptionapp.view.shared.DogRequestView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDashboardView extends CustomDrawerView {
 
     private List<Dog> dogs;
+    private List<Dog> filteredDogs;
+
     private GridView dogListView;
     private Button goToUserDogRequest;
     private Button logOut;
@@ -39,7 +42,7 @@ public class UserDashboardView extends CustomDrawerView {
         setContentView(R.layout.activity_user_dashboard_view);
 
         // Initialize the Drawer
-        drawerInit();
+        initCustomDrawerView();
 
         // Initialize Components and Data
         initComponents();
@@ -51,7 +54,6 @@ public class UserDashboardView extends CustomDrawerView {
     @Override
     protected void onStart() {
         super.onStart();
-
         DogRepository
                 .getRepository(this)
                 .getAllDogRecords()
@@ -68,13 +70,18 @@ public class UserDashboardView extends CustomDrawerView {
         if (dogs.isEmpty())
             return;
 
+        // Set dogs to filtered dogs
+        filteredDogs = new ArrayList<>(dogs);
+
+        // Refresh Adapter
+        updateFilteredData();
+    }
+    private void updateFilteredData() {
         UserDogListAdapter dogListAdapter = new UserDogListAdapter(
                 getApplicationContext(),
-                dogs
+                filteredDogs
         );
         dogListView.setAdapter(dogListAdapter);
-
-
     }
     private void initComponents() {
         dogListView = findViewById(R.id.userDashboardDogList);
@@ -89,5 +96,30 @@ public class UserDashboardView extends CustomDrawerView {
             startActivity(intent);
         });
         logOut.setOnClickListener(v -> startActivity(new Intent(UserDashboardView.this, MainActivity.class)));
+    }
+
+    @Override
+    public void handleFilterAction() {
+        // Clear List
+        filteredDogs.clear();
+
+        // Re-add dogs in the list
+        for (Dog dog : dogs) {
+            if (!dog.getBreed().toLowerCase().trim().contains(dogBreedFilter.getText().toString().toLowerCase().trim()))
+                continue;
+            if (!dog.getColorCoat().toLowerCase().trim().contains(dogColorFilter.getText().toString().toLowerCase().trim()))
+                continue;
+            if (!dog.getSize().toLowerCase().trim().contains(dogSizeFilter.getSelectedItem().toString().toLowerCase().trim()))
+                continue;
+            if (!dog.getSex().toLowerCase().trim().contains(dogSexFilter.getSelectedItem().toString().toLowerCase().trim()))
+                continue;
+            if (dog.getAge() != Integer.parseInt(dogAgeFilter.getText().toString()))
+                continue;
+
+            filteredDogs.add(dog);
+        }
+
+        // Refresh Adapter
+        updateFilteredData();
     }
 }
