@@ -20,4 +20,10 @@ public class InputUtility {
         }
         return -1;
     }
+
+    public static String truncateStringWithEllipsis(String originalStr, int maxCharsConsidered) {
+        if (originalStr.length() > maxCharsConsidered)
+            return originalStr.substring(0, maxCharsConsidered) + "...";
+        return originalStr;
+    }
 }

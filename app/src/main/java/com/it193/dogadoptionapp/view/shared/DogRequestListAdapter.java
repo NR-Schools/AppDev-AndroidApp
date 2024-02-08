@@ -14,6 +14,7 @@ import com.it193.dogadoptionapp.R;
 import com.it193.dogadoptionapp.model.Dog;
 import com.it193.dogadoptionapp.repository.DogRequestRepository;
 import com.it193.dogadoptionapp.storage.AppStateStorage;
+import com.it193.dogadoptionapp.utils.InputUtility;
 
 import java.util.List;
 
@@ -67,8 +68,18 @@ public class DogRequestListAdapter extends BaseAdapter {
             Button adminReject = convertView.findViewById(R.id.itemDogRequestAdminRejectRequest);
             Button adminAccept = convertView.findViewById(R.id.itemDogRequestAdminAcceptRequest);
 
-            userEmailField.setText(dogRequestList.get(position).getAccount().getEmail());
-            userNameField.setText(dogRequestList.get(position).getAccount().getUsername());
+            userEmailField.setText(
+                    InputUtility.truncateStringWithEllipsis(
+                            dogRequestList.get(position).getAccount().getEmail(),
+                            7
+                    )
+            );
+            userNameField.setText(
+                    InputUtility.truncateStringWithEllipsis(
+                            dogRequestList.get(position).getAccount().getUsername(),
+                            7
+                    )
+            );
             adminAccept.setOnClickListener(v -> handleAdminAccept(position));
             adminReject.setOnClickListener(v -> handleAdminReject(position));
 
