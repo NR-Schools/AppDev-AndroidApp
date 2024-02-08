@@ -72,6 +72,7 @@ public class SignUpView extends AppCompatActivity {
                     "Sign Up",
                     "Cannot use \"Admin\" as your email"
             );
+            return;
         }
 
         // Check if Password and ConfirmPassword are the same
