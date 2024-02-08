@@ -65,6 +65,15 @@ public class SignUpView extends AppCompatActivity {
             return;
         }
 
+        // Do not allow Admin
+        if (email.equals("Admin")) {
+            NotificationUtility.errorAlert(
+                    this,
+                    "Sign Up",
+                    "Cannot use \"Admin\" as your email"
+            );
+        }
+
         // Check if Password and ConfirmPassword are the same
         if (!passwd.equals(confirmPasswd)) {
             NotificationUtility.errorAlert(
